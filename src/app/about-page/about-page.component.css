@@ -1,0 +1,34 @@
+.nav-item {
+  margin-right: 25px;
+}
+
+.btn-dark-blue {
+  padding-left: 40px;
+  padding-right: 40px;
+
+  background: #7474bf; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #348ac7,
+    #7474bf
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #348ac7,
+    #7474bf
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
+}
+
+.btn-rounded {
+  border-radius: 12px;
+}
+
+.rec {
+  width: 400px;
+  height: 550px;
+  margin: 10px;
+  padding: 40px;
+  background-color: #202124;
+  border-radius: 15px;
+}

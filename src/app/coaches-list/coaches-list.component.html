@@ -1,0 +1,62 @@
+<div class="gr-main">
+  <div class="st">
+    <div class="st-item">
+      <img src="assets/images/logo.png" class="st-image" />
+      <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+    </div>
+    <div class="st-item">
+      <img src="assets/images/logo.png" class="st-image" />
+      <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+    </div>
+    <div class="st-item">
+      <img src="assets/images/logo.png" class="st-image" />
+      <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+    </div>
+  </div>
+
+  <div dir="rtl">
+    <div style="display: flex; justify-content: space-between">
+      <div
+        class="d-flex flex-row justify-content-start"
+        style="margin-top: 20px; margin-bottom: 20px"
+      >
+        <input
+          type="text"
+          class="form-control form-control-dark ft"
+          placeholder="فلترة"
+        />
+        <input
+          type="text"
+          class="form-control form-control-dark search"
+          placeholder="ابحث ..."
+          aria-label="Search"
+        />
+      </div>
+      <a href="./coaches/add-post" style="text-decoration: none;">
+        <div class="add-post">add post</div>
+      </a>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+
+  <div class="row">
+    <div class="column" *ngFor="let item of [].constructor(10)">
+      <div class="wrapper-grid">
+        <div class="img-container">
+          <div class="banner-img"></div>
+          <img
+            src="../../assets/images/profile.jpg"
+            alt="profile image"
+            class="profile-img"
+          />
+          <h1 class="name">محمد حسين العموري</h1>
+          <p class="description">
+            اسمي محمد العموري وأنا طالب في كلية الهندسة المعلوماتية في جامعة حمص
+            في السنة الرابعة ومدرب متوسط في المسابقة البرمجية
+          </p>
+          <button class="btnn">المزيد</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

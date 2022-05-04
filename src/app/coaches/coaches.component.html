@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700"
+    />
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="gr-header">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row">
+          <div style="margin-left: 20%">
+            <img
+              src="assets/images/person.svg"
+              style="color: red"
+              alt=""
+              srcset=""
+            />
+          </div>
+
+          <div style="margin-left: 20px">
+            <img
+              src="assets/images/notifications.svg"
+              style="color: red"
+              alt=""
+              srcset=""
+            />
+          </div>
+        </div>
+        <div style="display: flex; align-items: center">
+          <div style="color: antiquewhite; font-size: 28px">المدربين</div>
+
+          <div class="dropdown">
+            <div class="dropbtn"><i class="bi bi-list"></i></div>
+            <div class="dropdown-content">
+              <a href="#" dir="rtl"> الطلاب </a>
+              <a href="#" dir="rtl" class="selected-btn">المدربين </a>
+              <a href="#" dir="rtl"> مجموعات التدريب </a>
+              <a href="#" dir="rtl">المواعيد </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gr-menu">
+      <div style="height: 40px; width: 40px">
+        <img src="assets/images/back-icon.svg" alt="" srcset="" />
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <img
+          src="assets/images/logo.png"
+          width="125px"
+          height="auto"
+          alt=""
+          srcset=""
+        />
+        <div style="color: antiquewhite; font-size: 17px">
+          المسابقة البرمجية السورية
+        </div>
+        <div style="color: dimgrey; font-size: 13px">
+          Syrian Programming Contest
+        </div>
+      </div>
+      <div class="bt-gr">
+        <button class="col btn btn-rounded btn1" style="text-align: end">
+          الطلاب
+        </button>
+        <button
+          class="col btn btn-rounded selected-btn"
+          style="text-align: end"
+        >
+          المدربين
+        </button>
+        <button class="col btn btn-rounded btn3" style="text-align: end">
+          مجموعات التدريب
+        </button>
+        <button class="col btn btn-rounded btn4" style="text-align: end">
+          المواعيد
+        </button>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+  </body>
+</html>

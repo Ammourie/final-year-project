@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="cc">
+      <div class="leftside">
+        <div class="ad1">
+          <div class="adt">اخر المسائل المحلولة</div>
+          <hr style="color: white" />
+
+          <div class="solvedproblem" *ngFor="let item of [].constructor(5)">
+            <div>
+              <img
+                src="assets/images/code-forces.png"
+                style="width: 2vw; align-self: center"
+              />
+            </div>
+
+            <div style="color: white; font-size: 1.25vw">1A-watermelon</div>
+            <div style="color: grey; font-size: 0.5vw">قبل 30 دقيقة</div>
+          </div>
+        </div>
+        <div
+          class="ad1"
+          style="display: flex; flex-direction: column; align-items: center"
+        >
+          <img src="assets/images/clock.png" style="width: 30px" />
+          <div
+            style="
+              color: #9f9f9f;
+              font-family: sans-serif;
+              font-size: 30px;
+              text-align: center;
+            "
+          >
+            موعد الدرس القادم بعد <span style="color: #317db3">4</span> ساعات
+          </div>
+        </div>
+        <div class="ad1">
+          <div class="adt">اخر الأخبار</div>
+          <hr style="color: white" />
+
+          <div class="news">
+            <ul *ngFor="let item of [1, 2, 3, 4, 5, 6]">
+              <li>
+                <a
+                  class="advertisments"
+                  href="./coaches/add-post/#"
+                  style="font-size: 15px; color: #ff821c; text-decoration: none"
+                  >الإعلان عن موعد المسابقة في جامعة البعث</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="main" dir="rtl">
+        <form>
+          <textarea
+            dir="rtl"
+            charswidth="23"
+            name="text_body"
+            placeholder="أكتب إعلاناً..."
+            oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"
+          ></textarea>
+          <button class="btn">نشر</button>
+          <div class="add-task">
+            <h6 style="color: #d2d3d7">أضف مهمة ما</h6>
+            <input
+              type="text"
+              name="p-name"
+              id="p-name"
+              placeholder="اسم مسألة أو رابط لها ..."
+            />
+            <input
+              type="text"
+              name="p-discription"
+              id="p-discription"
+              placeholder="وصف المسألة (إختياري)"
+            />
+            <br />
+            <div class="btn" (click)="addProblem()" style="margin-right: 10px">
+              إضافة المسألة
+            </div>
+            <ul>
+              <li
+                *ngFor="let item of problems"
+                style="color: #d2d3d7; margin-right: 10px"
+              >
+                {{ item }}
+              </li>
+            </ul>
+            <div
+              class="date-pick"
+              style="
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-items: center;
+
+                direction: rtl;
+              "
+            >
+              <div style="color: #d2d3d7; margin-left: 20px">
+                يجب انهاء المهمة قبل
+              </div>
+
+              <mat-form-field>
+                <input
+                  class="t"
+                  matInput
+                  [matDatepicker]="datepicker"
+                  placeholder="إختر تاريخاً"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="datepicker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #datepicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div style="display: flex;;margin-top: 20px;align-items: center;">
+              <div style="color: #d2d3d7; margin-left: 20px">
+                الطلاب المعنيين بالمهمة
+              </div>
+              <!-- <div
+                class="btn"
+                (click)="addProblem()"
+                style="margin-right: 10px"
+              >
+                أضف طالباً
+              </div> -->
+
+              <div class="dropdown">
+                <div class="btn dropbtn">أضف طالباً</div>
+                <div class="dropdown-content">
+                  <div
+                    href="#"
+                    style="cursor: pointer"
+                    (click)="addStudent('student 1')"
+                  >
+                    student 1
+                  </div>
+                  <div
+                    href="#"
+                    style="cursor: pointer"
+                    (click)="addStudent('student 2')"
+                  >
+                    student 2
+                  </div>
+                  <div
+                    href="#"
+                    style="cursor: pointer"
+                    (click)="addStudent('student 3')"
+                  >
+                    student 3
+                  </div>
+                  <div
+                    href="#"
+                    style="cursor: pointer"
+                    (click)="addStudent('student 4')"
+                  >
+                    student 4
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ul>
+              <li
+                *ngFor="let item of students"
+                style="color: #d2d3d7; margin-right: 10px"
+              >
+                {{ item }}
+              </li>
+            </ul>
+
+            <div style="display: flex;  justify-content: start;">
+              <div class="btn" style="margin-right: 0; margin-top: 80px;"> أضف المهمة</div>
+              <div class="btn cancel-btn" style="margin-right: 20px; margin-top: 80px;"> إلغاء   </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

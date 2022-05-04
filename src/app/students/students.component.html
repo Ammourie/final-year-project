@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="gr-header">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row">
+          <div style="margin-left: 20%">
+            <img
+              src="assets/images/person.svg"
+              style="color: red"
+              alt=""
+              srcset=""
+            />
+          </div>
+
+          <div style="margin-left: 20px">
+            <img
+              src="assets/images/notifications.svg"
+              style="color: red"
+              alt=""
+              srcset=""
+            />
+          </div>
+        </div>
+        <div style="display: flex; align-items: center">
+          <div style="color: antiquewhite; font-size: 28px">الطلاب</div>
+
+          <div class="dropdown">
+            <div class="dropbtn"><i class="bi bi-list"></i></div>
+            <div class="dropdown-content">
+              <a href="#" dir="rtl" class="selected-btn"> الطلاب </a>
+              <a href="#" dir="rtl">المدربين </a>
+              <a href="#" dir="rtl"> مجموعات التدريب </a>
+              <a href="#" dir="rtl">المواعيد </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gr-menu">
+      <div style="height: 40px; width: 40px">
+        <img src="assets/images/back-icon.svg" alt="" srcset="" />
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <img
+          src="assets/images/logo.png"
+          width="125px"
+          height="auto"
+          alt=""
+          srcset=""
+        />
+        <div style="color: antiquewhite; font-size: 17px">
+          المسابقة البرمجية السورية
+        </div>
+        <div style="color: dimgrey; font-size: 13px">
+          Syrian Programming Contest
+        </div>
+      </div>
+      <div class="bt-gr">
+        <button
+          class="col btn selected-btn btn-rounded"
+          style="text-align: end"
+        >
+          الطلاب
+        </button>
+        <button class="col btn btn-rounded btn2" style="text-align: end">
+          المدربين
+        </button>
+        <button class="col btn btn-rounded btn3" style="text-align: end">
+          مجموعات التدريب
+        </button>
+        <button class="col btn btn-rounded btn4" style="text-align: end">
+          المواعيد
+        </button>
+      </div>
+    </div>
+    <div class="gr-main">
+      <div class="st">
+        <div class="st-item">
+          <img src="assets/images/logo.png" class="st-image" />
+          <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+        </div>
+        <div class="st-item">
+          <img src="assets/images/logo.png" class="st-image" />
+          <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+        </div>
+        <div class="st-item">
+          <img src="assets/images/logo.png" class="st-image" />
+          <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+        </div>
+      </div>
+
+      <div dir="rtl">
+        <div
+          class="d-flex flex-row justify-content-start"
+          style="margin-top: 20px"
+          style="margin-bottom: 20px"
+        >
+          <input
+            type="text"
+            class="form-control form-control-dark ft"
+            placeholder="فلترة"
+          />
+          <input
+            type="text"
+            class="form-control form-control-dark search"
+            placeholder="ابحث ..."
+            aria-label="Search"
+          />
+        </div>
+      </div>
+
+      <div class="students" *ngFor="let i of [].constructor(10)">
+        <div class="student d-flex flex-row justify-content-between" dir="rtl">
+          <div
+            class="d-flex flex-row justify-content-start"
+            style="align-items: center"
+          >
+            <img
+              src="assets/images/logo.png"
+              width="100px"
+              height="auto"
+              alt=""
+              srcset=""
+            />
+            <div>
+              <div
+                style="
+                  color: whitesmoke;
+                  font-size: 20px;
+                  margin-right: 20px;
+                  text-align: right;
+                "
+              >
+                أحمد نور الصباغ
+              </div>
+              <div
+                style="
+                  color: grey;
+                  font-size: 12px;
+                  margin-right: 20px;
+                  text-align: right;
+                "
+              >
+                أحمد نور الصباغ
+              </div>
+            </div>
+          </div>
+          <p style="color: grey; font-size: 22px">مبتدئ</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
