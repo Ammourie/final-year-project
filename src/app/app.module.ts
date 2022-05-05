@@ -36,6 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule.forRoot([
       { path: 'coaches/add-post', component: CoachesAddPostComponent },
       { path: 'coaches/list', component: CoachesListComponent },
+      { path: '', component: StudentsComponent },
     ]),
   ],
   providers: [],

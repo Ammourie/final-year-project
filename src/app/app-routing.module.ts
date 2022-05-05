@@ -1,10 +1,21 @@
+import { CoachesAddPostComponent } from './coaches-add-post/coaches-add-post.component';
+import { CoachesListComponent } from './coaches-list/coaches-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CoachesComponent } from './coaches/coaches.component';
 
-const routes: Routes = [];
-
+const routes: Routes = [
+  {
+    path: 'coaches',
+    component: CoachesComponent,
+    children: [
+      { path: 'list', component: CoachesListComponent }, //the path will /app/youroldpath1 instead of /youroldpath1
+      { path: 'add-post', component: CoachesAddPostComponent },
+    ],
+  },
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
