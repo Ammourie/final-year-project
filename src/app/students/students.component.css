@@ -300,4 +300,8 @@
   .search{
     width: 50vw;
   }
+  .st-image{
+    width: 50%;
+    height: 100%;
+  }
 }
