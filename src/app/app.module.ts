@@ -15,6 +15,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoachesComponent,
     CoachesAddPostComponent,
     CoachesListComponent,
+    PracticeGroubsComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +36,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatNativeDateModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      { path: 'coaches/add-post', component: CoachesAddPostComponent },
-      { path: 'coaches/list', component: CoachesListComponent },
-      { path: '', component: StudentsComponent },
+      // { path: 'coaches/add-post', component: CoachesAddPostComponent },
+      // { path: 'coaches/list', component: CoachesListComponent },
+      { path: 'students', component: StudentsComponent },
     ]),
   ],
   providers: [],

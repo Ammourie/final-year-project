@@ -42,7 +42,9 @@
           </div>
         </div>
         <div style="display: flex; align-items: center">
-          <div style="color: antiquewhite; font-size: 28px">الطلاب</div>
+          <div style="color: antiquewhite; font-size: 28px">
+            مجموعات التدريب
+          </div>
 
           <div class="dropdown">
             <div class="dropbtn"><i class="bi bi-list"></i></div>
@@ -76,19 +78,25 @@
         </div>
       </div>
       <div class="bt-gr">
-        <button
-          class="col btn selected-btn btn-rounded"
-          style="text-align: end"
-        >
+        <button class="col btn btn-rounded btn1" style="text-align: end">
           الطلاب
         </button>
-       <a [routerLink]="['/coaches/list']" routerLinkActive="router-link-active"  >
-        <div class="col btn btn-rounded btn2" style="text-align: end;width: 100%;">
-          المدربين
-        </div>
-       </a>
+        <a
+          [routerLink]="['/coaches/list']"
+          routerLinkActive="router-link-active"
+        >
+          <div
+            class="col btn btn-rounded btn2"
+            style="text-align: end; width: 100%"
+          >
+            المدربين
+          </div>
+        </a>
 
-        <button class="col btn btn-rounded btn3" style="text-align: end">
+        <button
+          class="col btn btn-rounded selected-btn"
+          style="text-align: end"
+        >
           مجموعات التدريب
         </button>
         <button class="col btn btn-rounded btn4" style="text-align: end">
@@ -99,16 +107,34 @@
     <div class="gr-main">
       <div class="st">
         <div class="st-item">
-          <img src="assets/images/placeholder1.png" class="st-image" />
-          <h1 class="st-text">نسبة الطلاب المشاركون أول مرة</h1>
+          <img src="assets/images/easy.png" class="st-image" />
+          <div class="st-content">
+            <div class="st-container">
+              <h1 class="st-header">مستوى التدريب مبتدئ</h1>
+              <h1 class="st-text">ثلاثة فرق تدريب بمجمل مئتي طالب</h1>
+              <h1 class="st-footer">الجلسة القادمة عن البرمجة الديناميكية</h1>
+            </div>
+          </div>
         </div>
         <div class="st-item">
-          <img src="assets/images/placeholder2.png" class="st-image" />
-          <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+          <img src="assets/images/med.png" class="st-image" />
+          <div class="st-content">
+            <div class="st-container">
+              <h1 class="st-header">مستوى التدريب متوسط</h1>
+              <h1 class="st-text">ثلاثة فرق تدريب بمجمل مئتي طالب</h1>
+              <h1 class="st-footer">الجلسة القادمة عن البرمجة الديناميكية</h1>
+            </div>
+          </div>
         </div>
         <div class="st-item">
-          <img src="assets/images/placeholder3.png" class="st-image" />
-          <h1 class="st-text">عدد الفرق المسجلة 35 فريقاً</h1>
+          <img src="assets/images/hard.png" class="st-image" />
+          <div class="st-content">
+            <div class="st-container">
+              <h1 class="st-header">مستوى التدريب متقدم</h1>
+              <h1 class="st-text">ثلاثة فرق تدريب بمجمل مئتي طالب</h1>
+              <h1 class="st-footer">الجلسة القادمة عن البرمجة الديناميكية</h1>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -132,42 +158,34 @@
         </div>
       </div>
 
-      <div class="students" *ngFor="let i of [].constructor(10)">
-        <div class="student d-flex flex-row justify-content-between" dir="rtl">
-          <div
-            class="d-flex flex-row justify-content-start"
-            style="align-items: center"
-          >
-            <img
-              src="assets/images/profile.jpg"
-              style="width: 60px; height: 60px; border-radius: 50%"
-              alt=""
-              srcset=""
-            />
-            <div>
-              <div
-                style="
-                  color: whitesmoke;
-                  font-size: 20px;
-                  margin-right: 20px;
-                  text-align: right;
-                "
-              >
-                محمد حسين العموري
-              </div>
-              <div
-                style="
-                  color: grey;
-                  font-size: 12px;
-                  margin-right: 20px;
-                  text-align: right;
-                "
-              >
-                طالب هندسة معلوماتية
-              </div>
-            </div>
+      <div class="row" dir="rtl">
+        <div class="column"  *ngFor="let item of [].constructor(10);let i=index">
+          <div class="wrapper-grid">
+            <div
+            [ngClass]="{
+              'img-container-g': i%3==0,
+              'img-container-r': i%3==1,
+              'img-container-o': i%3==2
+
+            }"
+            >
+<div class="content">
+<div class="group-header">
+مجموعة {{i+1}}</div>
+<div class="group-coaches">
+  <ul>
+    <li>
+      محمد نور الخليف
+    </li>
+    <li>
+      ياسر ميلاتو
+    </li>
+  </ul>
+</div>
+</div>
+
           </div>
-          <p style="color: grey; font-size: 22px">مبتدئ</p>
+          </div>
         </div>
       </div>
     </div>
