@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.component';
+import { CalendarComponent } from './calendar/calendar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.compo
     CoachesAddPostComponent,
     CoachesListComponent,
     PracticeGroubsComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
