@@ -1,3 +1,4 @@
+import { GroupsRegisterComponent } from './groups-register/groups-register.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.component';
 import { AboutPageComponent } from './about-page/about-page.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
     component: StudentsComponent,
 
   },
+
   {
     path: 'practice-groups',
     component: PracticeGroubsComponent,
@@ -30,6 +32,11 @@ const routes: Routes = [
   {
     path: 'dates',
     component: CalendarComponent,
+
+  },
+  {
+    path: 'group-register',
+    component: GroupsRegisterComponent,
 
   },
   {

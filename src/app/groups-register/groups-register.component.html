@@ -16,6 +16,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700"
+    />
+
     <title>Document</title>
   </head>
 
@@ -42,9 +47,9 @@
           </div>
         </div>
         <div style="display: flex; align-items: center">
-          <div style="color: antiquewhite; font-size: 28px">المواعيد</div>
+          <div style="color: antiquewhite; font-size: 28px">التسجيل على الفرق</div>
 
-          <div class="dropdown">
+          <!-- <div class="dropdown">
             <div class="dropbtn"><i class="bi bi-list"></i></div>
             <div class="dropdown-content">
               <a
@@ -58,6 +63,7 @@
                 [routerLink]="['/coaches/list']"
                 dir="rtl"
                 routerLinkActive="router-link-active"
+                class="selected-btn"
                 >المدربين
               </a>
               <a
@@ -71,11 +77,10 @@
                 [routerLink]="['/dates']"
                 dir="rtl"
                 routerLinkActive="router-link-active"
-                class="selected-btn"
                 >المواعيد
               </a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -98,105 +103,49 @@
           Syrian Programming Contest
         </div>
       </div>
-      <div class="bt-gr">
-        <a [routerLink]="['/students']" routerLinkActive="router-link-active" >
-          <div
-            class="col btn btn-rounded btn1"
-            style="text-align: end; width: 100%"
-          >
-            الطلاب
-          </div>
-        </a>
-        <a [routerLink]="['/coaches/list']" routerLinkActive="router-link-active" >
-        <div
-          class="col btn btn-rounded btn1"
-          style="text-align: end; width: 100%"
-        >
-          المدربين
-        </div></a>  <a [routerLink]="['/practice-groups']" routerLinkActive="router-link-active" >
-        <div class="col btn btn-rounded btn3" style="text-align: end; width: 100%">
-          مجموعات التدريب
-        </div></a>
-       <a [routerLink]="['/dates']" routerLinkActive="router-link-active" >   <div class="col btn btn-rounded selected-btn" style="text-align: end; width: 100%">
-          المواعيد
-        </div></a>
+      <hr style="color:whitesmoke; height: 1.5px;" >
+      <div style="color: antiquewhite; font-size: 18px;text-align: right;direction: rtl;">أعضاء الفريق :</div>
+
+      <div class="students-gr">
+
       </div>
+
     </div>
+
     <div class="gr-main">
-    <div style="width: 100%;">
-      <div class="month">
-        <ul>
-          <li class="prev">&#10094;</li>
-          <li class="next">&#10095;</li>
-          <li>
-            أيلول<br />
-            <span style="font-size: 18px">2021</span>
-          </li>
-        </ul>
+      <div style="color: antiquewhite; font-size: 28px;text-align: right;direction: rtl; margin: 10px;margin-right: 50px;font-family: sans-serif;">أعضاء مقترحون :</div>
+
+      <div class="st">
+<div style="background-color: red; width: 200px;
+height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"></div>
+
       </div>
 
-      <ul class="weekdays">
-        <li>Mo</li>
-        <li>Tu</li>
-        <li>We</li>
-        <li>Th</li>
-        <li>Fr</li>
-        <li>Sa</li>
-        <li>Su</li>
-      </ul>
+      <div dir="rtl">
+        <div style="display: flex; justify-content: space-between">
+          <div
+            class="d-flex flex-row justify-content-start"
+            style="margin-top: 20px; margin-bottom: 20px"
+          >
+            <input
+              type="text"
+              class="form-control form-control-dark ft"
+              placeholder="فلترة"
+            />
+            <input
+              type="text"
+              class="form-control form-control-dark search"
+              placeholder="ابحث ..."
+              aria-label="Search"
+            />
+          </div>
 
-      <ul class="days">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li><span class="active">10</span></li>
-        <li>11</li>
-        <li>12</li>
-        <li><span class="active">13</span></li>
-        <li>14</li>
-        <li>15</li>
-        <li>16</li>
-        <li>17</li>
-        <li>18</li>
-        <li>19</li>
-        <li>20</li>
-        <li>21</li>
-        <li>22</li>
-        <li>23</li>
-        <li>24</li>
-        <li>25</li>
-        <li>26</li>
-        <li>27</li>
-        <li>28</li>
-        <li>29</li>
-        <li>30</li>
-        <li>31</li>
-      </ul>
-    </div>
-<div class="events">
-  <h5 style="color: white; font-size: 30px;font-family: sans-serif;">الأحداث القريبة :</h5>
-<div class="grid-container" >
-  <div class="event" *ngFor="let item of [1,2,3,4]">
-    <div class="ev-date"  >
-    <div>10</div>
-    <div>ــــــــ</div>
-    <div>حزيران</div>
-    </div>
-    <div class="ev-content"  >
-    يوجد محاضرة في البرمجة المتقدمة في المخبر ال5 الساعة 2 ظهراً سيعطيها الكوتش الفاشل ياسر ميلاتو
-    </div>
+        </div>
       </div>
-</div>
+      <!-- <router-outlet></router-outlet> -->
 
-</div>
     </div>
+
   </body>
 </html>
-
 

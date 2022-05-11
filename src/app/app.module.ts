@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { GroupsRegisterComponent } from './groups-register/groups-register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     CoachesListComponent,
     PracticeGroubsComponent,
     CalendarComponent,
+    GroupsRegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,11 +39,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     MatInputModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot([
-      // { path: 'coaches/add-post', component: CoachesAddPostComponent },
-      // { path: 'coaches/list', component: CoachesListComponent },
-      { path: 'students', component: StudentsComponent },
-    ]),
+
   ],
   providers: [],
   bootstrap: [AppComponent],

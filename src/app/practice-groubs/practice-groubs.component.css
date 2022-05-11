@@ -379,14 +379,8 @@ ul{
 }
 
 /* //primary button at bottom */
-.btnn {
-  width: 100%;
-  border: none;
-  font-size: 1rem;
-  font-weight: bold;
-  color: wheat;
-  padding: 1rem;
-  background-color: #3f86c6;
+.btn {
+font-family: sans-serif;
 }
 
 .column {

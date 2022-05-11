@@ -49,10 +49,34 @@
           <div class="dropdown">
             <div class="dropbtn"><i class="bi bi-list"></i></div>
             <div class="dropdown-content">
-              <a href="#" dir="rtl" class="selected-btn"> الطلاب </a>
-              <a href="./coaches/list" dir="rtl">المدربين </a>
-              <a href="#" dir="rtl"> مجموعات التدريب </a>
-              <a href="#" dir="rtl">المواعيد </a>
+              <a
+                [routerLink]="['/students']"
+                dir="rtl"
+                routerLinkActive="router-link-active"
+              >
+                الطلاب
+              </a>
+              <a
+                [routerLink]="['/coaches/list']"
+                dir="rtl"
+                routerLinkActive="router-link-active"
+
+                >المدربين
+              </a>
+              <a
+                [routerLink]="['/practice-groups']"
+                dir="rtl"
+                routerLinkActive="router-link-active"       class="selected-btn"
+              >
+                مجموعات التدريب
+              </a>
+              <a
+                [routerLink]="['/dates']"
+                dir="rtl"
+                routerLinkActive="router-link-active"
+
+                >المواعيد
+              </a>
             </div>
           </div>
         </div>
@@ -78,30 +102,27 @@
         </div>
       </div>
       <div class="bt-gr">
-        <button class="col btn btn-rounded btn1" style="text-align: end">
-          الطلاب
-        </button>
-        <a
-          [routerLink]="['/coaches/list']"
-          routerLinkActive="router-link-active"
-        >
+        <a [routerLink]="['/students']" routerLinkActive="router-link-active" >
           <div
-            class="col btn btn-rounded btn2"
+            class="col btn btn-rounded btn1"
             style="text-align: end; width: 100%"
           >
-            المدربين
+            الطلاب
           </div>
         </a>
-
-        <button
-          class="col btn btn-rounded selected-btn"
-          style="text-align: end"
+        <a [routerLink]="['/coaches/list']" routerLinkActive="router-link-active" >
+        <div
+          class="col btn btn-rounded btn2"
+          style="text-align: end; width: 100%"
         >
+          المدربين
+        </div></a>  <a [routerLink]="['/practice-groups']" routerLinkActive="router-link-active" >
+        <div class="col btn btn-rounded selected-btn" style="text-align: end; width: 100%">
           مجموعات التدريب
-        </button>
-        <button class="col btn btn-rounded btn4" style="text-align: end">
+        </div></a>
+       <a [routerLink]="['/dates']" routerLinkActive="router-link-active" >   <div class="col btn btn-rounded btn4" style="text-align: end; width: 100%">
           المواعيد
-        </button>
+        </div></a>
       </div>
     </div>
     <div class="gr-main">
