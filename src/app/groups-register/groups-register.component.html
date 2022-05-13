@@ -47,7 +47,15 @@
           </div>
         </div>
         <div style="display: flex; align-items: center">
-          <div style="color: antiquewhite; font-size: 28px">التسجيل على الفرق</div>
+          <div
+            style="
+              color: antiquewhite;
+              font-size: 28px;
+              font-family: sans-serif;
+            "
+          >
+            التسجيل على الفرق
+          </div>
 
           <!-- <div class="dropdown">
             <div class="dropbtn"><i class="bi bi-list"></i></div>
@@ -103,24 +111,118 @@
           Syrian Programming Contest
         </div>
       </div>
-      <hr style="color:whitesmoke; height: 1.5px;" >
-      <div style="color: antiquewhite; font-size: 18px;text-align: right;direction: rtl;">أعضاء الفريق :</div>
-
-      <div class="students-gr">
-
+      <hr style="color: whitesmoke; height: 1.5px" />
+      <div
+        style="
+          color: antiquewhite;
+          font-size: 18px;
+          text-align: right;
+          direction: rtl;
+        "
+      >
+        أعضاء الفريق :
       </div>
 
+      <div class="students-gr">
+        <div class="added-student" *ngFor="let item of students; let i = index">
+          <div style="display: flex; align-items: center">
+            <img
+              src="../../assets/images/profile.jpg"
+              style="
+                border-radius: 50%;
+                width: 45px;
+                height: 45px;
+                margin-left: 15px;
+              "
+              alt="Avatar"
+            />
+            <div style="color: white; font-size: 20px; font-family: sans-serif">
+              {{ item }}
+            </div>
+          </div>
+          <div
+            class="btn bi bi-x-circle"
+            (click)="deleteStudent(i)"
+            style="color: red; font-size: 20px; margin-left: 10px"
+          ></div>
+        </div>
+      </div>
     </div>
 
     <div class="gr-main">
-      <div style="color: antiquewhite; font-size: 28px;text-align: right;direction: rtl; margin: 10px;margin-right: 50px;font-family: sans-serif;">أعضاء مقترحون :</div>
+      <div
+        style="
+          color: antiquewhite;
+          font-size: 28px;
+          text-align: right;
+          direction: rtl;
+          margin: 10px;
+          margin-right: 50px;
+          font-family: sans-serif;
+        "
+      >
+        أعضاء مقترحون :
+      </div>
 
-      <div class="st">
+      <!-- <div class="st">
 <div style="background-color: red; width: 200px;
 height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]"></div>
 
-      </div>
+      </div> -->
 
+      <p-carousel
+        [value]="items"
+        [numVisible]="3"
+        [numScroll]="3"
+        [circular]="false"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-student pTemplate="item">
+          <div class="recommended-student">
+            <div style="display: flex; direction: rtl">
+              <img
+                src="../../assets/images/profile.jpg"
+                style="
+                  border-radius: 50%;
+                  width: 55px;
+                  height: 55px;
+                  margin-left: 15px;
+                "
+                alt="Avatar"
+              />
+              <p style="color: white; font-size: 18px; font-family: sans-serif">
+                {{ student }} <br /><span style="font-size: 15px; color: gray"
+                  >مستوى التدريب متوسط</span
+                >
+              </p>
+            </div>
+            <ul dir="rtl">
+              <li
+                style="color: #9f9f9f; font-size: 15px; font-family: sans-serif"
+              >
+                بدأ بالتدريب منذ 2019
+              </li>
+              <li
+                style="color: #9f9f9f; font-size: 15px; font-family: sans-serif"
+              >
+                تأهل للمسابقة العالمية 3 مرات
+              </li>
+              <li
+                style="color: #9f9f9f; font-size: 15px; font-family: sans-serif"
+              >
+                جيد في ال math
+              </li>
+            </ul>
+            <div
+              class="btn btn-primary"
+              style="width: 60%; border-radius: 10px"
+              (click)="addStudent(student)"
+            >
+              إضافة
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
       <div dir="rtl">
         <div style="display: flex; justify-content: space-between">
           <div
@@ -139,13 +241,70 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
               aria-label="Search"
             />
           </div>
-
         </div>
       </div>
-      <!-- <router-outlet></router-outlet> -->
 
+      <div>
+        <div class="row" dir="rtl">
+          <div
+            class="column"
+            *ngFor="let item of [].constructor(10); let i = index"
+          >
+            <div class="wrapper-grid">
+              <div class="student-container">
+                <div class="content">
+                  <img
+                    src="../../assets/images/profile.jpg"
+                    style="
+                      border-radius: 50%;
+                      width: 100px;
+                      height: 100px;
+                      margin-left: 15px;
+                      position: absolute;
+                      top: -50px;
+                      margin-left: auto;
+                      margin-right: auto;
+                      left: 0;
+                      right: 0;
+                      align-self: center;
+                    "
+                    alt="Avatar"
+                  />
+                  <p
+                    style="
+                      color: white;
+                      font-size: 22px;
+                      font-family: sans-serif;
+                    "
+                  >
+                    محمد حسين العموري <br /><span
+                      style="font-size: 18px; color: gray"
+                      >مستوى التدريب متوسط</span
+                    >
+                  </p>
+                  <div
+                    class="btn btn-primary"
+                    style="
+                      width: 60%;
+                      border-radius: 10px;
+                      position: absolute;
+                      bottom: 20px;
+                      left: 0;
+                      right: 0;
+                      margin-left: auto;
+                      margin-right: auto;
+                      align-self: center;
+                    "
+                    (click)="addStudent('student')"
+                  >
+                    إضافة
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
   </body>
 </html>
-

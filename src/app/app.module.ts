@@ -18,6 +18,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { GroupsRegisterComponent } from './groups-register/groups-register.component';
+import {CarouselModule} from 'primeng/carousel';
+import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +43,9 @@ import { GroupsRegisterComponent } from './groups-register/groups-register.compo
     MatInputModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-
+    CarouselModule,
+    ButtonModule,
+    ToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
