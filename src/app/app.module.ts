@@ -18,9 +18,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { GroupsRegisterComponent } from './groups-register/groups-register.component';
-import {CarouselModule} from 'primeng/carousel';
-import {ButtonModule} from 'primeng/button';
-import {ToastModule} from 'primeng/toast';
+import { CarouselModule } from 'primeng/carousel';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import {ToastModule} from 'primeng/toast';
     BrowserAnimationsModule,
     CarouselModule,
     ButtonModule,
+    DialogModule,
+
     ToastModule,
   ],
   providers: [],

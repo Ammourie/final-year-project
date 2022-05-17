@@ -6,11 +6,54 @@
 }
 
 ::ng-deep .p-carousel {
-margin: 20px;
+  margin: 20px;
+}
+:host ::ng-deep .p-button {
+  margin: 0 0.5rem 0 0;
+  min-width: 10rem;
+}
+
+p {
+  margin: 0;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-dialog .p-button {
+  min-width: 6rem;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  background-color: #26282A;
+  color: white;
+  direction: rtl;
+  font-family: sans-serif;
+}
+:host ::ng-deep .p-dialog .p-dialog-content {
+  background-color: #26282A;
+  direction: rtl;
+}
+:host ::ng-deep .p-dialog .p-dialog-footer {
+  background-color: #26282A;
+  direction: rtl;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.confirm-dialog-content{
+  display: grid;
+  grid-template-columns: 47% 47%;
+  column-gap: 3%;
+  row-gap: 20px;
+
 }
 
 .recommended-student {
-  background-color: #1E2021;
+  background-color: #1e2021;
   border-radius: 20px;
   padding: 15px;
   width: 250px;
@@ -24,21 +67,19 @@ margin: 20px;
 
 .add-post {
   background-color: #202124;
-  color: #6C757D;
+  color: #6c757d;
   margin-left: 30px;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 5px;
   user-select: none;
-
 }
-.add-post:hover{
+.add-post:hover {
   box-shadow: 0px 0px 5px whitesmoke;
   cursor: pointer;
-
 }
-.add-post:active{
+.add-post:active {
   cursor: pointer;
   color: black;
   background-color: whitesmoke;
@@ -64,11 +105,10 @@ margin: 20px;
 .students-gr {
   display: flex;
   flex-direction: column;
-
+  align-items: center;
 }
-.added-student{
+.added-student {
   width: 100%;
-  margin: 10px;
   padding: 10px;
   border-radius: 10px;
   background-color: #303136;
@@ -77,7 +117,6 @@ margin: 20px;
   direction: rtl;
   justify-content: space-between;
   align-items: center;
-
 }
 
 .gr-header {
@@ -125,7 +164,6 @@ margin: 20px;
   overflow-x: auto;
   margin: 20px;
 }
-
 
 .ft {
   background-color: #202124;
@@ -240,9 +278,6 @@ margin: 20px;
   display: block;
 }
 
-
-
-
 .column {
   float: left;
   width: 30%;
@@ -265,8 +300,6 @@ margin: 20px;
 }
 
 .student-container {
-
-
   background-color: #1e2021;
   text-align: center;
   border-radius: 1rem;
@@ -274,9 +307,8 @@ margin: 20px;
   width: 80%;
   height: 30vh;
   margin: 10px;
-
 }
-.content{
+.content {
   /* color: wheat; */
   display: flex;
   flex-direction: column;
@@ -286,7 +318,6 @@ margin: 20px;
 }
 
 @media (max-width: 1350px) {
-
   .column {
     width: 40%;
     display: block;
@@ -318,7 +349,6 @@ margin: 20px;
 } */
 
 @media (max-width: 760px) {
-
   .gr-header {
     margin-right: 0;
   }

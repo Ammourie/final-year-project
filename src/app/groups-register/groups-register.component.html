@@ -115,16 +115,29 @@
       <div
         style="
           color: antiquewhite;
+          font-size: 20px;
+          text-align: center;
+          direction: rtl;
+          margin-top: 20px;
+        "
+        *ngIf="students.length == 0"
+      >
+        لم يتم اختيار أي شخص بعد
+      </div>
+      <div
+        style="
+          color: antiquewhite;
           font-size: 18px;
           text-align: right;
           direction: rtl;
         "
+        *ngIf="students.length != 0"
       >
         أعضاء الفريق :
       </div>
 
       <div class="students-gr">
-        <div class="added-student" *ngFor="let item of students; let i = index">
+        <div class="added-student" *ngFor="let item of students; let i = index" style="margin: 10px;">
           <div style="display: flex; align-items: center">
             <img
               src="../../assets/images/profile.jpg"
@@ -136,8 +149,13 @@
               "
               alt="Avatar"
             />
-            <div style="color: white; font-size: 20px; font-family: sans-serif">
-              {{ item }}
+            <div style="display: flex; flex-direction: column">
+              <div
+                style="color: white; font-size: 17px; font-family: sans-serif"
+              >
+                {{ item }}
+              </div>
+              <div style="color: grey; font-size: 13px">مبتدئ</div>
             </div>
           </div>
           <div
@@ -146,6 +164,101 @@
             style="color: red; font-size: 20px; margin-left: 10px"
           ></div>
         </div>
+        <div
+          class="btn btn-primary"
+          style="width: 70%; border-radius: 10px; margin-top: 40px"
+          *ngIf="students.length >= 3"
+          (click)="showModalDialog()"
+        >
+          تم
+        </div>
+        <p-dialog
+          header="أعضاء الفريق :"
+          [(visible)]="displayModal"
+          [modal]="true"
+          [baseZIndex]="10000"
+          [draggable]="false"
+          [resizable]="false"
+          [style]="{ width: '50vw' }"
+        >
+          <div class="confirm-dialog-content">
+            <div
+              class="added-student"
+              *ngFor="let item of students; let i = index"
+            >
+              <div style="display: flex; align-items: center">
+                <img
+                  src="../../assets/images/profile.jpg"
+                  style="
+                    border-radius: 50%;
+                    width: 45px;
+                    height: 45px;
+                    margin-left: 15px;
+                  "
+                  alt="Avatar"
+                />
+                <div style="display: flex; flex-direction: column">
+                  <div
+                    style="
+                      color: white;
+                      font-size: 17px;
+                      font-family: sans-serif;
+                    "
+                  >
+                    {{ item }}
+                  </div>
+                  <div style="color: grey; font-size: 13px">مبتدئ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h5
+            style="
+              direction: rtl;
+              color: white;
+              font-family: sans-serif;
+              font-weight: 600;
+              font-size: 1.25rem;
+              margin-top: 10px;
+              margin-bottom : 10px;
+            "
+          >
+            أعطه اسماً :
+          </h5>
+          <input
+            type="text"
+            class="form-control form-control-dark"
+            style="width: 97%; background-color: #303136;border: none ;border-radius: 5px;color:white;margin-bottom: 20px;"
+            placeholder="اسم الفريق..."
+          />
+          <ng-template pTemplate="footer" >
+            <p-button
+              icon="pi pi-times"
+              (click)="displayModal = false"
+              label="رجوع"
+              [style]="{
+                width: '15vw',
+                'background-color': '#970000',
+                color: 'white',
+                border: 'none',
+                'font-family': 'sans-serif'
+              }"
+            ></p-button>
+            <p-button
+              icon="pi pi-check"
+              (click)="displayModal = false"
+              label="موافق"
+              class="p-button-text"
+              [style]="{
+                width: '15vw',
+                border: 'none',
+                color: 'white',
+                'background-color': '#005C97',
+                'font-family': 'sans-serif'
+              }"
+            ></p-button>
+          </ng-template>
+        </p-dialog>
       </div>
     </div>
 

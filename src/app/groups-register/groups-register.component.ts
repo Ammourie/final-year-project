@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-groups-register',
@@ -11,7 +12,7 @@ export class GroupsRegisterComponent implements OnInit {
 
   responsiveOptions;
 
-  constructor() {
+  constructor(private primengConfig: PrimeNGConfig) {
     this.responsiveOptions = [
       {
         breakpoint: '1350px',
@@ -23,6 +24,22 @@ export class GroupsRegisterComponent implements OnInit {
         numVisible: 1,
         numScroll: 1,
       },
+    ];
+  }
+  ngOnInit() {
+    this.primengConfig.ripple = true;
+
+    this.items = [
+      'محمد حسين العموري',
+      'أحمد نور ',
+      'محمد نور الخليف',
+      'يحيى الزهران',
+      'عموري العموري',
+      'item6',
+      'item7',
+      'item8',
+      'item9',
+      'item10',
     ];
   }
   addStudent(student: String) {
@@ -38,19 +55,9 @@ export class GroupsRegisterComponent implements OnInit {
       }
     });
   }
+  displayModal: boolean = false;
 
-  ngOnInit() {
-    this.items = [
-      'محمد حسين العموري',
-      'أحمد نور ',
-      'محمد نور الخليف',
-      'يحيى الزهران',
-      'عموري العموري',
-      'item6',
-      'item7',
-      'item8',
-      'item9',
-      'item10',
-    ];
+  showModalDialog() {
+    this.displayModal = true;
   }
 }
