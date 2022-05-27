@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { GroupsRegisterComponent } from './groups-register/groups-register.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.component';
@@ -8,6 +9,7 @@ import { CoachesListComponent } from './coaches-list/coaches-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CoachesComponent } from './coaches/coaches.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,16 @@ const routes: Routes = [
   {
     path: 'group-register',
     component: GroupsRegisterComponent,
+
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
 
   },
   {

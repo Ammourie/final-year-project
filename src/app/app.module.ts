@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { CoachesListComponent } from './coaches-list/coaches-list.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.component';
@@ -22,6 +23,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,8 @@ import { ButtonModule } from 'primeng/button';
     PracticeGroubsComponent,
     CalendarComponent,
     GroupsRegisterComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,7 @@ import { ButtonModule } from 'primeng/button';
     CarouselModule,
     ButtonModule,
     DialogModule,
-
+    MatRadioModule,
     ToastModule,
   ],
   providers: [],

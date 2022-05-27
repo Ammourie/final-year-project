@@ -1,0 +1,114 @@
+<div class="d-flex">
+  <div class="gradient-curve">
+    <div style="width: 50%; height: 100%">
+      <div
+        style="
+          position: absolute;
+          font-family: sans-serif;
+          font-size: 4vw;
+          direction: rtl;
+          left: 5%;
+          top: 10%;
+          font-weight: 500;
+          color: black;
+        "
+      >
+        مرحبا بك في عالمنا !!!
+      </div>
+      <img
+        src="../../assets/images/computer.png"
+        alt=""
+        style="width: 60%; position: relative; left: 10%; top: 35%"
+        srcset=""
+      />
+    </div>
+  </div>
+  <div class="login-form">
+    <h1
+      style="
+        margin-top: 10%;
+        margin-bottom: 10%;
+        margin-right: 50px;
+        color: #d2d3d7;
+      "
+    >
+      التسجيل
+    </h1>
+    <form action="" dir="rtl">
+      <!-- <input type="text" class="name-input" name="fullName" placeholder="" />
+    <label for="fullName" style="color: wheat;">الاسم</label> -->
+
+      <input
+        type="text"
+        id="fullName"
+        class="name-input"
+        name="fullName"
+        placeholder=" الاسم الكامل"
+        autocomplete="off"
+      />
+      <input
+        type="email"
+        id="Email"
+        class="email-input"
+        name="Email"
+        placeholder="البريد الإلكتروني"
+        autocomplete="off"
+      />
+      <input
+        type="password"
+        id="PassWord"
+        class="password-input"
+        name="PassWord"
+        placeholder="كلمة السر"
+        autocomplete="off"
+      />
+      <div style="width: 70%; direction: rtl">
+        <div style="color: #d2d3d7">
+          الجنس :
+          <mat-radio-group
+            aria-label="gender"
+            dir="rtl"
+            style="margin-right: 20px"
+            name="gender"
+          >
+            <mat-radio-button value="1" style="color: #d2d3d7"
+              >ذكر</mat-radio-button
+            >
+            <mat-radio-button value="2" style="color: #d2d3d7"
+              >أنثى</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+        <br />
+        <div style="color: #d2d3d7">
+          التسجيل كـ :
+          <mat-radio-group
+            aria-label="Select an option"
+            dir="rtl"
+            style="margin-right: 20px"
+            name="status"
+          >
+            <mat-radio-button value="1" style="color: #d2d3d7"
+              >مدرب</mat-radio-button
+            >
+            <mat-radio-button value="2" style="color: #d2d3d7"
+              >طالب</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+      </div>
+      <div
+        style="
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+        "
+      >
+        <button type="submit" class="btn btn-rounded btnn">إنشاء</button>
+        <a style="color: #7b7a7d">لديك حساب بالفعل؟</a>
+      </div>
+    </form>
+  </div>
+</div>
