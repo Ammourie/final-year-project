@@ -3,28 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { FooterComponent } from './footer/footer.component';
-import { AboutPageComponent } from './about-page/about-page.component';
-import { StudentsComponent } from './students/students.component';
-import { CoachesComponent } from './coaches/coaches.component';
-import { CoachesAddPostComponent } from './coaches-add-post/coaches-add-post.component';
+import { NavBarComponent } from './_components/nav-bar/nav-bar.component';
+import { FooterComponent } from './_components/footer/footer.component';
+import { AboutPageComponent } from './_components/about-page/about-page.component';
+import { StudentsComponent } from './_components/students/students.component';
+import { CoachesComponent } from './_components/coaches/coaches.component';
+import { CoachesAddPostComponent } from './_components/coaches-add-post/coaches-add-post.component';
 import { RouterModule } from '@angular/router';
-import { CoachesListComponent } from './coaches-list/coaches-list.component';
+import { CoachesListComponent } from './_components/coaches-list/coaches-list.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { GroupsRegisterComponent } from './groups-register/groups-register.component';
+import { PracticeGroubsComponent } from './_components/practice-groubs/practice-groubs.component';
+import { CalendarComponent } from './_components/calendar/calendar.component';
+import { GroupsRegisterComponent } from './_components/groups-register/groups-register.component';
 import { CarouselModule } from 'primeng/carousel';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './_components/login/login.component';
+import { RegisterComponent } from './_components/register/register.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { RegisterComponent } from './register/register.component';
     DialogModule,
     MatRadioModule,
     ToastModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

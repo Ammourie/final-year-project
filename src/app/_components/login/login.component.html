@@ -16,7 +16,7 @@
         مرحبا بك في عالمنا !!!
       </div>
       <img
-        src="../../assets/images/computer.png"
+        src="../../../assets/images/computer.png"
         alt=""
         style="width: 60%; position: relative; left: 10%; top: 35%"
         srcset=""
@@ -34,18 +34,20 @@
     >
       الدخول
     </h1>
-    <form action="" dir="rtl">
+    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off"  action="" dir="rtl">
       <!-- <input type="text" class="name-input" name="fullName" placeholder="" />
     <label for="fullName" style="color: wheat;">الاسم</label> -->
 
 
       <input
-        type="email"
+        type="username"
         id="Email"
         class="email-input"
-        name="Email"
-        placeholder="البريد الإلكتروني"
+        name="userName"
+        placeholder="اسم المستخدم"
         autocomplete="off"
+        [(ngModel)]="model.userName"
+
         />
       <input
       type="password"
@@ -54,6 +56,8 @@
         name="PassWord"
         placeholder="كلمة السر"
         autocomplete="off"
+        [(ngModel)]="model.password"
+
         />
         <br>
 <div class="forget-pass">
@@ -71,7 +75,7 @@
         "
       >
         <button type="submit" class="btn btn-rounded btnn">الدخول</button>
-        <a style="color: #7b7a7d">ليس لديك حساب؟ </a>
+        <a style="color: #7b7a7d; text-decoration: none;"  [routerLink]="['/register']">ليس لديك حساب؟ </a>
       </div>
     </form>
   </div>

@@ -1,117 +1,115 @@
 * {
   box-sizing: border-box;
 }
-ul {
-  list-style-type: none;
-}
-body {
-  font-family: Verdana, sans-serif;
-}
+.add-post {
+  background-color: #202124;
+  color: #6C757D;
+  margin-left: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  user-select: none;
 
-.month {
-  padding: 70px 25px;
-  margin: 0;
-  width: 100%;
- background: #7474bf; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #348ac7,
-    #7474bf
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #348ac7,
-    #7474bf
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
-  text-align: center;
 }
-
-.month ul {
-  margin: 0;
-  padding: 0;
-}
-
-.month ul li {
-  color: white;
-  font-size: 30px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-.month .prev {
-  float: left;
-  padding-top: 10px;
-}
-
-.month .next {
-  float: right;
-  padding-top: 10px;
-}
-
-.weekdays {
-  margin: 0;
-  padding: 10px 0;
-  background-color: #ddd;
-  width: 100%;
-}
-
-.weekdays li {
-  display: inline-block;
-  width: 13.6%;
-  color: #666;
-  text-align: center;
-}
-
-.days {
-  padding: 10px 0;
-  background: #eee;
-  margin: 0;
-  width: 100%;
-}
-
-.days li {
-  list-style-type: none;
+.add-post:hover{
+  box-shadow: 0px 0px 5px whitesmoke;
   cursor: pointer;
-  display: inline-block;
-  width: 13.6%;
+
+}
+.add-post:active{
+  cursor: pointer;
+  color: black;
+  background-color: whitesmoke;
+}
+
+.wrapper-grid {
+  /* display: grid; */
+  /* grid-template-columns: minmax(300px, 1fr);
+  grid-gap: 2rem; */
+  justify-content: center;
+}
+.img-container {
+  overflow: hidden;
+  background-color: #1e2021;
   text-align: center;
-  margin-bottom: 5px;
-  font-size: 12px;
-  color: #777;
+  border-radius: 1rem;
+  position: relative;
+  /* width: 100%; */
+  margin: 10px;
 }
 
-.days li .active {
-  padding: 5px;
-  background: #7474bf; /* fallback for old browsers */
-
-  color: white !important;
+.banner-img {
+  position: absolute;
+  background-image: url(https://images.unsplash.com/photo-1582727657635-c771002bdada?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
+  height: 10rem;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-/* Add media queries for smaller screens */
-@media screen and (max-width: 720px) {
-  .weekdays li,
-  .days li {
-    width: 13.1%;
-  }
+/* circle profile image on top */
+.profile-img {
+  width: 8rem;
+  clip-path: circle(60px at center);
+  margin-top: 4.5rem;
 }
 
-@media screen and (max-width: 420px) {
-  .weekdays li,
-  .days li {
-    width: 12.5%;
-  }
-  .days li .active {
-    padding: 2px;
-  }
+/* //name */
+.name {
+  font-weight: bold;
+  color: white;
+  font-size: 1.5rem;
 }
 
-@media screen and (max-width: 290px) {
-  .weekdays li,
-  .days li {
-    width: 12.2%;
-  }
+/* //paragraph description */
+.description {
+  margin: 1rem 2rem;
+  color: white;
+  font-size: 0.9rem;
 }
 
+/* //primary button at bottom */
+.btnn {
+  width: 100%;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  color: wheat;
+  padding: 1rem;
+  background-color: #3f86c6;
+}
+
+.column {
+  float: left;
+  width: 30%;
+  padding: 0 10px;
+  margin-right: 1.5%;
+  margin-left: 1.5%;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  /* display: flex; */
+  margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  margin-bottom: 20px;
+}
 .gr {
   display: grid;
   /* position: absolute; */
@@ -139,15 +137,8 @@ body {
   gap: 15px;
   margin-top: 50px;
 }
-.btn1 {
-  grid-area: btn1;
-  background-color: #26282a;
-  color: gray;
-  padding-left: 20px;
-  padding-right: 20px;
-}
 .selected-btn {
-  grid-area: btn4;
+  grid-area: btn2;
   padding-left: 20px;
   padding-right: 20px;
 
@@ -163,6 +154,13 @@ body {
     #7474bf
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #fff;
+}
+.btn1 {
+  grid-area: btn1;
+  background-color: #26282a;
+  color: gray;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .btn2 {
   grid-area: btn2;
@@ -219,12 +217,9 @@ body {
 .gr-main {
   /* grid-column: 1 / span 7;
   grid-row: 2 / span 15; */
-  margin: 5%;
-  margin-top: 20px;
-  margin-right: 35%;
+  margin-right: 30%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .st {
@@ -265,7 +260,7 @@ body {
   margin-left: 20px;
 }
 .search {
-  background: url("../../assets/images/search.svg") no-repeat scroll 5px 5px;
+  background: url("../../../assets/images/search.svg") no-repeat scroll 5px 5px;
   background-color: #202124;
   background-size: 20px;
   background-position-x: 20px;
@@ -275,15 +270,25 @@ body {
   color: white;
   width: 25vw;
 }
-
-.student {
-  margin: 20px;
-  height: 100px;
-  border-radius: 20px;
+/* .st-item-2 {
+  width: 30vw;
+  height: 30vh;
   background-color: #202124;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 20px;
 }
+.st-item-3 {
+  width: 30vw;
+  height: 30vh;
+  background-color: #202124;
+  align-items: center;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 20px;
+} */
+
 .gr-right {
   grid-area: right;
 }
@@ -375,82 +380,82 @@ body {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-.events {
-  width: 100%;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  color: white;
-  direction: rtl;
-}
-.grid-container {
-  display: grid;
-  /* grid-template-columns: 40% 40%; */
-gap: 50px;
-  grid-template-columns: auto  auto;
-  padding: 10px;
-}
-.event {
-  display: flex;
-  /* width: 50%; */
-  /* margin-left: 40px; */
-}
-.ev-date {
-  background: #7474bf; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #348ac7,
-    #7474bf
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #348ac7,
-    #7474bf
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  border-radius: 0px 20px 20px 0px;
-  /* height: 100px; */
 
-  /* width: 100px; */
-  padding: 25px;
-  font-size: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+@media (max-width: 800px) {
+  .column {
+    width: 90%;
+    display: block;
+    margin-bottom: 20px;
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+  .wrapper-grid {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
-.ev-content {
-  border-radius: 20px 0px 0px 20px;
-  padding: 20px;
-  font-size: 20px;
-  background-color: #1e2021;
-  color: #eee;
-}
-@media (max-width: 1000px) {
+
+@media (max-width: 600px) {
   .gr-header {
     margin-right: 0;
   }
   .gr-menu {
     display: none;
   }
-
+  /* .menu{
+    display: inline-block;
+    color: white;
+   font-size: 25px;
+   margin-left: 10px;
+ } */
   .dropdown {
     position: relative;
     display: inline-block;
   }
   .gr-main {
-    margin: 10%;
-    margin-top: 20px;
+    margin-right: 0;
   }
-  .grid-container {
-    display: grid;
-    /* grid-template-columns: 40% 40%; */
-  gap: 50px;
-    grid-template-columns: auto ;
+  .st {
+    flex-direction: column;
+  }
+  .st-item {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    height: 30vh;
+    background-color: #202124;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
     padding: 10px;
+    border-radius: 20px;
   }
-.ev-date{
-  font-size: 30px;
-}
-.ev-content{
-  font-size: 20px;
-}
+  .st-text {
+    margin: auto;
+    color: white;
+    font-size: 4vw;
+    font-family: sans-serif;
+    direction: rtl;
+  }
+  .ft {
+    width: 15vw;
+  }
+  .search {
+    width: 50vw;
+  }
+  /* .column {
+    width: 80%;
+    display: block;
+    margin-bottom: 20px;
+  } */
+  /* .card {
+    margin-left: 10%;
+    margin-right: 10%;
+  } */
+  .img-container {
+    width: 100%;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
 }

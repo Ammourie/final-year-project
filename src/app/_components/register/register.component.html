@@ -15,14 +15,14 @@
         مرحبا بك في عالمنا !!!
       </div>
       <img
-        src="../../assets/images/computer.png"
+        src="../../../assets/images/computer.png"
         alt=""
         style="width: 60%; position: relative; left: 10%; top: 35%"
         srcset=""
       />
     </div>
   </div>
-  <div class="login-form">
+  <div class="login-form ">
     <h1
       style="
         margin-top: 10%;
@@ -33,33 +33,36 @@
     >
       التسجيل
     </h1>
-    <form action="" dir="rtl">
+    <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off"  action="" dir="rtl">
       <!-- <input type="text" class="name-input" name="fullName" placeholder="" />
     <label for="fullName" style="color: wheat;">الاسم</label> -->
 
       <input
         type="text"
-        id="fullName"
+        id="userName"
         class="name-input"
-        name="fullName"
+        name="userName"
         placeholder=" الاسم الكامل"
         autocomplete="off"
+        [(ngModel)]="model.userName"
       />
       <input
         type="email"
         id="Email"
         class="email-input"
-        name="Email"
+        name="email"
         placeholder="البريد الإلكتروني"
         autocomplete="off"
+        [(ngModel)]="model.email"
       />
       <input
         type="password"
         id="PassWord"
         class="password-input"
-        name="PassWord"
+        name="passWord"
         placeholder="كلمة السر"
         autocomplete="off"
+        [(ngModel)]="model.password"
       />
       <div style="width: 70%; direction: rtl">
         <div style="color: #d2d3d7">
@@ -69,11 +72,12 @@
             dir="rtl"
             style="margin-right: 20px"
             name="gender"
+            [(ngModel)]="model.gender"
           >
-            <mat-radio-button value="1" style="color: #d2d3d7"
+            <mat-radio-button value="male" style="color: #d2d3d7"
               >ذكر</mat-radio-button
             >
-            <mat-radio-button value="2" style="color: #d2d3d7"
+            <mat-radio-button value="female" style="color: #d2d3d7"
               >أنثى</mat-radio-button
             >
           </mat-radio-group>
@@ -86,11 +90,12 @@
             dir="rtl"
             style="margin-right: 20px"
             name="status"
+            [(ngModel)]="model.status"
           >
-            <mat-radio-button value="1" style="color: #d2d3d7"
+            <mat-radio-button value="coach" style="color: #d2d3d7"
               >مدرب</mat-radio-button
             >
-            <mat-radio-button value="2" style="color: #d2d3d7"
+            <mat-radio-button value="student" style="color: #d2d3d7"
               >طالب</mat-radio-button
             >
           </mat-radio-group>
@@ -106,7 +111,8 @@
         "
       >
         <button type="submit" class="btn btn-rounded btnn">إنشاء</button>
-        <a style="color: #7b7a7d">لديك حساب بالفعل؟</a>
+        <a style="color: #7b7a7d; text-decoration: none;"  [routerLink]="['/login']"> لديك حساب بالفعل؟ </a>
+
       </div>
     </form>
   </div>

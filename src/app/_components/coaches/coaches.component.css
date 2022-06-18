@@ -71,14 +71,8 @@
 }
 
 /* //primary button at bottom */
-.btnn {
-  width: 100%;
-  border: none;
-  font-size: 1rem;
-  font-weight: bold;
-  color: wheat;
-  padding: 1rem;
-  background-color: #3f86c6;
+.btn {
+font-family: sans-serif;
 }
 
 .column {
@@ -260,7 +254,7 @@
   margin-left: 20px;
 }
 .search {
-  background: url("../../assets/images/search.svg") no-repeat scroll 5px 5px;
+  background: url("../../../assets/images/search.svg") no-repeat scroll 5px 5px;
   background-color: #202124;
   background-size: 20px;
   background-position-x: 20px;
@@ -381,7 +375,7 @@
   display: block;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .column {
     width: 90%;
     display: block;

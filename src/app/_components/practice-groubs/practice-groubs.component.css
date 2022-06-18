@@ -190,7 +190,7 @@ ul{
   margin-left: 20px;
 }
 .search {
-  background: url("../../assets/images/search.svg") no-repeat scroll 5px 5px;
+  background: url("../../../assets/images/search.svg") no-repeat scroll 5px 5px;
 
   background-color: #202124;
   background-size: 20px;
@@ -309,7 +309,7 @@ ul{
   justify-content: center;
 }
 .img-container-g {
-  background: url("../../assets/images/bookmark-green.svg") no-repeat scroll 5px
+  background: url("../../../assets/images/bookmark-green.svg") no-repeat scroll 5px
     5px;
 
   overflow: hidden;
@@ -325,7 +325,7 @@ ul{
   background-position-y: top;
 }
 .img-container-o {
-  background: url("../../assets/images/bookmark-orange.svg") no-repeat scroll
+  background: url("../../../assets/images/bookmark-orange.svg") no-repeat scroll
     5px 5px;
 
   overflow: hidden;
@@ -341,7 +341,7 @@ ul{
   background-position-y: top;
 }
 .img-container-r {
-  background: url("../../assets/images/bookmark-red.svg ") no-repeat scroll 5px
+  background: url("../../../assets/images/bookmark-red.svg ") no-repeat scroll 5px
     5px;
 
   overflow: hidden;

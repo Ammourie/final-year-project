@@ -1,15 +1,15 @@
-import { LoginComponent } from './login/login.component';
-import { GroupsRegisterComponent } from './groups-register/groups-register.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { PracticeGroubsComponent } from './practice-groubs/practice-groubs.component';
-import { AboutPageComponent } from './about-page/about-page.component';
-import { StudentsComponent } from './students/students.component';
-import { CoachesAddPostComponent } from './coaches-add-post/coaches-add-post.component';
-import { CoachesListComponent } from './coaches-list/coaches-list.component';
+import { LoginComponent } from './_components/login/login.component';
+import { GroupsRegisterComponent } from './_components/groups-register/groups-register.component';
+import { CalendarComponent } from './_components/calendar/calendar.component';
+import { PracticeGroubsComponent } from './_components/practice-groubs/practice-groubs.component';
+import { AboutPageComponent } from './_components/about-page/about-page.component';
+import { StudentsComponent } from './_components/students/students.component';
+import { CoachesAddPostComponent } from './_components/coaches-add-post/coaches-add-post.component';
+import { CoachesListComponent } from './_components/coaches-list/coaches-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CoachesComponent } from './coaches/coaches.component';
-import { RegisterComponent } from './register/register.component';
+import { CoachesComponent } from './_components/coaches/coaches.component';
+import { RegisterComponent } from './_components/register/register.component';
 
 const routes: Routes = [
   {

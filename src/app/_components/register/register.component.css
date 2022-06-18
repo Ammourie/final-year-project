@@ -1,7 +1,7 @@
 .gradient-curve {
   width: 100vw;
   height: 100vh;
-  background: url("../../assets/images/login.png") no-repeat;
+  background: url("../../../assets/images/login.png") no-repeat;
   background-size: 50% 100%;
 }
 .login-form {
@@ -28,7 +28,7 @@ form {
   direction: rtl;
   border-bottom: #717171 solid 2px;
   background-color: #1e2021;
-  background: url("../../assets/images/login-person-grey.svg") no-repeat scroll;
+  background: url("../../../assets/images/login-person-grey.svg") no-repeat scroll;
   background-position-x: right;
   background-position-y: center;
   background-size: 20px 20px;
@@ -37,7 +37,7 @@ form {
 
 .name-input:focus {
   border-bottom: #d2d3d7 solid 2px;
-  background: url("../../assets/images/login-person.svg") no-repeat scroll;
+  background: url("../../../assets/images/login-person.svg") no-repeat scroll;
   background-position-x: right;
   background-position-y: center;
   background-size: 20px 20px;
@@ -53,7 +53,7 @@ form {
   direction: rtl;
   border-bottom: #717171 solid 2px;
   background-color: #1e2021;
-  background: url("../../assets/images/email-grey.svg") no-repeat scroll;
+  background: url("../../../assets/images/email-grey.svg") no-repeat scroll;
   background-position-x: right;
   background-position-y: center;
   background-size: 20px 20px;
@@ -62,7 +62,7 @@ form {
 
 .email-input:focus {
   border-bottom: #d2d3d7 solid 2px;
-  background: url("../../assets/images/email.svg") no-repeat scroll;
+  background: url("../../../assets/images/email.svg") no-repeat scroll;
   background-position-x: right;
   background-position-y: center;
   background-size: 20px 20px;
@@ -95,7 +95,7 @@ form {
   direction: rtl;
   border-bottom: #717171 solid 2px;
   background-color: #1e2021;
-  background: url("../../assets/images/password-grey.svg") no-repeat scroll;
+  background: url("../../../assets/images/password-grey.svg") no-repeat scroll;
   background-position-x: right;
   background-position-y: center;
   background-size: 20px 20px;
@@ -104,7 +104,7 @@ form {
 
 .password-input:focus {
   border-bottom: #d2d3d7 solid 2px;
-  background: url("../../assets/images/password.svg") no-repeat scroll;
+  background: url("../../../assets/images/password.svg") no-repeat scroll;
   background-position-x: right;
   background-position-y: center;
   background-size: 20px 20px;

@@ -59,8 +59,17 @@
           />
         </li>
         <li class="nav-item">
-          <a class="col btn btn-dark-blue btn-rounded" [routerLink]="['/login']"
+          <a
+            class="col btn btn-dark-blue btn-rounded"
+            [routerLink]="['/login']"
+            *ngIf="(accountService.currentUser$ | async) === null"
             >دخول</a
+          >
+          <b
+            class="col btn btn-dark-blue btn-rounded"
+            (click)="logout()"
+            *ngIf="accountService.currentUser$ | async"
+            >خروج</b
           >
         </li>
       </ul>
