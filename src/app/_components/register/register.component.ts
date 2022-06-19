@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
   model: any = {};
-  loggedIn: boolean = false;
   constructor(public accountService: AccountService) {}
 
   ngOnInit(): void {}

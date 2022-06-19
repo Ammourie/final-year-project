@@ -10,11 +10,13 @@ import { map, ReplaySubject } from 'rxjs';
 export class AccountService {
   baseUrl = 'https://cpcmanager.herokuapp.com/api/';
   loggedIn: boolean = false;
+  loggingIndicator: boolean = false;
   private currentUserSource = new ReplaySubject(1);
   currentUser$ = this.currentUserSource.asObservable();
   constructor(private http: HttpClient, private router: Router) {}
 
   login(model: any) {
+    this.loggingIndicator = true;
     this.http
       .post<User>(this.baseUrl + 'Account/login', model)
       .pipe(
@@ -29,8 +31,16 @@ export class AccountService {
       )
       .subscribe({
         next: (res) => {},
-        error: (error) => console.log(error),
-        complete: () => this.router.navigate(['/']),
+        error: (error) => {
+          console.log(error);
+          this.loggingIndicator = false;
+        },
+        complete: () => {
+          console.log("compleated");
+
+          this.loggingIndicator = false;
+          this.router.navigate(['/']);
+        },
       });
   }
   setCurrentUser(user: User) {
@@ -39,9 +49,12 @@ export class AccountService {
 
   register(model: any) {
     // console.log(model);
-
+    this.loggingIndicator = true;
     this.http.post<User>(this.baseUrl + 'Account/register', model).subscribe({
-      error: (error) => console.log(error),
+      error: (error) => {
+        console.log(error);
+        this.loggingIndicator = false;
+      },
       complete: () => this.login(model),
     });
   }

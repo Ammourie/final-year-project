@@ -1,3 +1,5 @@
+import { UsersService } from '../../_services/users.service';
+import { Student } from './../../_models/student';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -8,9 +10,24 @@ import { Router, Routes } from '@angular/router';
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.css'],
 })
-
 export class StudentsComponent implements OnInit {
-  constructor() {}
+  constructor(public studentService: UsersService) {}
+  ngOnInit() {
+    if(this.studentService.students.length==0){
 
-  ngOnInit(): void {}
+      this.studentService.getstudents()
+    }
+
+  }
+  // getStudent() {
+  //   this.studentService.getstudents().subscribe({
+  //     next: (res) => this.students=res,
+  //     error: (error) => console.log(error),
+  //     complete:()=>{console.log(this.students);
+  //       this.gettingStudents=false;
+  //     }
+
+  //   });;
+
+  // }
 }

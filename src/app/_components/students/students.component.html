@@ -99,27 +99,44 @@
         </div>
       </div>
       <div class="bt-gr">
-        <a [routerLink]="['/students']" routerLinkActive="router-link-active" >
+        <a [routerLink]="['/students']" routerLinkActive="router-link-active">
           <div
             class="col btn btn-rounded selected-btn"
             style="text-align: end; width: 100%"
           >
-الطلاب
+            الطلاب
           </div>
         </a>
-        <a [routerLink]="['/coaches/list']" routerLinkActive="router-link-active" >
-        <div
-          class="col btn btn-rounded btn2"
-          style="text-align: end; width: 100%"
+        <a
+          [routerLink]="['/coaches/list']"
+          routerLinkActive="router-link-active"
         >
-          المدربين
-        </div></a>  <a [routerLink]="['/practice-groups']" routerLinkActive="router-link-active" >
-        <div class="col btn btn-rounded btn3" style="text-align: end; width: 100%">
-          مجموعات التدريب
-        </div></a>
-       <a [routerLink]="['/dates']" routerLinkActive="router-link-active" >   <div class="col btn btn-rounded btn4" style="text-align: end; width: 100%">
-          المواعيد
-        </div></a>
+          <div
+            class="col btn btn-rounded btn2"
+            style="text-align: end; width: 100%"
+          >
+            المدربين
+          </div></a
+        >
+        <a
+          [routerLink]="['/practice-groups']"
+          routerLinkActive="router-link-active"
+        >
+          <div
+            class="col btn btn-rounded btn3"
+            style="text-align: end; width: 100%"
+          >
+            مجموعات التدريب
+          </div></a
+        >
+        <a [routerLink]="['/dates']" routerLinkActive="router-link-active">
+          <div
+            class="col btn btn-rounded btn4"
+            style="text-align: end; width: 100%"
+          >
+            المواعيد
+          </div></a
+        >
       </div>
     </div>
     <div class="gr-main">
@@ -157,19 +174,26 @@
           />
         </div>
       </div>
+      <div class="lds-ring"  *ngIf="this.studentService.gettingStudents"><div></div><div></div><div></div><div></div></div>
+<div *ngIf="!this.studentService.gettingStudents">
 
-      <div class="students" *ngFor="let i of [].constructor(10)">
-        <div class="student d-flex flex-row justify-content-between" dir="rtl">
-          <div
+  <div class="students" *ngFor="let i of this.studentService.students" >
+    <div class="student d-flex flex-row justify-content-between" dir="rtl">
+      <div
             class="d-flex flex-row justify-content-start"
             style="align-items: center"
           >
-            <img
-              src="assets/images/profile.jpg"
+            <img *ngIf="i.profilePhoto!=null"
+              src="{{i.profilePhoto}}"
               style="width: 60px; height: 60px; border-radius: 50%"
               alt=""
               srcset=""
-            />
+            /> <img *ngIf="i.profilePhoto===null"
+            src="../../../assets/images/placeholder2.png"
+            style="width: 60px; height: 60px; border-radius: 50%"
+            alt=""
+            srcset=""
+          />
             <div>
               <div
                 style="
@@ -179,7 +203,7 @@
                   text-align: right;
                 "
               >
-                محمد حسين العموري
+                {{ i.userName }}
               </div>
               <div
                 style="
@@ -195,7 +219,8 @@
           </div>
           <p style="color: grey; font-size: 22px">مبتدئ</p>
         </div>
-      </div>
+      </div></div>
+
     </div>
   </body>
 </html>
