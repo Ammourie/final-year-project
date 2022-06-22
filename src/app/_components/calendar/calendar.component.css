@@ -132,12 +132,20 @@ body {
 .bt-gr {
   display: grid;
   grid-template-areas:
+    "btn0"
     "btn1"
     "btn2"
     "btn3"
     "btn4";
   gap: 15px;
   margin-top: 50px;
+}
+.btn0 {
+  grid-area: btn0;
+  background-color: #26282a;
+  color: gray;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .btn1 {
   grid-area: btn1;

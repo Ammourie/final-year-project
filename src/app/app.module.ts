@@ -27,6 +27,8 @@ import { LoginComponent } from './_components/login/login.component';
 import { RegisterComponent } from './_components/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MainPracticePageComponent } from './_components/main-practice-page/main-practice-page.component';
+import {MatTabsModule}from "@angular/material/tabs"
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     GroupsRegisterComponent,
     LoginComponent,
     RegisterComponent,
+    MainPracticePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatRadioModule,
     ToastModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule,MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

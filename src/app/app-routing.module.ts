@@ -1,3 +1,4 @@
+import { MainPracticePageComponent } from './_components/main-practice-page/main-practice-page.component';
 import { LoginComponent } from './_components/login/login.component';
 import { GroupsRegisterComponent } from './_components/groups-register/groups-register.component';
 import { CalendarComponent } from './_components/calendar/calendar.component';
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'dates',
     component: CalendarComponent,
+
+  },
+  {
+    path: 'main-practice-page',
+    component: MainPracticePageComponent,
 
   },
   {

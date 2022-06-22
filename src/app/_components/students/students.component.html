@@ -48,6 +48,13 @@
             <div class="dropbtn"><i class="bi bi-list"></i></div>
             <div class="dropdown-content">
               <a
+                [routerLink]="['/main-practice-page']"
+                dir="rtl"
+                routerLinkActive="router-link-active"
+              >
+                الرئيسية
+              </a>
+              <a
                 [routerLink]="['/students']"
                 dir="rtl"
                 routerLinkActive="router-link-active"
@@ -99,6 +106,14 @@
         </div>
       </div>
       <div class="bt-gr">
+        <a [routerLink]="['/main-practice-page']" routerLinkActive="router-link-active">
+          <div
+            class="col btn btn-rounded btn0"
+            style="text-align: end; width: 100%"
+          >
+            الرئيسية
+          </div>
+        </a>
         <a [routerLink]="['/students']" routerLinkActive="router-link-active">
           <div
             class="col btn btn-rounded selected-btn"

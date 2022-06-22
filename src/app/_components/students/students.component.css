@@ -18,6 +18,7 @@
 .bt-gr {
   display: grid;
   grid-template-areas:
+    "btn0"
     "btn1"
     "btn2"
     "btn3"
@@ -42,7 +43,15 @@
     #7474bf
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #fff;
-}.btn1 {
+}
+.btn0 {
+  grid-area: btn0;
+  background-color: #26282a;
+  color: gray;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.btn1 {
   grid-area: btn1;
   background-color: #26282a;
   color: gray;
@@ -56,7 +65,7 @@
   padding-left: 20px;
   padding-right: 20px;
 }
-.btn{
+.btn {
   font-family: sans-serif;
 }
 .btn3 {
@@ -136,12 +145,11 @@
 .st-text {
   margin: auto;
   color: white;
-  font-size:1.75vw;
+  font-size: 1.75vw;
   font-family: sans-serif;
   direction: rtl;
-
 }
-.ft{
+.ft {
   background-color: #202124;
 
   border: none;
@@ -150,17 +158,16 @@
   margin-right: 20px;
   margin-left: 20px;
 }
-.search{
-  background: url(
-    '../../../assets/images/search.svg') no-repeat scroll 5px 5px;
-    background-color: #202124;
-    background-size:20px ;
-    background-position-x:20px ;
-    background-position-y:center ;
+.search {
+  background: url("../../../assets/images/search.svg") no-repeat scroll 5px 5px;
+  background-color: #202124;
+  background-size: 20px;
+  background-position-x: 20px;
+  background-position-y: center;
 
-    border: none;
-    color: white;
-    width: 25vw;
+  border: none;
+  color: white;
+  width: 25vw;
 }
 
 .student {
@@ -296,20 +303,17 @@
   .st-text {
     margin: auto;
     color: white;
-    font-size:4vw;
+    font-size: 4vw;
     font-family: sans-serif;
     direction: rtl;
-
   }
-  .ft{
-
+  .ft {
     width: 15vw;
-
   }
-  .search{
+  .search {
     width: 50vw;
   }
-  .st-image{
+  .st-image {
     width: 50%;
     height: 100%;
   }
@@ -318,10 +322,9 @@
 .lds-ring {
   display: inline-block;
   position: relative;
-  margin-top:10%;
+  margin-top: 10%;
   width: 100%;
   height: 100%;
-
 }
 .lds-ring div {
   box-sizing: border-box;

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700"
+    />
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="gr-header">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row">
+          <div style="margin-left: 20%">
+            <img
+              src="assets/images/person.svg"
+              style="color: red"
+              alt=""
+              srcset=""
+            />
+          </div>
+
+          <div style="margin-left: 20px">
+            <img
+              src="assets/images/notifications.svg"
+              style="color: red"
+              alt=""
+              srcset=""
+            />
+          </div>
+        </div>
+        <div style="display: flex; align-items: center">
+          <div style="color: antiquewhite; font-size: 28px">الرئيسية</div>
+          <div class="dropdown">
+            <div class="dropbtn"><i class="bi bi-list"></i></div>
+            <div class="dropdown-content">
+              <a
+                [routerLink]="['/main-practice-page']"
+                dir="rtl"
+                routerLinkActive="router-link-active"
+                class="selected-btn"
+              >
+                الرئيسية
+              </a>
+              <a [routerLink]="['/students']" dir="rtl"> الطلاب </a>
+              <a
+                [routerLink]="['/coaches/list']"
+                dir="rtl"
+                routerLinkActive="router-link-active"
+                >المدربين
+              </a>
+              <a
+                [routerLink]="['/practice-groups']"
+                dir="rtl"
+                routerLinkActive="router-link-active"
+              >
+                مجموعات التدريب
+              </a>
+              <a
+                [routerLink]="['/dates']"
+                dir="rtl"
+                routerLinkActive="router-link-active"
+                >المواعيد
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gr-menu">
+      <div style="height: 40px; width: 40px">
+        <img src="assets/images/back-icon.svg" alt="" srcset="" />
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <img
+          src="assets/images/logo.png"
+          width="125px"
+          height="auto"
+          alt=""
+          srcset=""
+        />
+        <div style="color: antiquewhite; font-size: 17px">
+          المسابقة البرمجية السورية
+        </div>
+        <div style="color: dimgrey; font-size: 13px">
+          Syrian Programming Contest
+        </div>
+      </div>
+      <div class="bt-gr">
+        <a [routerLink]="['/students']" routerLinkActive="router-link-active">
+          <div
+            class="col btn btn-rounded selected-btn"
+            style="text-align: end; width: 100%"
+          >
+            الرئيسية
+          </div>
+        </a>
+        <a [routerLink]="['/students']" routerLinkActive="router-link-active">
+          <div
+            class="col btn btn-rounded btn1"
+            style="text-align: end; width: 100%"
+          >
+            الطلاب
+          </div>
+        </a>
+        <a
+          [routerLink]="['/coaches/list']"
+          routerLinkActive="router-link-active"
+        >
+          <div
+            class="col btn btn-rounded btn3"
+            style="text-align: end; width: 100%"
+          >
+            المدربين
+          </div></a
+        >
+        <a
+          [routerLink]="['/practice-groups']"
+          routerLinkActive="router-link-active"
+        >
+          <div
+            class="col btn btn-rounded btn3"
+            style="text-align: end; width: 100%"
+          >
+            مجموعات التدريب
+          </div></a
+        >
+        <a [routerLink]="['/dates']" routerLinkActive="router-link-active">
+          <div
+            class="col btn btn-rounded btn4"
+            style="text-align: end; width: 100%"
+          >
+            المواعيد
+          </div></a
+        >
+      </div>
+    </div>
+    <div class="gr-main">
+      <div class="rec-stu">
+        <div class="adt" style="text-align: end; margin: 20px;color:white">
+          فريقك المحتمل
+        </div>
+        <div  style="display: flex;gap:15px;overflow: auto;direction: rtl;margin: 10px;">
+          <div class="stu" style="display: flex; flex-direction: column;align-items: center; gap: 10px;" *ngFor="let item of [1,3,2,3]">
+            <img src="../../../assets/images/placeholder2.png" width="100px" alt="" />
+            <div style="color: white; font-size:17px">فلان الفلاني</div>
+          </div>
+        </div>
+      </div>
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="آخر الإعلانات">
+          <div
+            class="latest-advertisments-container"
+            *ngFor="let item of [].constructor(5)"
+          >
+            <div style="display: flex; align-items: center; gap: 10px">
+              <img
+                src="../../../assets/images/placeholder2.png"
+                width="50px"
+                alt=""
+              />
+              <div style="display: flex; flex-direction: column">
+                <div style="color: white; font-size: 15px">عمر البيطار</div>
+                <div style="color: rgb(110, 106, 106); font-size: 13px">
+                  منذ 15 د
+                </div>
+              </div>
+            </div>
+            <br />
+            <p>
+              تنويه للطلاب والمدربين اللي من غير جامعات اللي عنا بالغروب
+              المدربين اللي من غير جامعات اللي عندن طلاب بجامعتن من حمص وما
+              بيقدرو يحضرو بمحافظتن لسبب ما او الطلاب اللي بالغروب اللي بغير
+              محافظة وهني حماصنة وحابين يحضرو عنا ف ما في اي مشكلة.. بس يا ريت
+              يحكي معنا مشان العدد لأنو العدد كبير ف ما يجي كتير عالم ويصير زحمة
+              كمان اللي حابب يشوف شو عم نعطي او شو عم ننزل مسابقات او شغلات وبدو
+              يتفرج ف كمان يحكي معنا لنضيفو.. ما يفوت دغري بس مشان نعرف شو عم
+              يصير واذا هالشخص من عنا او لا مشان وقت نعمل فرق وهيك قصص ما نضيع
+            </p>
+            <div style="display: flex; gap: 15px">
+              <div class="btn btn-outline-success" style="width: 100px">
+                جيد
+              </div>
+              <div class="btn btn-outline-danger" style="width: 100px">سيء</div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="المهمات اليومية">
+          <div
+            style="
+              display: flex;
+              direction: rtl;
+              align-items: center;
+              justify-content: space-between;
+              width: 100;
+              margin-left: 25px;
+              margin-right: 25px;
+              margin-bottom: 30px;
+              background-color: #202124;
+              border-radius: 20px;
+              color: #9f9f9f;
+            "
+            *ngFor="let item of [].constructor(10)"
+          >
+            <div style="display: flex">
+              <img
+                src="../../../assets/images/daily-tasks-cover.jpg"
+                style="border-radius: 20px"
+                alt=""
+              />
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px;
+                  padding: 20px;
+                "
+              >
+                <div style="font-size: 20px; color: white">
+                  Prove Him Wrong
+                  <span
+                    style="color: #348ac7; text-decoration: underline"
+                    onmouseover="this.style.cursor='pointer'"
+                    >1651B</span
+                  >
+                </div>
+                <div style="font-size: 15px; color: #9f9f9f">
+                  مستوى الصعوبة سهل
+                </div>
+                <div style="font-size: 15px; color: #9f9f9f">
+                  Greedy Algorithm
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="btn btn-success"
+              style="height: min-content; margin: 30px"
+            >
+              الذهاب لإنجازها
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="مسائل قد تعجبك"> Content 3 </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="gr-left">
+      <div class="ad1">
+        <div class="adt">فريقك المحتمل</div>
+        <hr style="color: white" />
+
+        <div class="rec-team-member" *ngFor="let item of [].constructor(3)">
+          <div>
+            <img
+              src="../../../assets/images/placeholder2.png"
+              style="width: 2.5vw; align-self: center"
+            />
+          </div>
+
+          <div style="color: white; font-size: 1.25vw">فلان الفلاني</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

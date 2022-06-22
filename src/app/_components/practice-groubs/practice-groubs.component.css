@@ -37,6 +37,7 @@ ul{
 .bt-gr {
   display: grid;
   grid-template-areas:
+    "btn0"
     "btn1"
     "btn2"
     "btn3"
@@ -61,6 +62,13 @@ ul{
     #7474bf
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #fff;
+}
+.btn0 {
+  grid-area: btn0;
+  background-color: #26282a;
+  color: gray;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .btn1 {
   grid-area: btn1;
