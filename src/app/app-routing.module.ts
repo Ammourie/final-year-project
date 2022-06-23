@@ -1,3 +1,4 @@
+import { ProfileComponent } from './_components/profile/profile.component';
 import { MainPracticePageComponent } from './_components/main-practice-page/main-practice-page.component';
 import { LoginComponent } from './_components/login/login.component';
 import { GroupsRegisterComponent } from './_components/groups-register/groups-register.component';
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'main-practice-page',
     component: MainPracticePageComponent,
+
+  },
+  {
+    path: 'profile/:name',
+    component: ProfileComponent,
 
   },
   {

@@ -32,35 +32,46 @@
           aria-label="Search"
         />
       </div>
-      <a [routerLink]="['/coaches/add-post']" routerLinkActive="router-link-active"  style="text-decoration: none;">
+      <a
+        [routerLink]="['/coaches/add-post']"
+        routerLinkActive="router-link-active"
+        style="text-decoration: none"
+      >
         <div class="add-post">add post</div>
       </a>
     </div>
   </div>
   <!-- <router-outlet></router-outlet> -->
-  <div class="lds-ring" *ngIf="this.coachService.gettingcoaches" ><div></div><div></div><div></div><div></div></div>
+  <div class="lds-ring" *ngIf="this.coachService.gettingcoaches">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 
   <div class="row" *ngIf="!this.coachService.gettingcoaches">
     <div class="column" *ngFor="let item of this.coachService.coaches">
       <div class="wrapper-grid">
         <div class="img-container">
           <div class="banner-img"></div>
-          <img *ngIf="item.profilePhoto===null"
+          <img
+            *ngIf="item.profilePhoto === null"
             src="../../../assets/images/placeholder2.png"
             alt="profile image"
             class="profile-img"
           />
-          <img *ngIf="item.profilePhoto!=null"
-            src={{item.profilePhoto}}
+          <img
+            *ngIf="item.profilePhoto != null"
+            src="{{ item.profilePhoto }}"
             alt="profile image"
             class="profile-img"
           />
-          <h1 class="name">{{item.userName}}</h1>
+          <h1 class="name">{{ item.userName }}</h1>
           <p class="description">
             اسمي محمد العموري وأنا طالب في كلية الهندسة المعلوماتية في جامعة حمص
             في السنة الرابعة ومدرب متوسط في المسابقة البرمجية
           </p>
-          <button class="btnn">المزيد</button>
+          <button class="btnn" (click)="gotoProfile(item)">المزيد</button>
         </div>
       </div>
     </div>

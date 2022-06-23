@@ -18,8 +18,13 @@
     />
     <title>Document</title>
   </head>
-
-  <body>
+  <div class="lds-ring" *ngIf="this.loading">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <body *ngIf="!this.loading">
     <div class="gr-header">
       <div class="d-flex flex-row justify-content-between">
         <div class="d-flex flex-row">
@@ -42,7 +47,9 @@
           </div>
         </div>
         <div style="display: flex; align-items: center">
-          <div style="color: antiquewhite; font-size: 28px">الطلاب</div>
+          <div style="color: antiquewhite; font-size: 28px">
+            {{ this.student!.userName }}
+          </div>
 
           <div class="dropdown">
             <div class="dropbtn"><i class="bi bi-list"></i></div>
@@ -89,7 +96,7 @@
     <div class="gr-menu">
       <div style="height: 40px; width: 40px">
         <img
-          src="../../../assets/images/back-icon.svg"
+          src="assets/images/back-icon.svg"
           (click)="goback()"
           alt=""
           srcset=""
@@ -162,100 +169,6 @@
         >
       </div>
     </div>
-    <div class="gr-main">
-      <div class="st">
-        <div class="st-item">
-          <img src="assets/images/placeholder1.png" class="st-image" />
-          <h1 class="st-text">نسبة الطلاب المشاركون أول مرة</h1>
-        </div>
-        <div class="st-item">
-          <img src="assets/images/placeholder2.png" class="st-image" />
-          <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
-        </div>
-        <div class="st-item">
-          <img src="assets/images/placeholder3.png" class="st-image" />
-          <h1 class="st-text">عدد الفرق المسجلة 35 فريقاً</h1>
-        </div>
-      </div>
-
-      <div dir="rtl">
-        <div
-          class="d-flex flex-row justify-content-start"
-          style="margin-top: 20px"
-          style="margin-bottom: 20px"
-        >
-          <input
-            type="text"
-            class="form-control form-control-dark ft"
-            placeholder="فلترة"
-          />
-          <input
-            type="text"
-            class="form-control form-control-dark search"
-            placeholder="ابحث ..."
-            aria-label="Search"
-          />
-        </div>
-      </div>
-      <div class="lds-ring" *ngIf="this.studentService.gettingStudents">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div *ngIf="!this.studentService.gettingStudents">
-        <div class="students" *ngFor="let i of this.studentService.students">
-          <div
-            class="student d-flex flex-row justify-content-between"
-            onmouseover="this.style.cursor='pointer'"
-            dir="rtl"
-            (click)="gotoProfile(i)"
-          >
-            <div
-              class="d-flex flex-row justify-content-start"
-              style="align-items: center"
-            >
-              <img
-                *ngIf="i.profilePhoto != null"
-                src="{{ i.profilePhoto }}"
-                style="width: 60px; height: 60px; border-radius: 50%"
-                alt=""
-                srcset=""
-              />
-              <img
-                *ngIf="i.profilePhoto === null"
-                src="../../../assets/images/placeholder2.png"
-                style="width: 60px; height: 60px; border-radius: 50%"
-                alt=""
-                srcset=""
-              />
-              <div>
-                <div
-                  style="
-                    color: whitesmoke;
-                    font-size: 20px;
-                    margin-right: 20px;
-                    text-align: right;
-                  "
-                >
-                  {{ i.userName }}
-                </div>
-                <div
-                  style="
-                    color: grey;
-                    font-size: 12px;
-                    margin-right: 20px;
-                    text-align: right;
-                  "
-                >
-                  طالب هندسة معلوماتية
-                </div>
-              </div>
-            </div>
-            <p style="color: grey; font-size: 22px">مبتدئ</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="gr-main"></div>
   </body>
 </html>

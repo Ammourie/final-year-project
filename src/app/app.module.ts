@@ -28,7 +28,8 @@ import { RegisterComponent } from './_components/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MainPracticePageComponent } from './_components/main-practice-page/main-practice-page.component';
-import {MatTabsModule}from "@angular/material/tabs"
+import {MatTabsModule}from "@angular/material/tabs";
+import { ProfileComponent } from './_components/profile/profile.component'
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {MatTabsModule}from "@angular/material/tabs"
     LoginComponent,
     RegisterComponent,
     MainPracticePageComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

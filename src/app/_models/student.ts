@@ -17,4 +17,5 @@ export interface Student {
   participations: Participation[];
   trainingGroups: TrainingGroup[];
   teachingGroups: TeachingGroup[];
+
 }
