@@ -169,6 +169,126 @@
         >
       </div>
     </div>
-    <div class="gr-main"></div>
+    <div class="gr-main">
+      <div class="card profile-card-2">
+        <div class="card-img-block">
+          <img
+            class="img-fluid"
+            src="https://images.pexels.com/photos/946351/pexels-photo-946351.jpeg?w=500&h=650&auto=compress&cs=tinysrgb"
+            width="100%"
+            alt="Card image cap"
+          />
+        </div>
+        <div class="card-body">
+          <img
+            src="{{ this.student?.profilePhoto }}"
+            alt="profile-image"
+            class="profile"
+            *ngIf="this.student?.profilePhoto != null"
+          />
+          <img
+            src="../../../assets/images/person.svg"
+            alt="profile-image"
+            class="profile"
+            *ngIf="this.student?.profilePhoto === null"
+          />
+          <div
+            style="
+              background-color: #1e2021;
+              width: 100%;
+              padding: 10px;
+              padding-right: 142px;
+              height: 80px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <div>
+              <div style="display: flex; gap: 20px; align-items: center">
+                <h5 class="card-title">{{ this.student?.userName }}</h5>
+                <img
+                  src="../../../assets/images/coach-badge.png"
+                  height="24px"
+                  alt=""
+                />
+              </div>
+              <p class="card-text">كلية الهندسة المعلوماتية</p>
+            </div>
+            <div style="display: flex; gap: 15px">
+              <img
+                src="../../../assets/images/at-coder.png "
+                width="40px"
+                height="40px"
+                alt=""
+              />
+              <img
+                src="../../../assets/images/code-cheaf.png "
+                width="40px"
+                height="40px"
+                alt=""
+              />
+              <img
+                src="../../../assets/images/code-forces.png"
+                width="40px"
+                height="40px"
+                alt=""
+              />
+            </div>
+          </div>
+
+          <!-- <div class="icon-block"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"> <i class="fa fa-twitter"></i></a><a href="#"> <i class="fa fa-google-plus"></i></a></div> -->
+        </div>
+      </div>
+      <h4 class="part-header">سيرة ذاتية مختصرة</h4>
+      <div class="about-part">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta, neque
+        hic eos quaerat voluptatem ullam a perspiciatis perferendis quis
+        cupiditate deserunt voluptates earum maxime sunt! Rem nesciunt, quia
+        quam dolorem accusantium molestias ipsa odit nisi sequi cumque.
+        Necessitatibus, vel perspiciatis.
+      </div>
+      <h4 class="part-header">المشاركات</h4>
+      <div class="participates-part" *ngFor="let item of [1, 2, 3, 4]">
+        <img
+          src="../../../assets/images/cpc.png"
+          width="80px"
+          height="120px"
+          alt=""
+        />
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-left: 200px;
+          "
+        >
+          <h4 style="color: white">المسابقة العالمية</h4>
+          <div style="display: flex; gap: 5px; align-items: center">
+            <i class="bi bi-geo-alt" style="color: grey"></i>
+            <div class="p-item">روسيا</div>
+          </div>
+          <div style="display: flex; gap: 5px; align-items: center">
+            <i class="bi bi-calendar3" style="color: grey"></i>
+
+            <div class="p-item">2020-2021</div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 20px">
+          <h4 style="color: white; opacity: 0">العالمية</h4>
+          <div style="display: flex; gap: 5px; align-items: center">
+            <i class="bi bi-people" style="color: grey"></i>
+
+            <div class="p-item">radio active</div>
+          </div>
+          <div style="display: flex; gap: 5px; align-items: center">
+            <i class="bi bi-award" style="color: grey"></i>
+
+            <div class="p-item">المركز السادس</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

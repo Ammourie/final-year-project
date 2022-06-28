@@ -1,3 +1,4 @@
+import { PagenotfoundComponentComponent } from './_components/pagenotfound-component/pagenotfound-component.component';
 import { ProfileComponent } from './_components/profile/profile.component';
 import { MainPracticePageComponent } from './_components/main-practice-page/main-practice-page.component';
 import { LoginComponent } from './_components/login/login.component';
@@ -66,6 +67,17 @@ const routes: Routes = [
   {
     path: '',
     component: AboutPageComponent,
+
+  },
+  {
+    path: 'notfound',
+    component: PagenotfoundComponentComponent,
+
+  },
+  {
+    path: '**',
+    pathMatch:'full',
+    component: PagenotfoundComponentComponent,
 
   },
 ];

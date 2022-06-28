@@ -29,7 +29,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MainPracticePageComponent } from './_components/main-practice-page/main-practice-page.component';
 import {MatTabsModule}from "@angular/material/tabs";
-import { ProfileComponent } from './_components/profile/profile.component'
+import { ProfileComponent } from './_components/profile/profile.component';
+import { PagenotfoundComponentComponent } from './_components/pagenotfound-component/pagenotfound-component.component'
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ProfileComponent } from './_components/profile/profile.component'
     RegisterComponent,
     MainPracticePageComponent,
     ProfileComponent,
+    PagenotfoundComponentComponent,
   ],
   imports: [
     BrowserModule,

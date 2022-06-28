@@ -13,7 +13,11 @@ import { Location } from '@angular/common';
 export class ProfileComponent implements OnInit {
   student: Student | undefined;
   loading = true;
-  constructor(private router: Router, private http: HttpClient,private location: Location) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private location: Location
+  ) {}
   // constructor(private http: HttpClient) {
   //   const username = JSON.parse(localStorage.getItem('user')!!).username;
   //   const auth= JSON.parse(localStorage.getItem('user')!!).token
@@ -32,8 +36,8 @@ export class ProfileComponent implements OnInit {
   //     });
   // }
 
-  goback(){
-    this.location.back()
+  goback() {
+    this.location.back();
   }
   ngOnInit(): void {
     const username =
@@ -51,7 +55,15 @@ export class ProfileComponent implements OnInit {
         header
       )
       .subscribe({
-        next: (r) => (this.student = r),
+        next: (r) => {
+          this.student = r;
+        },
+        error:(error)=>{
+          if(error.status===404){
+            this.router.navigateByUrl('/notfound');
+
+          }
+        },
         complete: () => {
           this.loading = false;
         },
