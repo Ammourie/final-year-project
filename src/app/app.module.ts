@@ -30,7 +30,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainPracticePageComponent } from './_components/main-practice-page/main-practice-page.component';
 import {MatTabsModule}from "@angular/material/tabs";
 import { ProfileComponent } from './_components/profile/profile.component';
-import { PagenotfoundComponentComponent } from './_components/pagenotfound-component/pagenotfound-component.component'
+import { PagenotfoundComponentComponent } from './_components/pagenotfound-component/pagenotfound-component.component';
+import { GroupsComponent } from './_components/groups/groups.component';
+import { AboutPage2Component } from './_components/about-page2/about-page2.component'
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { PagenotfoundComponentComponent } from './_components/pagenotfound-compo
     MainPracticePageComponent,
     ProfileComponent,
     PagenotfoundComponentComponent,
+    GroupsComponent,
+    AboutPage2Component,
   ],
   imports: [
     BrowserModule,

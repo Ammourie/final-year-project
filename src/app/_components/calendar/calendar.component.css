@@ -12,7 +12,7 @@ body {
   padding: 70px 25px;
   margin: 0;
   width: 100%;
- background: #7474bf; /* fallback for old browsers */
+  background: #7474bf; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
     #348ac7,
@@ -22,7 +22,7 @@ body {
     to right,
     #348ac7,
     #7474bf
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   text-align: center;
 }
 
@@ -393,8 +393,8 @@ body {
 .grid-container {
   display: grid;
   /* grid-template-columns: 40% 40%; */
-gap: 50px;
-  grid-template-columns: auto  auto;
+  gap: 50px;
+  grid-template-columns: auto auto;
   padding: 10px;
 }
 .event {
@@ -451,14 +451,14 @@ gap: 50px;
   .grid-container {
     display: grid;
     /* grid-template-columns: 40% 40%; */
-  gap: 50px;
-    grid-template-columns: auto ;
+    gap: 50px;
+    grid-template-columns: auto;
     padding: 10px;
   }
-.ev-date{
-  font-size: 30px;
-}
-.ev-content{
-  font-size: 20px;
-}
+  .ev-date {
+    font-size: 30px;
+  }
+  .ev-content {
+    font-size: 20px;
+  }
 }

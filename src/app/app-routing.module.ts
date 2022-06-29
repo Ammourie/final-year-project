@@ -1,3 +1,5 @@
+import { AboutPage2Component } from './_components/about-page2/about-page2.component';
+import { GroupsComponent } from './_components/groups/groups.component';
 import { PagenotfoundComponentComponent } from './_components/pagenotfound-component/pagenotfound-component.component';
 import { ProfileComponent } from './_components/profile/profile.component';
 import { MainPracticePageComponent } from './_components/main-practice-page/main-practice-page.component';
@@ -52,6 +54,16 @@ const routes: Routes = [
   {
     path: 'group-register',
     component: GroupsRegisterComponent,
+
+  },
+  {
+    path: 'about',
+    component: AboutPage2Component,
+
+  },
+  {
+    path: 'groups',
+    component: GroupsComponent,
 
   },
   {

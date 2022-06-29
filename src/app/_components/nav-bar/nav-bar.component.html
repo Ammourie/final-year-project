@@ -32,16 +32,28 @@
     >
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">الإعلانات</a>
+          <a class="nav-link active" aria-current="page" href="#"
+            >حول المسابقة</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">التديب</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/main-practice-page']"
+            routerLinkActive="router-link-active"
+            >التدريب</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">حول المسابقة</a>
+          <a class="nav-link" href="#">الإعلانات</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">أسئلة شائعة</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/group-register']"
+            routerLinkActive="router-link-active"
+            >تشكيل الفرق</a
+          >
         </li>
       </ul>
     </div>
