@@ -1,5 +1,9 @@
+import { Student } from './../../_models/student';
+import { Router } from '@angular/router';
+import { UsersService } from './../../_services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-groups-register',
@@ -12,7 +16,12 @@ export class GroupsRegisterComponent implements OnInit {
 
   responsiveOptions;
 
-  constructor(private primengConfig: PrimeNGConfig) {
+  constructor(
+    private primengConfig: PrimeNGConfig,
+    public studentService: UsersService,
+    private router: Router,
+    private location: Location
+  ) {
     this.responsiveOptions = [
       {
         breakpoint: '1350px',
@@ -27,6 +36,10 @@ export class GroupsRegisterComponent implements OnInit {
     ];
   }
   ngOnInit() {
+    if (this.studentService.students.length == 0) {
+      this.studentService.getstudents();
+    }
+
     this.primengConfig.ripple = true;
 
     this.items = [
@@ -42,8 +55,16 @@ export class GroupsRegisterComponent implements OnInit {
       'item10',
     ];
   }
+  goback() {
+    console.log("vvv");
+
+    this.location.back();
+  }
+  gotoProfile(student: Student) {
+    this.router.navigateByUrl('/profile/' + student.userName);
+  }
   addStudent(student: String) {
-    if (this.students.length < 4) this.students.push(student);
+    if (this.students.length < 3) this.students.push(student);
     console.log(this.students);
   }
   deleteStudent(element: number) {
