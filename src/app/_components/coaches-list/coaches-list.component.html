@@ -36,6 +36,7 @@
         [routerLink]="['/coaches/add-post']"
         routerLinkActive="router-link-active"
         style="text-decoration: none"
+        *ngIf="this.x2['role']=='Member,Coach'"
       >
         <div class="add-post">add post</div>
       </a>
@@ -49,19 +50,23 @@
     <div></div>
   </div>
 
-  <div class="row" *ngIf="!this.coachService.gettingcoaches">
+  <div class="row" *ngIf="!this.coachService.gettingcoaches" dir="rtl">
     <div class="column" *ngFor="let item of this.coachService.coaches">
       <div class="wrapper-grid">
         <div class="img-container">
           <div class="banner-img"></div>
           <img
-            *ngIf="item.profilePhoto === null"
+            *ngIf="item.profilePhoto == null"
+            width="60px"
+            height="120px"
             src="../../../assets/images/placeholder2.png"
             alt="profile image"
             class="profile-img"
           />
           <img
             *ngIf="item.profilePhoto != null"
+            width="60px"
+            height="120px"
             src="{{ item.profilePhoto }}"
             alt="profile image"
             class="profile-img"

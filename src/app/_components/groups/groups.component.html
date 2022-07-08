@@ -205,10 +205,10 @@
             />
             <div style="color: white">عمر البيطار</div>
           </div>
-          <button class="btn btn-primary" style="width: 60%; border-radius: 10px;align-self: center;" *ngIf="i%2===0 or i%5===0">
+          <button class="btn btn-primary" style="width: 60%; border-radius: 10px;align-self: center;" *ngIf="i%2===0 || i%5===0">
             إسناد مهمة
           </button>
-          <button disabled class="btn btn-primary"  style="width: 60%; border-radius: 10px;align-self: center; opacity: 0; " *ngIf="i%2!=0 and i%5!=0">
+          <button disabled class="btn btn-primary"  style="width: 60%; border-radius: 10px;align-self: center; opacity: 0; " *ngIf="i%2!=0 && i%5!=0">
             إسناد مهمة
           </button>
         </div>

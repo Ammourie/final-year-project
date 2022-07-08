@@ -5,6 +5,8 @@ import { TrainingGroup } from './training_group';
 export interface Student {
   id: number;
   userName: string;
+  fullName: string;
+  isCoach:boolean
   createdAt: Date;
   lastActive: Date;
   codeforcesAccount: string;

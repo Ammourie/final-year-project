@@ -9,51 +9,52 @@ import { Injectable } from '@angular/core';
 export class UsersService {
   students: Student[] = [];
   coaches: Student[] = [];
-  gettingStudents=false;
-  gettingcoaches=false;
+  gettingStudents = false;
+  gettingcoaches = false;
 
   baseUrl = 'https://cpcmanager.herokuapp.com/api/';
   constructor(private http: HttpClient) {}
-  getstudents(){
-    this.gettingStudents=true;
+  getstudents() {
+    this.gettingStudents = true;
 
-    const auth= JSON.parse(localStorage.getItem('user')!!).token
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
 
     var header = {
-      headers: new HttpHeaders()
-     . set('Authorization',  `Bearer ${auth}`)
-    }
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
 
-     this.http
-    .get<Student[]>(this.baseUrl+"Users",header).subscribe({
-      next: (res) => this.students=res,
+    this.http.get<Student[]>(this.baseUrl + 'Users', header).subscribe({
+      next: (res) => (this.students = res),
       error: (error) => console.log(error),
-      complete:()=>{console.log(this.students);
-        this.gettingStudents=false;
-      }
-
-    })
-
+      complete: () => {
+        console.log(this.students);
+        this.gettingStudents = false;
+        console.log(this.students[0].fullName);
+      },
+    });
   }
-  getcoaches(){
-    this.gettingcoaches=true;
+  getcoaches() {
+    this.gettingcoaches = true;
 
-    const auth= JSON.parse(localStorage.getItem('user')!!).token
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
 
     var header = {
-      headers: new HttpHeaders()
-     . set('Authorization',  `Bearer ${auth}`)
-    }
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
 
-     this.http
-    .get<Student[]>(this.baseUrl+"Users",header).subscribe({
-      next: (res) => this.coaches=res,
+    this.http.get<Student[]>(this.baseUrl + 'Users', header).subscribe({
+      next: (res) => {
+        for (var i in res) {
+          if (res[i].isCoach) {
+            this.coaches.push(res[i]);
+          }
+        }
+      },
       error: (error) => console.log(error),
-      complete:()=>{console.log(this.coaches);
-        this.gettingcoaches=false;
-      }
-
-    })
-
+      complete: () => {
+        console.log(this.coaches);
+        this.gettingcoaches = false;
+      },
+    });
   }
 }

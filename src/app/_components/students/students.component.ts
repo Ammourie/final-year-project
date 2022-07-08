@@ -28,7 +28,7 @@ export class StudentsComponent implements OnInit {
     this.location.back();
   }
   gotoProfile(student: Student) {
-    this.router.navigateByUrl('/profile/' + student.userName);
+    this.router.navigateByUrl('/profile/' + student.id,);
   }
   // getStudent() {
   //   this.studentService.getstudents().subscribe({

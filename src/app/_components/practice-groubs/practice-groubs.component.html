@@ -195,7 +195,7 @@
       </div>
 
       <div class="row" dir="rtl">
-        <div class="column"  *ngFor="let item of [].constructor(10);let i=index">
+        <div class="column"  *ngFor="let item of [].constructor(10);let i=index" (click)="showModalDialog()">
           <div class="wrapper-grid">
             <div
             [ngClass]="{
@@ -222,7 +222,63 @@
 
           </div>
           </div>
+        </div> <p-dialog
+        header="طلاب المجموعة :"
+        [(visible)]="displayModal"
+        [modal]="true"
+        [baseZIndex]="10000"
+        [draggable]="false"
+        [resizable]="false"
+        [style]="{ width: '50vw' }"
+      >
+        <div class="confirm-dialog-content">
+          <div
+            class="added-student"
+            *ngFor="let item of [].constructor(100); let i = index"
+          >
+            <div style="display: flex; align-items: center">
+              <img
+                src="../../../assets/images/profile.jpg"
+                style="
+                  border-radius: 50%;
+                  width: 45px;
+                  height: 45px;
+                  margin-left: 15px;
+                "
+                alt="Avatar"
+              />
+              <div style="display: flex; flex-direction: column">
+                <div
+                  style="
+                    color: white;
+                    font-size: 17px;
+                    font-family: sans-serif;
+                  "
+                >
+                  محمد حسين العموري
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <ng-template pTemplate="footer">
+
+          <p-button
+
+            (click)="displayModal = false"
+            label="رجوع"
+            class="p-button-text"
+            [style]="{
+              width: '15vw',
+              border: 'none',
+              color: 'white',
+              'background-color': '#005C97',
+              'font-family': 'sans-serif'
+            }"
+          ></p-button>
+        </ng-template>
+      </p-dialog>
       </div>
     </div>
   </body>

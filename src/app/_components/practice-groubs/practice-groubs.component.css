@@ -436,6 +436,39 @@ font-family: sans-serif;
   text-align: center;
   font-size: 30px;
 }
+
+
+ :host ::ng-deep .p-dialog>::-webkit-scrollbar {
+display: none;
+}
+:host ::ng-deep .p-dialog .p-button {
+  min-width: 6rem;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  background-color: #26282A;
+  color: white;
+  direction: rtl;
+  font-family: sans-serif;
+}
+:host ::ng-deep .p-dialog .p-dialog-content {
+  background-color: #26282A;
+  direction: rtl;
+}
+:host ::ng-deep .p-dialog .p-dialog-footer {
+  background-color: #26282A;
+  direction: rtl;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.confirm-dialog-content{
+  display: grid;
+  grid-template-columns: 47% 47%;
+  column-gap: 3%;
+  row-gap: 20px;
+
+}
 @media (max-width: 1000px) {
 
   .group-header{

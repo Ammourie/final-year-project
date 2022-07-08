@@ -190,7 +190,7 @@
             src="../../../assets/images/person.svg"
             alt="profile-image"
             class="profile"
-            *ngIf="this.student?.profilePhoto === null"
+            *ngIf="this.student?.profilePhoto == null"
           />
           <div
             style="
@@ -204,16 +204,20 @@
               align-items: center;
             "
           >
-            <div>
-              <div style="display: flex; gap: 20px; align-items: center">
+            <div >
+              <div style="display: flex; gap: 20px; align-items: center;margin-right: 20px;">
                 <h5 class="card-title">{{ this.student?.userName }}</h5>
-                <img
+                <img *ngIf="this.student?.isCoach"
                   src="../../../assets/images/coach-badge.png"
                   height="24px"
                   alt=""
                 />
+                <i
+                class="btn bi bi-pencil-square"
+                style="color: grey; font-size: 18px"
+              ></i>
               </div>
-              <p class="card-text">كلية الهندسة المعلوماتية</p>
+              <p class="card-text" style="margin-right: 20px;">كلية الهندسة المعلوماتية</p>
             </div>
             <div style="display: flex; gap: 15px">
               <img

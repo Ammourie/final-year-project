@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PracticeGroubsComponent implements OnInit {
 
+  displayModal: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  showModalDialog() {
+    this.displayModal = true;
+  }
 }

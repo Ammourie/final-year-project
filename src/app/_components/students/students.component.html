@@ -210,6 +210,7 @@
             onmouseover="this.style.cursor='pointer'"
             dir="rtl"
             (click)="gotoProfile(i)"
+            *ngIf="!i.isCoach"
           >
             <div
               class="d-flex flex-row justify-content-start"
@@ -223,7 +224,7 @@
                 srcset=""
               />
               <img
-                *ngIf="i.profilePhoto === null"
+                *ngIf="i.profilePhoto == null"
                 src="../../../assets/images/placeholder2.png"
                 style="width: 60px; height: 60px; border-radius: 50%"
                 alt=""
