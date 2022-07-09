@@ -1,7 +1,9 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Student } from './../../_models/student';
 import { Component, OnInit } from '@angular/core';
+import { VERSION, ViewChild, ElementRef } from '@angular/core';
 
 import { Location } from '@angular/common';
 
@@ -11,12 +13,24 @@ import { Location } from '@angular/common';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  editingNamePart: boolean = false;
+  editingBioPart: boolean = false;
+
   student: Student | undefined;
+  imgUrl: any;
+  username = JSON.parse(localStorage.getItem('user')!!).username;
+  token = JSON.parse(localStorage.getItem('user')!!).token;
+  x = JSON.stringify(this.jwtHelper.decodeToken(this.token));
+  x2 = JSON.parse(this.x);
+  loggedinId = this.x2.nameid;
   loading = true;
+  model1: any = {};
+
   constructor(
     private router: Router,
     private http: HttpClient,
-    private location: Location
+    private location: Location,
+    private jwtHelper: JwtHelperService
   ) {}
   // constructor(private http: HttpClient) {
   //   const username = JSON.parse(localStorage.getItem('user')!!).username;
@@ -57,16 +71,69 @@ export class ProfileComponent implements OnInit {
       .subscribe({
         next: (r) => {
           this.student = r;
+          this.model1=r;
         },
-        error:(error)=>{
-          if(error.status==404){
+        error: (error) => {
+          if (error.status == 404) {
             this.router.navigateByUrl('/notfound');
-
           }
         },
         complete: () => {
           this.loading = false;
         },
       });
+  }
+  onSelectFile(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+
+      const auth = JSON.parse(localStorage.getItem('user')!!).token;
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${auth}`,
+        }),
+      };
+      formData.append('file', file);
+
+      const upload$ = this.http.post(
+        'https://cpcmanager.herokuapp.com/api/Users/add-photo',
+
+        formData,
+        httpOptions
+      );
+
+      upload$.subscribe({
+        next: (res) => console.log(res),
+
+        error: (e) => console.log(e),
+
+        complete: () => window.location.reload(),
+      });
+    }
+    // if (event.target.files && event.target.files[0]) {
+    //   var reader = new FileReader();
+
+    //   reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+    //   reader.onload = (event) => {
+    //     // called once readAsDataURL is completed
+    //     this.imgUrl = event.target?.result;
+    //   };
+    // }
+  }
+  toogleEditingNamePart() {
+    this.editingNamePart = true;
+  }
+  editiNamePart() {
+    this.editingNamePart = false;
+    console.log(this.model1);
+  }
+  toogleBioPart() {
+    this.editingBioPart = true;
+  }
+  editBioPart() {
+    this.editingBioPart = false;
+    console.log(this.model1);
   }
 }

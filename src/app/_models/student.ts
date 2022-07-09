@@ -6,7 +6,8 @@ export interface Student {
   id: number;
   userName: string;
   fullName: string;
-  isCoach:boolean
+  isCoach:boolean;
+  bio:String;
   createdAt: Date;
   lastActive: Date;
   codeforcesAccount: string;

@@ -25,6 +25,6 @@ export class CoachesListComponent implements OnInit {
   }
 
   gotoProfile(student: Student) {
-    this.router.navigateByUrl('/profile/' + student.userName);
+    this.router.navigateByUrl('/profile/' + student.id);
   }
 }

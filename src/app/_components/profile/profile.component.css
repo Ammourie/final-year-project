@@ -30,6 +30,62 @@
 
   position: relative;
 }
+
+p {
+  font-family: Lato;
+}
+
+.profile {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.hoverable {
+  position: absolute;
+  top: -42px;
+  right: -12px;
+  width: 100px;
+  height: 100px;
+  border: 3px solid rgb(208, 208, 208);
+  -webkit-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
+  display: block;
+  cursor: pointer;
+
+  border-radius: 50%;
+}
+.hoverable .hover-text {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.hoverable .background {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 1;
+}
+.hoverable:hover .hover-text {
+  display: block;
+}
+.hoverable:hover .background {
+  display: block;
+}
+
+#fileInput {
+  display: none;
+}
+
+/*
 .profile-card-2 .profile {
   border-radius: 50%;
   position: absolute;
@@ -40,7 +96,7 @@
   border: 3px solid rgb(208, 208, 208);
   -webkit-transform: translate(-50%, 0%);
   transform: translate(-50%, 0%);
-}
+} */
 .profile-card-2 h5 {
   font-weight: 600;
   color: white;
@@ -84,7 +140,6 @@
 }
 .p-item {
   color: grey;
-
 }
 .gr > div {
   text-align: center;
@@ -394,7 +449,31 @@
     height: 100%;
   }
 }
+.hovered{
 
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+
+}
+.hovered:hover{
+  background: url("../../../assets/images/plus.svg") no-repeat scroll  ;
+  background-position-x:50% ;
+  background-position-y:50% ;
+  background-size: 150%;
+  background-color: rgba(128, 128, 128, 0.426);
+  cursor: pointer;
+  width: 40px;
+  position: absolute;
+  height: 40px;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+
+}
 .lds-ring {
   display: inline-block;
   position: absolute;

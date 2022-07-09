@@ -157,7 +157,7 @@
               <div
                 style="color: white; font-size: 17px; font-family: sans-serif"
               >
-                {{ item.userName }}
+                {{ item }}
               </div>
               <div style="color: grey; font-size: 13px">مبتدئ</div>
             </div>
@@ -209,7 +209,7 @@
                       font-family: sans-serif;
                     "
                   >
-                    {{ item.userName }}
+                    {{ item }}
                   </div>
                   <div style="color: grey; font-size: 13px">مبتدئ</div>
                 </div>
@@ -232,7 +232,7 @@
           <p-dropdown
             [options]="this.studentService.coaches"
             [(ngModel)]="this.selectedCoach"
-            optionLabel="userName"
+            optionLabel="fullName"
             placeholder="أختر مدرباً"
           >
             <ng-template pTemplate="filter" let-options="options">
@@ -257,7 +257,7 @@
                     alt=""
                     srcset=""
                   />
-                  <div>{{ this.selectedCoach.userName }}</div>
+                  <div>{{ this.selectedCoach.fullName }}</div>
                 </div>
               </div>
             </ng-template>
@@ -271,7 +271,7 @@
                     alt=""
                     srcset=""
                   />
-                  <div>{{ coach.userName }}</div>
+                  <div>{{ coach.fullName }}</div>
                 </div>
               </div>
             </ng-template>
@@ -376,7 +376,7 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
                 alt="Avatar"
               />
               <p style="color: white; font-size: 18px; font-family: sans-serif">
-                {{ student.userName }} <br /><span
+                {{ student.fullName }} <br /><span
                   style="font-size: 15px; color: gray"
                   >مستوى التدريب متوسط</span
                 >
@@ -488,7 +488,7 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
                       font-family: sans-serif;
                     "
                   >
-                    {{ item.userName }}<br /><span
+                    {{ item.fullName }}<br /><span
                       style="font-size: 18px; color: gray"
                       >مستوى التدريب متوسط</span
                     >

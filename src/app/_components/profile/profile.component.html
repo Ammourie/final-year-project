@@ -24,6 +24,7 @@
     <div></div>
     <div></div>
   </div>
+
   <body *ngIf="!this.loading">
     <div class="gr-header">
       <div class="d-flex flex-row justify-content-between">
@@ -48,7 +49,7 @@
         </div>
         <div style="display: flex; align-items: center">
           <div style="color: antiquewhite; font-size: 28px">
-            {{ this.student!.userName }}
+            {{ this.student!.fullName }}
           </div>
 
           <div class="dropdown">
@@ -180,18 +181,37 @@
           />
         </div>
         <div class="card-body">
-          <img
-            src="{{ this.student?.profilePhoto }}"
-            alt="profile-image"
-            class="profile"
-            *ngIf="this.student?.profilePhoto != null"
+          <label class="hoverable" for="fileInput">
+            <img
+              [src]="this.student?.profilePhoto"
+              alt="profile-image"
+              class="profile"
+              *ngIf="this.student?.profilePhoto != null"
+            />
+            <img
+              src="../../../assets/images/person.svg"
+              alt="profile-image"
+              class="profile"
+              *ngIf="this.student?.profilePhoto == null"
+            />
+            <div class="hover-text" *ngIf="this.student?.id == this.loggedinId">
+              <i
+                class="bi bi-camera-fill"
+                style="color: grey; font-size: 18px"
+              ></i>
+            </div>
+            <div
+              class="background profile"
+              *ngIf="this.student?.id == this.loggedinId"
+            ></div>
+          </label>
+          <input
+            id="fileInput"
+            type="file"
+            (change)="onSelectFile($event)"
+            *ngIf="this.student?.id == this.loggedinId"
           />
-          <img
-            src="../../../assets/images/person.svg"
-            alt="profile-image"
-            class="profile"
-            *ngIf="this.student?.profilePhoto == null"
-          />
+
           <div
             style="
               background-color: #1e2021;
@@ -204,40 +224,112 @@
               align-items: center;
             "
           >
-            <div >
-              <div style="display: flex; gap: 20px; align-items: center;margin-right: 20px;">
-                <h5 class="card-title">{{ this.student?.userName }}</h5>
-                <img *ngIf="this.student?.isCoach"
+            <div>
+              <div
+                style="
+                  display: flex;
+                  gap: 20px;
+                  align-items: center;
+                  margin-right: 20px;
+                "
+              >
+                <h5 class="card-title" *ngIf="!this.editingNamePart">
+                  {{ this.student?.fullName }}
+                </h5>
+                <input
+                  type="text"
+                  *ngIf="this.editingNamePart"
+                  value="{{ this.student?.fullName }}"
+                  style="
+                    background: #26282a;
+                    border: 0.1px solid grey;
+                    color: white;
+                    padding: 3px;
+                  "
+                  [(ngModel)]="model1.fullName"
+                />
+                <img
+                  *ngIf="this.student?.isCoach"
                   src="../../../assets/images/coach-badge.png"
                   height="24px"
                   alt=""
                 />
                 <i
-                class="btn bi bi-pencil-square"
-                style="color: grey; font-size: 18px"
-              ></i>
+                  class="btn bi bi-pencil-square"
+                  *ngIf="
+                    this.student?.id == this.loggedinId && !this.editingNamePart
+                  "
+                  (click)="this.toogleEditingNamePart()"
+                  style="color: grey; font-size: 18px"
+                ></i>
+                <i
+                  class="btn bi-patch-check-fill"
+                  *ngIf="this.editingNamePart"
+                  (click)="this.editiNamePart()"
+                  style="color: grey; font-size: 18px"
+                ></i>
               </div>
-              <p class="card-text" style="margin-right: 20px;">كلية الهندسة المعلوماتية</p>
+              <p
+                class="card-text"
+                style="margin-right: 20px"
+                *ngIf="!this.editingNamePart"
+              >
+                {{
+                  this.student?.university == null
+                    ? "لم يتم تحديد جامعة بعد"
+                    : this.student?.university
+                }}
+              </p>
+              <input
+                style="
+                  background: #26282a;
+                  border: 0.1px solid grey;
+                  color: white;
+                  padding: 3px;
+                "
+                *ngIf="this.editingNamePart"
+                type="text"
+                [value]="this.student?.university"
+                [(ngModel)]="model1.university"
+              />
             </div>
             <div style="display: flex; gap: 15px">
-              <img
-                src="../../../assets/images/at-coder.png "
-                width="40px"
-                height="40px"
-                alt=""
-              />
-              <img
-                src="../../../assets/images/code-cheaf.png "
-                width="40px"
-                height="40px"
-                alt=""
-              />
-              <img
-                src="../../../assets/images/code-forces.png"
-                width="40px"
-                height="40px"
-                alt=""
-              />
+              <div style="position: relative">
+                <img
+                  src="../../../assets/images/at-coder.png "
+                  width="40px"
+                  height="40px"
+                  alt=""
+                />
+                <div
+                  class="hovered"
+                  *ngIf="this.student?.atCoderHandle == null"
+                ></div>
+              </div>
+              <div style="position: relative">
+                <img
+                  src="../../../assets/images/code-cheaf.png "
+                  width="40px"
+                  height="40px"
+                  alt=""
+                />
+                <div
+                  class="hovered"
+                  *ngIf="this.student?.codeChefHandle == null"
+                ></div>
+              </div>
+              <div style="position: relative">
+                <img
+                  src="../../../assets/images/code-forces.png "
+                  width="40px"
+                  height="40px"
+                  alt=""
+                />
+                <div
+                  class="hovered"
+                  *ngIf="this.student?.codeforcesAccount == null"
+                ></div>
+              </div>
             </div>
           </div>
 
@@ -248,21 +340,57 @@
         سيرة ذاتية مختصرة
         <i
           class="btn bi bi-pencil-square"
+          *ngIf="this.student?.id == this.loggedinId && !this.editingBioPart"
+          style="color: grey; font-size: 18px"
+          (click)="this.toogleBioPart()"
+        ></i>
+        <i
+          class="btn bi-patch-check-fill"
+          *ngIf="this.editingBioPart"
+          (click)="this.editBioPart()"
           style="color: grey; font-size: 18px"
         ></i>
       </h4>
 
-      <div class="about-part">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta, neque
-        hic eos quaerat voluptatem ullam a perspiciatis perferendis quis
-        cupiditate deserunt voluptates earum maxime sunt! Rem nesciunt, quia
-        quam dolorem accusantium molestias ipsa odit nisi sequi cumque.
-        Necessitatibus, vel perspiciatis.
+      <div class="about-part" *ngIf="!this.editingBioPart">
+        {{
+          this.student?.bio == null
+            ? "لا يوجد بعد سيرة ذاتية قم بإضافتها"
+            : this.student?.bio
+        }}
       </div>
-      <h4 class="part-header">المشاركات <i
-        class="btn bi bi-pencil-square"
-        style="color: grey; font-size: 18px"
-      ></i></h4>
+      <textarea
+      *ngIf="this.editingBioPart"
+        name=""
+        id=""
+        cols="30"
+        rows="3"
+        style="
+          direction: rtl;
+          margin: 20px;
+          background: #1e2021;
+          border: none;
+          resize: none;
+          padding: 20px;
+          color: white;
+          border-radius: 20px;
+        "
+        [(ngModel)]="model1.bio"
+        oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"
+        >{{
+          this.student?.bio == null
+            ? "لا يوجد بعد سيرة ذاتية قم بإضافتها"
+            : this.student?.bio
+        }}</textarea
+      >
+      <h4 class="part-header">
+        المشاركات
+        <i
+          class="btn bi bi-pencil-square"
+          *ngIf="this.student?.id == this.loggedinId"
+          style="color: grey; font-size: 18px"
+        ></i>
+      </h4>
       <div class="participates-part" *ngFor="let item of [1, 2, 3, 4]">
         <img
           src="../../../assets/images/cpc.png"
