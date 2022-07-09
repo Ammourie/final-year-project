@@ -1,10 +1,10 @@
+import { TeamsRegisterComponent } from './_components/teams-register/teams-register.component';
 import { AboutPage2Component } from './_components/about-page2/about-page2.component';
-import { GroupsComponent } from './_components/groups/groups.component';
+import { TeamsComponent } from './_components/teams/teams.component';
 import { PagenotfoundComponentComponent } from './_components/pagenotfound-component/pagenotfound-component.component';
 import { ProfileComponent } from './_components/profile/profile.component';
 import { MainPracticePageComponent } from './_components/main-practice-page/main-practice-page.component';
 import { LoginComponent } from './_components/login/login.component';
-import { GroupsRegisterComponent } from './_components/groups-register/groups-register.component';
 import { CalendarComponent } from './_components/calendar/calendar.component';
 import { PracticeGroubsComponent } from './_components/practice-groubs/practice-groubs.component';
 import { AboutPageComponent } from './_components/about-page/about-page.component';
@@ -52,8 +52,8 @@ const routes: Routes = [
 
   },
   {
-    path: 'group-register',
-    component: GroupsRegisterComponent,
+    path: 'team-register',
+    component: TeamsRegisterComponent,
 
   },
   {
@@ -62,8 +62,8 @@ const routes: Routes = [
 
   },
   {
-    path: 'groups',
-    component: GroupsComponent,
+    path: 'teams',
+    component: TeamsComponent,
 
   },
   {

@@ -1,3 +1,4 @@
+import { TeamsRegisterComponent } from './_components/teams-register/teams-register.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -18,7 +19,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PracticeGroubsComponent } from './_components/practice-groubs/practice-groubs.component';
 import { CalendarComponent } from './_components/calendar/calendar.component';
-import { GroupsRegisterComponent } from './_components/groups-register/groups-register.component';
 import { CarouselModule } from 'primeng/carousel';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
@@ -31,11 +31,10 @@ import { MainPracticePageComponent } from './_components/main-practice-page/main
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProfileComponent } from './_components/profile/profile.component';
 import { PagenotfoundComponentComponent } from './_components/pagenotfound-component/pagenotfound-component.component';
-import { GroupsComponent } from './_components/groups/groups.component';
+import {  TeamsComponent } from './_components/teams/teams.component';
 import { AboutPage2Component } from './_components/about-page2/about-page2.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { DropdownModule } from 'primeng/dropdown';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,14 +47,15 @@ import { DropdownModule } from 'primeng/dropdown';
     CoachesListComponent,
     PracticeGroubsComponent,
     CalendarComponent,
-    GroupsRegisterComponent,
     LoginComponent,
     RegisterComponent,
     MainPracticePageComponent,
     ProfileComponent,
     PagenotfoundComponentComponent,
-    GroupsComponent,
+    TeamsComponent,
     AboutPage2Component,
+    TeamsRegisterComponent,
+
   ],
   imports: [
     BrowserModule,

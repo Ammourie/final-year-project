@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Student } from '../_models/student';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -24,7 +23,14 @@ export class UsersService {
     };
 
     this.http.get<Student[]>(this.baseUrl + 'Users', header).subscribe({
-      next: (res) => (this.students = res),
+      next: (res) => {
+      for (const i of res) {
+        if(i['isCoach']){
+          this.coaches.push(i)
+        }else{
+          this.students.push(i)
+        };
+              }},
       error: (error) => console.log(error),
       complete: () => {
         console.log(this.students);

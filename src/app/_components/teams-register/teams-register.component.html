@@ -144,7 +144,19 @@
         >
           <div style="display: flex; align-items: center">
             <img
-              src="../../../assets/images/profile.jpg"
+              *ngIf="item.profilePhoto == null"
+              src="../../../assets/images/placeholder2.png"
+              style="
+                border-radius: 50%;
+                width: 45px;
+                height: 45px;
+                margin-left: 15px;
+              "
+              alt="Avatar"
+            />
+            <img
+              *ngIf="item.profilePhoto != null"
+              [src]="item.profilePhoto"
               style="
                 border-radius: 50%;
                 width: 45px;
@@ -157,7 +169,7 @@
               <div
                 style="color: white; font-size: 17px; font-family: sans-serif"
               >
-                {{ item }}
+                {{ item.fullName }}
               </div>
               <div style="color: grey; font-size: 13px">مبتدئ</div>
             </div>
@@ -192,7 +204,19 @@
             >
               <div style="display: flex; align-items: center">
                 <img
-                  src="../../../assets/images/profile.jpg"
+                  *ngIf="item.profilePhoto == null"
+                  src="../../../assets/images/placeholder2.png"
+                  style="
+                    border-radius: 50%;
+                    width: 45px;
+                    height: 45px;
+                    margin-left: 15px;
+                  "
+                  alt="Avatar"
+                />
+                <img
+                  *ngIf="item.profilePhoto != null"
+                  [src]="item.profilePhoto"
                   style="
                     border-radius: 50%;
                     width: 45px;
@@ -209,7 +233,7 @@
                       font-family: sans-serif;
                     "
                   >
-                    {{ item }}
+                    {{ item.fullName }}
                   </div>
                   <div style="color: grey; font-size: 13px">مبتدئ</div>
                 </div>
@@ -233,27 +257,36 @@
             [options]="this.studentService.coaches"
             [(ngModel)]="this.selectedCoach"
             optionLabel="fullName"
+            appendTo="body"
             placeholder="أختر مدرباً"
           >
-            <ng-template pTemplate="filter" let-options="options">
-              <div class="flex p-3">
-                <div class="p-inputgroup" (click)="$event.stopPropagation()">
-                  <span class="p-inputgroup-addon"
-                    ><i class="pi pi-search"></i
-                  ></span>
-                </div>
-              </div>
-            </ng-template>
             <ng-template pTemplate="selectedItem">
               <div
-                class="country-item country-item-value"
+                class="coach-item coach-item-value"
                 *ngIf="this.selectedCoach"
               >
-                <div style="display: flex; gap: 20px;align-items: center; color:white">
+                <div
+                  style="
+                    display: flex;
+                    gap: 20px;
+                    align-items: center;
+                    color: white;
+                  "
+                >
                   <img
+                    *ngIf="this.selectedCoach.profilePhoto != null"
+                    [src]="this.selectedCoach.profilePhoto"
+                    width="30px"
+                    height="30px"
+                    alt=""
+                    srcset=""
+                    style="border-radius: 50%"
+                  />
+                  <img
+                    *ngIf="this.selectedCoach.profilePhoto == null"
                     src="../../../assets/images/placeholder2.png"
-                    width="20px"
-                    height="20px"
+                    width="30px"
+                    height="30px"
                     alt=""
                     srcset=""
                   />
@@ -262,12 +295,22 @@
               </div>
             </ng-template>
             <ng-template let-coach pTemplate="item">
-              <div class="country-item">
-                <div style="display: flex; gap: 20px;align-items: center;">
+              <div class="coach-item">
+                <div style="display: flex; gap: 20px; align-items: center">
                   <img
+                    *ngIf="this.coach.profilePhoto != null"
+                    [src]="this.coach.profilePhoto"
+                    width="30px"
+                    height="30px"
+                    alt=""
+                    srcset=""
+                    style="border-radius: 50%"
+                  />
+                  <img
+                    *ngIf="this.coach.profilePhoto == null"
                     src="../../../assets/images/placeholder2.png"
-                    width="20px"
-                    height="20px"
+                    width="30px"
+                    height="30px"
                     alt=""
                     srcset=""
                   />
@@ -300,6 +343,7 @@
               color: white;
               margin-bottom: 20px;
             "
+            [(ngModel)]="group.name"
             placeholder="اسم الفريق..."
           />
 
@@ -318,7 +362,7 @@
             ></p-button>
             <p-button
               icon="pi pi-check"
-              (click)="displayModal = false"
+              (click)="registerGroup()"
               label="موافق"
               class="p-button-text"
               [style]="{
@@ -348,6 +392,22 @@
       >
         أعضاء مقترحون :
       </div>
+      <div
+        class="lds-ring"
+        *ngIf="this.studentService.gettingStudents"
+        style="
+          width: min-content;
+          height: min-content;
+          align-self: center;
+          margin-top: 7%;
+          margin-bottom: 15%;
+        "
+      >
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
 
       <!-- <div class="st">
 <div style="background-color: red; width: 200px;
@@ -356,6 +416,7 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
       </div> -->
 
       <p-carousel
+        *ngIf="!this.studentService.gettingStudents"
         [value]="this.studentService.students"
         [numVisible]="3"
         [numScroll]="3"
@@ -366,7 +427,19 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
           <div class="recommended-student">
             <div style="display: flex; direction: rtl">
               <img
-                src="../../../assets/images/profile.jpg"
+                *ngIf="student.profilePhoto != null"
+                [src]="student.profilePhoto"
+                style="
+                  border-radius: 50%;
+                  width: 55px;
+                  height: 55px;
+                  margin-left: 15px;
+                "
+                alt="Avatar"
+              />
+              <img
+                *ngIf="student.profilePhoto == null"
+                src="../../../assets/images/placeholder2.png"
                 style="
                   border-radius: 50%;
                   width: 55px;
