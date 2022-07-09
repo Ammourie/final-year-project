@@ -1,6 +1,21 @@
 * {
   box-sizing: border-box;
 }
+::ng-deep .p-dropdown {
+  background-color: #303136;
+
+  border: none;
+}
+::ng-deep .p-dropdown-items {
+  background-color: #303136;
+  color: white;
+
+}
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item  {
+  color: white;
+
+}
+
 ::ng-deep .p-carousel-indicators {
   display: none !important;
 }

@@ -5,14 +5,17 @@ import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { Location } from '@angular/common';
 
+
+
 @Component({
   selector: 'app-groups-register',
   templateUrl: './groups-register.component.html',
   styleUrls: ['./groups-register.component.css'],
 })
 export class GroupsRegisterComponent implements OnInit {
-  items: String[] = [];
-  students: String[] = [];
+  students: Student[] = [];
+  selectedCoach:Student | undefined;
+
 
   responsiveOptions;
 
@@ -38,22 +41,13 @@ export class GroupsRegisterComponent implements OnInit {
   ngOnInit() {
     if (this.studentService.students.length == 0) {
       this.studentService.getstudents();
+      this.studentService.getcoaches();
+      this.selectedCoach=this.studentService.coaches[0]
     }
 
     this.primengConfig.ripple = true;
 
-    this.items = [
-      'محمد حسين العموري',
-      'أحمد نور ',
-      'محمد نور الخليف',
-      'يحيى الزهران',
-      'عموري العموري',
-      'item6',
-      'item7',
-      'item8',
-      'item9',
-      'item10',
-    ];
+
   }
   goback() {
     console.log("vvv");
@@ -63,7 +57,7 @@ export class GroupsRegisterComponent implements OnInit {
   gotoProfile(student: Student) {
     this.router.navigateByUrl('/profile/' + student.userName);
   }
-  addStudent(student: String) {
+  addStudent(student: Student) {
     if (this.students.length < 3) this.students.push(student);
     console.log(this.students);
   }
@@ -76,9 +70,12 @@ export class GroupsRegisterComponent implements OnInit {
       }
     });
   }
-  displayModal: boolean = false;
+    displayModal: boolean = false;
 
-  showModalDialog() {
-    this.displayModal = true;
-  }
+    showModalDialog() {
+
+
+      this.displayModal = true;
+    }
+
 }

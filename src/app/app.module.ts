@@ -34,6 +34,7 @@ import { PagenotfoundComponentComponent } from './_components/pagenotfound-compo
 import { GroupsComponent } from './_components/groups/groups.component';
 import { AboutPage2Component } from './_components/about-page2/about-page2.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     FormsModule,
     HttpClientModule,
     MatTabsModule,
+    DropdownModule,
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

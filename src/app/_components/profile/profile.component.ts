@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
           this.student = r;
         },
         error:(error)=>{
-          if(error.status===404){
+          if(error.status==404){
             this.router.navigateByUrl('/notfound');
 
           }

@@ -74,7 +74,7 @@
           <a
             class="col btn btn-dark-blue btn-rounded"
             [routerLink]="['/login']"
-            *ngIf="(accountService.currentUser$ | async) === null"
+            *ngIf="(accountService.currentUser$ | async) == null"
             >دخول</a
           >
           <b
