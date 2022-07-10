@@ -15,8 +15,12 @@ import { Location } from '@angular/common';
 export class ProfileComponent implements OnInit {
   editingNamePart: boolean = false;
   editingBioPart: boolean = false;
-
+  showDialogModalFlag: boolean = false;
+  dialogeTitle:string="";
+  dialogeType: string = '';
   student: Student | undefined;
+  codeforces: any = { handle: null};
+
   imgUrl: any;
   username = JSON.parse(localStorage.getItem('user')!!).username;
   token = JSON.parse(localStorage.getItem('user')!!).token;
@@ -71,7 +75,7 @@ export class ProfileComponent implements OnInit {
       .subscribe({
         next: (r) => {
           this.student = r;
-          this.model1=r;
+          this.model1 = r;
         },
         error: (error) => {
           if (error.status == 404) {
@@ -135,5 +139,21 @@ export class ProfileComponent implements OnInit {
   editBioPart() {
     this.editingBioPart = false;
     console.log(this.model1);
+  }
+  showDialogModal(type: string) {
+    if(type=='codeforces'){
+
+      this.dialogeTitle="أدخل اسم المستخدم الخاص بك على codeforces:"
+    }
+    else if(type=='atcoder') {
+
+      this.dialogeTitle="أدخل اسم المستخدم الخاص بك على atCoder:"
+    }
+    else if(type=='codechef') {
+
+      this.dialogeTitle="أدخل اسم المستخدم الخاص بك على codechef:"
+    }
+    this.dialogeType = type;
+    this.showDialogModalFlag = true;
   }
 }

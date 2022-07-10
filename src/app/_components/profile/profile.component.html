@@ -304,6 +304,8 @@
                 <div
                   class="hovered"
                   *ngIf="this.student?.atCoderHandle == null"
+                  (click)="showDialogModal('atcoder')"
+
                 ></div>
               </div>
               <div style="position: relative">
@@ -316,6 +318,8 @@
                 <div
                   class="hovered"
                   *ngIf="this.student?.codeChefHandle == null"
+                  (click)="showDialogModal('codechef')"
+
                 ></div>
               </div>
               <div style="position: relative">
@@ -328,10 +332,67 @@
                 <div
                   class="hovered"
                   *ngIf="this.student?.codeforcesAccount == null"
+                  (click)="showDialogModal('codeforces')"
                 ></div>
               </div>
             </div>
           </div>
+          <p-dialog
+          [header]="this.dialogeTitle"
+          [(visible)]="this.showDialogModalFlag"
+          [modal]="true"
+          [baseZIndex]="10000"
+          [draggable]="false"
+          [resizable]="false"
+          [style]="{ width: '50vw' }"
+        >
+
+
+
+          <input
+            type="text"
+            class="form-control form-control-dark"
+            style="
+              width: 97%;
+              background-color: #303136;
+              border: none;
+              border-radius: 5px;
+              color: white;
+              margin-bottom: 20px;
+              margin-top: 20px;
+            "
+            [(ngModel)]="codeforces.handle"
+            placeholder="e.g Ammourie99"
+          />
+
+          <ng-template pTemplate="footer">
+            <p-button
+              icon="pi pi-times"
+              (click)="showDialogModalFlag = false"
+              label="رجوع"
+              [style]="{
+                width: '15vw',
+                'background-color': '#970000',
+                color: 'white',
+                border: 'none',
+                'font-family': 'sans-serif'
+              }"
+            ></p-button>
+            <p-button
+              icon="pi pi-check"
+              (click)="showDialogModalFlag=false"
+              label="موافق"
+              class="p-button-text"
+              [style]="{
+                width: '15vw',
+                border: 'none',
+                color: 'white',
+                'background-color': '#005C97',
+                'font-family': 'sans-serif'
+              }"
+            ></p-button>
+          </ng-template>
+        </p-dialog>
 
           <!-- <div class="icon-block"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"> <i class="fa fa-twitter"></i></a><a href="#"> <i class="fa fa-google-plus"></i></a></div> -->
         </div>
