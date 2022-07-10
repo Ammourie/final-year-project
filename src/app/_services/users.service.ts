@@ -24,18 +24,13 @@ export class UsersService {
 
     this.http.get<Student[]>(this.baseUrl + 'Users', header).subscribe({
       next: (res) => {
-      for (const i of res) {
-        if(i['isCoach']){
-          this.coaches.push(i)
-        }else{
-          this.students.push(i)
-        };
-              }},
+        for (const i of res) {
+          if (!i['isCoach']) this.students.push(i);
+        }
+      },
       error: (error) => console.log(error),
       complete: () => {
-        console.log(this.students);
         this.gettingStudents = false;
-        console.log(this.students[0].fullName);
       },
     });
   }
@@ -58,7 +53,6 @@ export class UsersService {
       },
       error: (error) => console.log(error),
       complete: () => {
-        console.log(this.coaches);
         this.gettingcoaches = false;
       },
     });

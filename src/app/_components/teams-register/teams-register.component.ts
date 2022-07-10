@@ -14,9 +14,10 @@ import { Location } from '@angular/common';
 export class TeamsRegisterComponent implements OnInit {
   students: Student[] = [];
   selectedCoach: Student | undefined;
-  group: any = {
+  team: any = {
     name: '',
-    students: [],
+    members: [],
+    coachId: 0,
   };
   responsiveOptions;
 
@@ -50,8 +51,6 @@ export class TeamsRegisterComponent implements OnInit {
     this.primengConfig.ripple = true;
   }
   goback() {
-    console.log('vvv');
-
     this.location.back();
   }
   gotoProfile(student: Student) {
@@ -60,14 +59,11 @@ export class TeamsRegisterComponent implements OnInit {
   addStudent(student: Student) {
     if (!this.students.includes(student)) {
       if (this.students.length < 3) this.students.push(student);
-      console.log(this.students);
     }
   }
   deleteStudent(element: number) {
     this.students.forEach((value, index) => {
       if (element == index) {
-        console.log('hello');
-
         this.students.splice(index, 1);
       }
     });
@@ -80,8 +76,11 @@ export class TeamsRegisterComponent implements OnInit {
 
   registerGroup() {
     for (const i of this.students) {
-      this.group.students.push(i.id);
+      this.team.members.push(i.id);
     }
+    this.team.coachId=this.selectedCoach?.id
+    console.log(this.team);
+
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
     const httpOptions = {
@@ -92,21 +91,17 @@ export class TeamsRegisterComponent implements OnInit {
 
     this.httpclient
       .post(
-        'https://cpcmanager.herokuapp.com/api/TrainingGroups',
-        this.group,
+        'https://cpcmanager.herokuapp.com/api/Teams',
+        this.team,
         httpOptions
       )
       .subscribe({
-        next: (e) => {
-          console.log(e);
-        },
-        error: (e) => console.log(e),
+        next: (e) => {},
+        error: (e) => {},
         complete: () => {
-          console.log('completed');
-
           this.displayModal = false;
-          this.students=[];
-          this.router.navigateByUrl("/teams")
+          this.students = [];
+          this.router.navigateByUrl('/teams');
         },
       });
   }

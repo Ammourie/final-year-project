@@ -7,8 +7,8 @@
   border: none;
 }
 ::ng-deep .p-dropdown-items-wrapper  {
- max-height: 500px;
- min-height: 200px;
+ /* max-height: 500px;
+ min-height: 200px; */
  direction: rtl;
 }
 

@@ -4,13 +4,13 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-groups',
+  selector: 'app-teams',
   templateUrl: './teams.component.html',
   styleUrls: ['./teams.component.css'],
 })
 export class TeamsComponent implements OnInit {
   constructor(private location: Location, private httpclient: HttpClient) {}
-  gettingGroups: boolean = true;
+  gettingTeams: boolean = true;
   team: Team[] | undefined;
   ngOnInit(): void {
     this.getGroups();
@@ -24,14 +24,14 @@ export class TeamsComponent implements OnInit {
     };
     this.httpclient
       .get<Team[]>(
-        'https://cpcmanager.herokuapp.com/api/TrainingGroups',
+        'https://cpcmanager.herokuapp.com/api/Teams',
         httpOptions
       )
       .subscribe({
         next: (res) => (this.team = res),
         error: (e) => console.log(e),
         complete: () => {
-          console.log(this.team), (this.gettingGroups = false);
+          console.log(this.team), (this.gettingTeams = false);
         },
       });
   }
