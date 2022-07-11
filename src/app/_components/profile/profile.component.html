@@ -265,7 +265,7 @@
                 <i
                   class="btn bi-patch-check-fill"
                   *ngIf="this.editingNamePart"
-                  (click)="this.editiNamePart()"
+                  (click)="this.editNamePart()"
                   style="color: grey; font-size: 18px"
                 ></i>
               </div>
@@ -305,7 +305,6 @@
                   class="hovered"
                   *ngIf="this.student?.atCoderHandle == null"
                   (click)="showDialogModal('atcoder')"
-
                 ></div>
               </div>
               <div style="position: relative">
@@ -319,15 +318,31 @@
                   class="hovered"
                   *ngIf="this.student?.codeChefHandle == null"
                   (click)="showDialogModal('codechef')"
-
                 ></div>
               </div>
               <div style="position: relative">
+                <a
+                  href="https://codeforces.com/profile/{{
+                    this.student?.codeforcesAccount
+                  }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  *ngIf="this.student?.codeforcesAccount != null"
+                >
+                  <img
+                    src="../../../assets/images/code-forces.png "
+                    width="40px"
+                    height="40px"
+                    alt=""
+                  />
+                </a>
+
                 <img
                   src="../../../assets/images/code-forces.png "
                   width="40px"
                   height="40px"
                   alt=""
+                  *ngIf="this.student?.codeforcesAccount == null"
                 />
                 <div
                   class="hovered"
@@ -338,61 +353,58 @@
             </div>
           </div>
           <p-dialog
-          [header]="this.dialogeTitle"
-          [(visible)]="this.showDialogModalFlag"
-          [modal]="true"
-          [baseZIndex]="10000"
-          [draggable]="false"
-          [resizable]="false"
-          [style]="{ width: '50vw' }"
-        >
+            [header]="this.dialogeTitle"
+            [(visible)]="this.showDialogModalFlag"
+            [modal]="true"
+            [baseZIndex]="10000"
+            [draggable]="false"
+            [resizable]="false"
+            [style]="{ width: '50vw' }"
+          >
+            <input
+              type="text"
+              class="form-control form-control-dark"
+              style="
+                width: 97%;
+                background-color: #303136;
+                border: none;
+                border-radius: 5px;
+                color: white;
+                margin-bottom: 20px;
+                margin-top: 20px;
+              "
+              [(ngModel)]="dialogeValue"
+              placeholder="e.g Ammourie99"
+            />
 
-
-
-          <input
-            type="text"
-            class="form-control form-control-dark"
-            style="
-              width: 97%;
-              background-color: #303136;
-              border: none;
-              border-radius: 5px;
-              color: white;
-              margin-bottom: 20px;
-              margin-top: 20px;
-            "
-            [(ngModel)]="codeforces.handle"
-            placeholder="e.g Ammourie99"
-          />
-
-          <ng-template pTemplate="footer">
-            <p-button
-              icon="pi pi-times"
-              (click)="showDialogModalFlag = false"
-              label="رجوع"
-              [style]="{
-                width: '15vw',
-                'background-color': '#970000',
-                color: 'white',
-                border: 'none',
-                'font-family': 'sans-serif'
-              }"
-            ></p-button>
-            <p-button
-              icon="pi pi-check"
-              (click)="showDialogModalFlag=false"
-              label="موافق"
-              class="p-button-text"
-              [style]="{
-                width: '15vw',
-                border: 'none',
-                color: 'white',
-                'background-color': '#005C97',
-                'font-family': 'sans-serif'
-              }"
-            ></p-button>
-          </ng-template>
-        </p-dialog>
+            <ng-template pTemplate="footer">
+              <p-button
+                icon="pi pi-times"
+                (click)="showDialogModalFlag = false"
+                label="رجوع"
+                [style]="{
+                  width: '15vw',
+                  'background-color': '#970000',
+                  color: 'white',
+                  border: 'none',
+                  'font-family': 'sans-serif'
+                }"
+              ></p-button>
+              <p-button
+                icon="pi pi-check"
+                (click)="submitDialoge()"
+                label="موافق"
+                class="p-button-text"
+                [style]="{
+                  width: '15vw',
+                  border: 'none',
+                  color: 'white',
+                  'background-color': '#005C97',
+                  'font-family': 'sans-serif'
+                }"
+              ></p-button>
+            </ng-template>
+          </p-dialog>
 
           <!-- <div class="icon-block"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"> <i class="fa fa-twitter"></i></a><a href="#"> <i class="fa fa-google-plus"></i></a></div> -->
         </div>
@@ -421,7 +433,7 @@
         }}
       </div>
       <textarea
-      *ngIf="this.editingBioPart"
+        *ngIf="this.editingBioPart"
         name=""
         id=""
         cols="30"
@@ -447,12 +459,145 @@
       <h4 class="part-header">
         المشاركات
         <i
-          class="btn bi bi-pencil-square"
+          class="btn bi bi-plus-square"
           *ngIf="this.student?.id == this.loggedinId"
           style="color: grey; font-size: 18px"
+          (click)="this.showPDialogModalFlag = true"
         ></i>
       </h4>
-      <div class="participates-part" *ngFor="let item of [1, 2, 3, 4]">
+      <p-dialog
+        header="أضف مشاركة:"
+        [(visible)]="this.showPDialogModalFlag"
+        [modal]="true"
+        [baseZIndex]="10000"
+        [draggable]="false"
+        [resizable]="false"
+        [style]="{ width: '50vw' }"
+      >
+        <div
+          style="
+            display: grid;
+            grid-template-columns: auto auto;
+            direction: rtl;
+          "
+        >
+          <input
+            type="text"
+            class="form-control form-control-dark"
+            style="
+              width: 97%;
+              background-color: #303136;
+              border: none;
+              border-radius: 5px;
+              color: white;
+              margin-bottom: 20px;
+              margin-top: 20px;
+            "
+            [(ngModel)]="participation.name"
+            placeholder="اسم المشاركة"
+          />
+          <input
+            type="text"
+            class="form-control form-control-dark"
+            style="
+              width: 97%;
+              background-color: #303136;
+              border: none;
+              border-radius: 5px;
+              color: white;
+              margin-bottom: 20px;
+              margin-top: 20px;
+            "
+            [(ngModel)]="participation.location"
+            placeholder="مكان المشاركة"
+          />
+          <input
+            type="text"
+            onfocus="(this.type='date')"
+            class="form-control form-control-dark"
+            style="
+              width: 97%;
+              background-color: #303136;
+              border: none;
+              border-radius: 5px;
+              color: white;
+              margin-bottom: 20px;
+              margin-top: 20px;
+            "
+            [(ngModel)]="participation.year"
+            placeholder="تاريخ المشاركة"
+          />
+          <input
+            type="text"
+            class="form-control form-control-dark"
+            style="
+              width: 97%;
+              background-color: #303136;
+              border: none;
+              border-radius: 5px;
+              color: white;
+              margin-bottom: 20px;
+              margin-top: 20px;
+            "
+            [(ngModel)]="participation.teamName"
+            placeholder="اسم الفريق الذي شاركت معه"
+          />
+          <input
+            type="text"
+            class="form-control form-control-dark"
+            style="
+              width: 97%;
+              background-color: #303136;
+              border: none;
+              border-radius: 5px;
+              color: white;
+              margin-bottom: 20px;
+              margin-top: 20px;
+            "
+            [(ngModel)]="participation.rank"
+            placeholder="المركز الذي احتليته"
+          />
+        </div>
+        <ng-template pTemplate="footer">
+          <p-button
+            icon="pi pi-times"
+            (click)="showPDialogModalFlag = false"
+            label="رجوع"
+            [style]="{
+              width: '15vw',
+              'background-color': '#970000',
+              color: 'white',
+              border: 'none',
+              'font-family': 'sans-serif'
+            }"
+          ></p-button>
+          <p-button
+            icon="pi pi-check"
+            (click)="addParticibation()"
+            label="موافق"
+            class="p-button-text"
+            [style]="{
+              width: '15vw',
+              border: 'none',
+              color: 'white',
+              'background-color': '#005C97',
+              'font-family': 'sans-serif'
+            }"
+          ></p-button>
+        </ng-template>
+      </p-dialog>
+      <div
+        style="
+          color: white;
+          align-self: center;
+          font-size: 30px;
+          font-family: sans-serif;
+        "
+        *ngIf="this.student?.participations?.length == 0"
+      >
+        لا يوجد مشاركات بعد قم بإضافة البعض
+      </div>
+      <div class="participates-part" *ngFor="let item of this.student?.participations;let i=index">
         <img
           src="../../../assets/images/cpc.png"
           width="80px"
@@ -467,15 +612,60 @@
             margin-left: 200px;
           "
         >
-          <h4 style="color: white">المسابقة العالمية</h4>
+          <div style="display: flex; gap: 20px">
+            <h4 style="color: white">{{item.name}}</h4>
+            <i
+              class="bi bi-trash"
+              style="color: rgb(185, 11, 11); font-size: 20px; cursor: pointer"
+              (click)="deleteParticipation(i)"
+            ></i>
+          </div>
+          <p-dialog
+          header="هل أنت متأكد؟"
+          [(visible)]="this.showDDialogModalFlag"
+          [modal]="true"
+          [baseZIndex]="10000"
+          [draggable]="false"
+          [resizable]="false"
+          [style]="{ width: '50vw' }"
+        >
+
+          <ng-template pTemplate="footer">
+            <p-button
+              icon="pi pi-times"
+              (click)="showDDialogModalFlag = false"
+              label="رجوع"
+              [style]="{
+                width: '15vw',
+                'background-color': '#970000',
+                color: 'white',
+                border: 'none',
+                'font-family': 'sans-serif'
+              }"
+            ></p-button>
+            <p-button
+              icon="pi pi-check"
+              (click)="confirmDelete()"
+              label="موافق"
+              class="p-button-text"
+              [style]="{
+                width: '15vw',
+                border: 'none',
+                color: 'white',
+                'background-color': '#005C97',
+                'font-family': 'sans-serif'
+              }"
+            ></p-button>
+          </ng-template>
+        </p-dialog>
           <div style="display: flex; gap: 5px; align-items: center">
             <i class="bi bi-geo-alt" style="color: grey"></i>
-            <div class="p-item">روسيا</div>
+            <div class="p-item">{{item.location}}</div>
           </div>
           <div style="display: flex; gap: 5px; align-items: center">
             <i class="bi bi-calendar3" style="color: grey"></i>
 
-            <div class="p-item">2020-2021</div>
+            <div class="p-item">{{item.year}}</div>
           </div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 20px">
@@ -483,12 +673,12 @@
           <div style="display: flex; gap: 5px; align-items: center">
             <i class="bi bi-people" style="color: grey"></i>
 
-            <div class="p-item">radio active</div>
+            <div class="p-item">{{item.teamName}}</div>
           </div>
           <div style="display: flex; gap: 5px; align-items: center">
             <i class="bi bi-award" style="color: grey"></i>
 
-            <div class="p-item">المركز السادس</div>
+            <div class="p-item">المركز {{item.rank}}</div>
           </div>
         </div>
       </div>

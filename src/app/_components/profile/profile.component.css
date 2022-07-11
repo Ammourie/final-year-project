@@ -412,28 +412,27 @@ p {
 }
 
 :host ::ng-deep .p-dialog .p-dialog-header {
-  background-color: #26282A;
+  background-color: #26282a;
   color: white;
   direction: rtl;
   font-family: sans-serif;
 }
 :host ::ng-deep .p-dialog .p-dialog-content {
-  background-color: #26282A;
+  background-color: #26282a;
   direction: rtl;
 }
 :host ::ng-deep .p-dialog .p-dialog-footer {
-  background-color: #26282A;
+  background-color: #26282a;
   direction: rtl;
   display: flex;
   justify-content: flex-end;
   gap: 20px;
 }
-.confirm-dialog-content{
+.confirm-dialog-content {
   display: grid;
   grid-template-columns: 47% 47%;
   column-gap: 3%;
   row-gap: 20px;
-
 }
 
 @media (max-width: 800px) {
@@ -484,20 +483,28 @@ p {
     height: 100%;
   }
 }
-.hovered{
-
+.hovered {
   position: absolute;
   width: 40px;
   height: 40px;
   top: 0;
   left: 0;
   border-radius: 5px;
-
 }
-.hovered:hover{
-  background: url("../../../assets/images/plus.svg") no-repeat scroll  ;
-  background-position-x:50% ;
-  background-position-y:50% ;
+
+.mat-datepicker-toggle {
+  color: #d2d3d7 !important;
+}
+.t {
+  color: #d2d3d7;
+}
+input matInput{
+  color: #d2d3d7;
+}
+.hovered:hover {
+  background: url("../../../assets/images/plus.svg") no-repeat scroll;
+  background-position-x: 50%;
+  background-position-y: 50%;
   background-size: 150%;
   background-color: rgba(128, 128, 128, 0.426);
   cursor: pointer;
@@ -507,7 +514,6 @@ p {
   top: 0;
   left: 0;
   border-radius: 5px;
-
 }
 .lds-ring {
   display: inline-block;

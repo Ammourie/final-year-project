@@ -1,8 +1,7 @@
-import { Team } from './team';
 export interface Participation {
-  rank: number;
+  rank: string;
   year: string;
   name: string;
   location: string;
-  team: Team;
+  teamName: String;
 }

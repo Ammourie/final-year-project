@@ -176,7 +176,7 @@ input matInput{
  }
 
 
-mat-datepicker-toggle {
+.mat-datepicker-toggle {
   color: #d2d3d7 !important;
 }
 .dropbtn {

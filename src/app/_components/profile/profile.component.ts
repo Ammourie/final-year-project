@@ -1,3 +1,4 @@
+import { Participation } from './../../_models/participation';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -16,11 +17,14 @@ export class ProfileComponent implements OnInit {
   editingNamePart: boolean = false;
   editingBioPart: boolean = false;
   showDialogModalFlag: boolean = false;
-  dialogeTitle:string="";
+  showPDialogModalFlag: boolean = false;
+  showDDialogModalFlag: boolean = false;
+  indexForDelete: number = 0;
+  dialogeTitle: string = '';
   dialogeType: string = '';
   student: Student | undefined;
-  codeforces: any = { handle: null};
-
+  // codeforces: any = { handle: null};
+  dialogeValue: String = '';
   imgUrl: any;
   username = JSON.parse(localStorage.getItem('user')!!).username;
   token = JSON.parse(localStorage.getItem('user')!!).token;
@@ -28,7 +32,14 @@ export class ProfileComponent implements OnInit {
   x2 = JSON.parse(this.x);
   loggedinId = this.x2.nameid;
   loading = true;
-  model1: any = {};
+  model1: any = { bio: null, fullName: null, university: null };
+  participation: Participation = {
+    rank: '',
+    year: '',
+    name: '',
+    location: '',
+    teamName: '',
+  };
 
   constructor(
     private router: Router,
@@ -129,31 +140,88 @@ export class ProfileComponent implements OnInit {
   toogleEditingNamePart() {
     this.editingNamePart = true;
   }
-  editiNamePart() {
+  editNamePart() {
     this.editingNamePart = false;
-    console.log(this.model1);
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${auth}`,
+      }),
+    };
+    this.http
+      .patch(
+        'https://cpcmanager.herokuapp.com/api/Users',
+        this.model1,
+        httpOptions
+      )
+      .subscribe({
+        error: (e) => console.log(e),
+        complete: () => {
+          this.dialogeValue = '';
+          this.showDialogModalFlag = false;
+        },
+      });
   }
   toogleBioPart() {
     this.editingBioPart = true;
   }
   editBioPart() {
     this.editingBioPart = false;
-    console.log(this.model1);
   }
   showDialogModal(type: string) {
-    if(type=='codeforces'){
-
-      this.dialogeTitle="أدخل اسم المستخدم الخاص بك على codeforces:"
-    }
-    else if(type=='atcoder') {
-
-      this.dialogeTitle="أدخل اسم المستخدم الخاص بك على atCoder:"
-    }
-    else if(type=='codechef') {
-
-      this.dialogeTitle="أدخل اسم المستخدم الخاص بك على codechef:"
+    if (type == 'codeforces') {
+      this.dialogeTitle = 'أدخل اسم المستخدم الخاص بك على codeforces:';
+    } else if (type == 'atcoder') {
+      this.dialogeTitle = 'أدخل اسم المستخدم الخاص بك على atCoder:';
+    } else if (type == 'codechef') {
+      this.dialogeTitle = 'أدخل اسم المستخدم الخاص بك على codechef:';
     }
     this.dialogeType = type;
     this.showDialogModalFlag = true;
+  }
+  submitDialoge() {
+    if (this.dialogeType == 'codeforces') {
+      const auth = JSON.parse(localStorage.getItem('user')!!).token;
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${auth}`,
+        }),
+      };
+      this.http
+        .post(
+          'https://cpcmanager.herokuapp.com/api/Users/codeforces-account/' +
+            this.dialogeValue,
+          {},
+          httpOptions
+        )
+        .subscribe({
+          error: (e) => console.log(e),
+          complete: () => {
+            this.dialogeValue = '';
+            this.showDialogModalFlag = false;
+            window.location.reload();
+          },
+        });
+    }
+  }
+  addParticibation() {
+    console.log(this.participation);
+    this.student?.participations.push(this.participation);
+    this.participation = {
+      rank: '',
+      year: '',
+      name: '',
+      location: '',
+      teamName: '',
+    };
+    this.showPDialogModalFlag = false;
+  }
+  deleteParticipation(id: number) {
+    this.showDDialogModalFlag = true;
+    this.indexForDelete = id;
+  }
+  confirmDelete() {
+    this.showDDialogModalFlag = false;
+    this.student?.participations.splice(this.indexForDelete,1)
   }
 }
