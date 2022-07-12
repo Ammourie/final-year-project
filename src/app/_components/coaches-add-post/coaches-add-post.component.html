@@ -9,8 +9,6 @@
   <body>
     <div class="cc">
       <div class="leftside">
-
-
         <div class="ad1">
           <div class="adt">اخر المسائل المحلولة</div>
           <hr style="color: white" />
@@ -68,9 +66,9 @@
           charswidth="23"
           name="text_body"
           placeholder="أكتب إعلاناً..."
-          oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"
+          oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'" [(ngModel)]="post"
         ></textarea>
-        <button class="btn">نشر</button>
+        <button class="btn" (click)="uploadPost()">نشر</button>
         <div class="add-task">
           <div class="lds-ring" *ngIf="this.loadingFlag">
             <div></div>

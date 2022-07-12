@@ -188,38 +188,61 @@
       <mat-tab-group mat-stretch-tabs>
         <mat-tab label="آخر الإعلانات">
           <div
-            class="latest-advertisments-container"
-            *ngFor="let item of [].constructor(5)"
+            style="
+              width: 100%;
+              height: 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            "
+            *ngIf="this.postsLoading"
           >
-            <div style="display: flex; align-items: center; gap: 10px">
-              <img
-                src="../../../assets/images/placeholder2.png"
-                width="50px"
-                alt=""
-              />
-              <div style="display: flex; flex-direction: column">
-                <div style="color: white; font-size: 15px">عمر البيطار</div>
-                <div style="color: rgb(110, 106, 106); font-size: 13px">
-                  منذ 15 د
+            <div class="lds-dual-ring"></div>
+          </div>
+          <div *ngIf="!this.postsLoading">
+            <div
+              class="latest-advertisments-container"
+              *ngFor="let item of this.post;let i=index"
+            >
+            <div style="display: flex;  direction: rtl; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 10px">
+                <img
+                  src="../../../assets/images/placeholder2.png"
+                  width="50px"
+                  alt=""
+                  *ngIf="item.author.profilePhoto == null"
+                />
+                <img
+                  [src]="item.author.profilePhoto"
+                  style="width: 50px;
+                  height: 50px;
+                  border-radius: 50%;"
+                  alt=""
+                  *ngIf="item.author.profilePhoto != null"
+                />
+                <div style="display: flex; flex-direction: column">
+                  <div style="color: white; font-size: 15px">{{item.author.userName}}</div>
+                  <div style="color: rgb(110, 106, 106); font-size: 13px">
+                    منذ 15 د
+                  </div>
                 </div>
               </div>
-            </div>
-            <br />
-            <p>
-              تنويه للطلاب والمدربين اللي من غير جامعات اللي عنا بالغروب
-              المدربين اللي من غير جامعات اللي عندن طلاب بجامعتن من حمص وما
-              بيقدرو يحضرو بمحافظتن لسبب ما او الطلاب اللي بالغروب اللي بغير
-              محافظة وهني حماصنة وحابين يحضرو عنا ف ما في اي مشكلة.. بس يا ريت
-              يحكي معنا مشان العدد لأنو العدد كبير ف ما يجي كتير عالم ويصير زحمة
-              كمان اللي حابب يشوف شو عم نعطي او شو عم ننزل مسابقات او شغلات وبدو
-              يتفرج ف كمان يحكي معنا لنضيفو.. ما يفوت دغري بس مشان نعرف شو عم
-              يصير واذا هالشخص من عنا او لا مشان وقت نعمل فرق وهيك قصص ما نضيع
-            </p>
-            <div style="display: flex; gap: 15px">
-              <div class="btn btn-outline-success" style="width: 100px">
-                جيد
+              <i
+              class="bi bi-trash"
+              style="color: rgb(185, 11, 11); font-size: 20px; cursor: pointer"
+              (click)="deletePost(i)"
+              *ngIf="item.author.id == this.loggedinId"
+            ></i>            </div>
+              <br />
+              <p>{{item.content}}  </p>
+              <div style="display: none; gap: 15px">
+                <div class="btn btn-outline-success" style="width: 100px">
+                  جيد
+                </div>
+                <div class="btn btn-outline-danger" style="width: 100px">
+                  سيء
+                </div>
               </div>
-              <div class="btn btn-outline-danger" style="width: 100px">سيء</div>
             </div>
           </div>
         </mat-tab>
@@ -237,7 +260,7 @@
             <div class="lds-dual-ring"></div>
           </div>
           <div *ngIf="!this.tasksLoading">
-            <div *ngFor="let item of this.tasksToShow; let i = index">
+            <div *ngFor="let item of this.tasksToShow; let i = index;">
               <div
                 style="
                   display: flex;
@@ -309,8 +332,7 @@
                 >
                   الذهاب لإنجازها
                 </a>
-                <div style="margin: 20px"                   *ngIf="this.isCoach"
-                >
+                <div style="margin: 20px" *ngIf="this.isCoach">
                   مخصصة للمجموعة {{ item.group.name }}
                 </div>
               </div>

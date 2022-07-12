@@ -48,7 +48,6 @@ export class ProfileComponent implements OnInit {
     private jwtHelper: JwtHelperService
   ) {}
 
-
   goback() {
     this.location.back();
   }
@@ -186,6 +185,48 @@ export class ProfileComponent implements OnInit {
             window.location.reload();
           },
         });
+    } else if (this.dialogeType == 'codechef') {
+      const auth = JSON.parse(localStorage.getItem('user')!!).token;
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${auth}`,
+        }),
+      };
+      this.http
+        .patch(
+          'https://cpcmanager.herokuapp.com/api/Users',
+          { codeChefHandle: this.dialogeValue },
+          httpOptions
+        )
+        .subscribe({
+          error: (e) => console.log(e),
+          complete: () => {
+            this.dialogeValue = '';
+            this.showDialogModalFlag = false;
+            window.location.reload();
+          },
+        });
+    } else {
+      const auth = JSON.parse(localStorage.getItem('user')!!).token;
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${auth}`,
+        }),
+      };
+      this.http
+        .patch(
+          'https://cpcmanager.herokuapp.com/api/Users',
+          { atCoderHandle: this.dialogeValue },
+          httpOptions
+        )
+        .subscribe({
+          error: (e) => console.log(e),
+          complete: () => {
+            this.dialogeValue = '';
+            this.showDialogModalFlag = false;
+            window.location.reload();
+          },
+        });
     }
   }
   addParticibation() {
@@ -206,6 +247,6 @@ export class ProfileComponent implements OnInit {
   }
   confirmDelete() {
     this.showDDialogModalFlag = false;
-    this.student?.participations.splice(this.indexForDelete,1)
+    this.student?.participations.splice(this.indexForDelete, 1);
   }
 }

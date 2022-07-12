@@ -1,7 +1,13 @@
+import { Post } from './../../_models/post';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { DailyTask } from './../../_models/daily_task';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'app-main-practice-page',
@@ -12,17 +18,45 @@ export class MainPracticePageComponent implements OnInit {
   tasksLoading: boolean = false;
   postsLoading: boolean = false;
   tasksToShow: DailyTask[] = [];
+  post: Post[] = [];
   token = JSON.parse(localStorage.getItem('user')!!).token;
   x = JSON.stringify(this.jwtHelper.decodeToken(this.token));
   x2 = JSON.parse(this.x);
+  loggedinId = this.x2.nameid;
   isCoach = this.x2['role'] == 'Member,Coach';
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.getAllTasks();
     this.getMyTasks();
+    this.getPosts();
+    this.cdr.detectChanges();
   }
 
+  getPosts() {
+    this.postsLoading = true;
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+
+    this.http
+      .get<Post[]>('https://cpcmanager.herokuapp.com/api/Blog', header)
+      .subscribe({
+        next: (res) => {
+          this.post = res.reverse();
+        },
+        error: (error) => console.log(error),
+        complete: () => {
+          this.postsLoading = false;
+        },
+      });
+  }
   getMyTasks() {
     this.tasksLoading = true;
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
@@ -39,7 +73,7 @@ export class MainPracticePageComponent implements OnInit {
       .subscribe({
         next: (res) => {
           if (!this.isCoach) {
-            this.tasksToShow = res;
+            this.tasksToShow = res.reverse();
             console.log('added my tasks');
           }
         },
@@ -65,15 +99,35 @@ export class MainPracticePageComponent implements OnInit {
       .subscribe({
         next: (res) => {
           if (this.isCoach) {
-            this.tasksToShow = res;
+            this.tasksToShow = res.reverse();
             console.log('added all tasks');
           }
         },
         error: (error) => console.log(error),
         complete: () => {
           this.tasksLoading = false;
-
         },
       });
+  }
+  deletePost(i: number) {
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+
+    this.http
+      .delete(
+        'https://cpcmanager.herokuapp.com/api/blog/' + this.post[i].id,
+        header
+      )
+      .subscribe({
+        next: (res) => {},
+        error: (error) => console.log(error),
+        complete: () => {
+          this.tasksLoading = false;
+        },
+      });
+    this.post.splice(i, 1);
   }
 }

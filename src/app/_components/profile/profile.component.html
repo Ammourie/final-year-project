@@ -295,12 +295,29 @@
             </div>
             <div style="display: flex; gap: 15px">
               <div style="position: relative">
+                <a
+                href="https://atcoder.jp/users/{{
+                  this.student?.atCoderHandle
+                }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                *ngIf="this.student?.atCoderHandle != null"
+              >
                 <img
                   src="../../../assets/images/at-coder.png "
                   width="40px"
                   height="40px"
                   alt=""
                 />
+              </a>
+
+              <img
+                src="../../../assets/images/at-coder.png "
+                width="40px"
+                height="40px"
+                alt=""
+                *ngIf="this.student?.atCoderHandle == null"
+              />
                 <div
                   class="hovered"
                   *ngIf="this.student?.atCoderHandle == null"
@@ -308,11 +325,28 @@
                 ></div>
               </div>
               <div style="position: relative">
+                <a
+                  href="https://www.codechef.com/users/{{
+                    this.student?.codeChefHandle
+                  }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  *ngIf="this.student?.codeChefHandle != null"
+                >
+                  <img
+                    src="../../../assets/images/code-cheaf.png "
+                    width="40px"
+                    height="40px"
+                    alt=""
+                  />
+                </a>
+
                 <img
                   src="../../../assets/images/code-cheaf.png "
                   width="40px"
                   height="40px"
                   alt=""
+                  *ngIf="this.student?.codeChefHandle == null"
                 />
                 <div
                   class="hovered"
@@ -598,7 +632,10 @@
       >
         لا يوجد مشاركات بعد قم بإضافة البعض
       </div>
-      <div class="participates-part" *ngFor="let item of this.student?.participations;let i=index">
+      <div
+        class="participates-part"
+        *ngFor="let item of this.student?.participations; let i = index"
+      >
         <img
           src="../../../assets/images/cpc.png"
           width="80px"
@@ -614,59 +651,59 @@
           "
         >
           <div style="display: flex; gap: 20px">
-            <h4 style="color: white">{{item.name}}</h4>
+            <h4 style="color: white">{{ item.name }}</h4>
             <i
               class="bi bi-trash"
               style="color: rgb(185, 11, 11); font-size: 20px; cursor: pointer"
               (click)="deleteParticipation(i)"
+              *ngIf="this.student?.id == this.loggedinId"
             ></i>
           </div>
           <p-dialog
-          header="هل أنت متأكد؟"
-          [(visible)]="this.showDDialogModalFlag"
-          [modal]="true"
-          [baseZIndex]="10000"
-          [draggable]="false"
-          [resizable]="false"
-          [style]="{ width: '50vw' }"
-        >
-
-          <ng-template pTemplate="footer">
-            <p-button
-              icon="pi pi-times"
-              (click)="showDDialogModalFlag = false"
-              label="رجوع"
-              [style]="{
-                width: '15vw',
-                'background-color': '#970000',
-                color: 'white',
-                border: 'none',
-                'font-family': 'sans-serif'
-              }"
-            ></p-button>
-            <p-button
-              icon="pi pi-check"
-              (click)="confirmDelete()"
-              label="موافق"
-              class="p-button-text"
-              [style]="{
-                width: '15vw',
-                border: 'none',
-                color: 'white',
-                'background-color': '#005C97',
-                'font-family': 'sans-serif'
-              }"
-            ></p-button>
-          </ng-template>
-        </p-dialog>
+            header="هل أنت متأكد؟"
+            [(visible)]="this.showDDialogModalFlag"
+            [modal]="true"
+            [baseZIndex]="10000"
+            [draggable]="false"
+            [resizable]="false"
+            [style]="{ width: '50vw' }"
+          >
+            <ng-template pTemplate="footer">
+              <p-button
+                icon="pi pi-times"
+                (click)="showDDialogModalFlag = false"
+                label="رجوع"
+                [style]="{
+                  width: '15vw',
+                  'background-color': '#970000',
+                  color: 'white',
+                  border: 'none',
+                  'font-family': 'sans-serif'
+                }"
+              ></p-button>
+              <p-button
+                icon="pi pi-check"
+                (click)="confirmDelete()"
+                label="موافق"
+                class="p-button-text"
+                [style]="{
+                  width: '15vw',
+                  border: 'none',
+                  color: 'white',
+                  'background-color': '#005C97',
+                  'font-family': 'sans-serif'
+                }"
+              ></p-button>
+            </ng-template>
+          </p-dialog>
           <div style="display: flex; gap: 5px; align-items: center">
             <i class="bi bi-geo-alt" style="color: grey"></i>
-            <div class="p-item">{{item.location}}</div>
+            <div class="p-item">{{ item.location }}</div>
           </div>
           <div style="display: flex; gap: 5px; align-items: center">
             <i class="bi bi-calendar3" style="color: grey"></i>
 
-            <div class="p-item">{{item.year}}</div>
+            <div class="p-item">{{ item.year }}</div>
           </div>
         </div>
         <div style="display: flex; flex-direction: column; gap: 20px">
@@ -674,12 +711,12 @@
           <div style="display: flex; gap: 5px; align-items: center">
             <i class="bi bi-people" style="color: grey"></i>
 
-            <div class="p-item">{{item.teamName}}</div>
+            <div class="p-item">{{ item.teamName }}</div>
           </div>
           <div style="display: flex; gap: 5px; align-items: center">
             <i class="bi bi-award" style="color: grey"></i>
 
-            <div class="p-item">المركز {{item.rank}}</div>
+            <div class="p-item">المركز {{ item.rank }}</div>
           </div>
         </div>
       </div>

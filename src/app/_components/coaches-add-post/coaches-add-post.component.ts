@@ -15,6 +15,7 @@ export class CoachesAddPostComponent implements OnInit {
   groupDesired: TrainingGroup[] = [];
   dateUntilSolve: String = '';
   trainingGroups: TrainingGroup[] = [];
+  post: string = '';
   loadingFlag = false;
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -49,9 +50,7 @@ export class CoachesAddPostComponent implements OnInit {
       });
   }
   addproblem() {
-    this.problems.push(
-    this.problemName,
-    );
+    this.problems.push(this.problemName);
     this.problemName = '';
   }
   addTask() {
@@ -76,10 +75,31 @@ export class CoachesAddPostComponent implements OnInit {
         error: (error) => console.log(error),
         complete: () => {
           this.loadingFlag = false;
-          this.problems=[]
-          this.taskDiscription=''
-          this.dateUntilSolve=''
-          this.groupDesired=[]
+          this.problems = [];
+          this.taskDiscription = '';
+          this.dateUntilSolve = '';
+          this.groupDesired = [];
+        },
+      });
+  }
+  uploadPost() {
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+    const formData = new FormData();
+    formData.append('Content', this.post);
+
+    this.http
+      .post('https://cpcmanager.herokuapp.com/api/blog', formData, header)
+      .subscribe({
+        next: (res) => {},
+        error: (error) => console.log(error),
+        complete: () => {
+          this.post = '';
+          this.router.navigateByUrl('/main-practice-page');
+
         },
       });
   }
