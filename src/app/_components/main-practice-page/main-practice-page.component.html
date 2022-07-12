@@ -154,13 +154,34 @@
     </div>
     <div class="gr-main">
       <div class="rec-stu">
-        <div class="adt" style="text-align: end; margin: 20px;color:white">
+        <div class="adt" style="text-align: end; margin: 20px; color: white">
           فريقك المحتمل
         </div>
-        <div  style="display: flex;gap:15px;overflow: auto;direction: rtl;margin: 10px;">
-          <div class="stu" style="display: flex; flex-direction: column;align-items: center; gap: 10px;" *ngFor="let item of [1,3,2,3]">
-            <img src="../../../assets/images/placeholder2.png" width="100px" alt="" />
-            <div style="color: white; font-size:17px">فلان الفلاني</div>
+        <div
+          style="
+            display: flex;
+            gap: 15px;
+            overflow: auto;
+            direction: rtl;
+            margin: 10px;
+          "
+        >
+          <div
+            class="stu"
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 10px;
+            "
+            *ngFor="let item of [1, 3, 2, 3]"
+          >
+            <img
+              src="../../../assets/images/placeholder2.png"
+              width="100px"
+              alt=""
+            />
+            <div style="color: white; font-size: 17px">فلان الفلاني</div>
           </div>
         </div>
       </div>
@@ -202,59 +223,97 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="المهمات اليومية">
+        <mat-tab label="المهمات ">
           <div
             style="
+              width: 100%;
+              height: 200px;
               display: flex;
-              direction: rtl;
+              justify-content: center;
               align-items: center;
-              justify-content: space-between;
-              width: 100;
-              margin-left: 25px;
-              margin-right: 25px;
-              margin-bottom: 30px;
-              background-color: #202124;
-              border-radius: 20px;
-              color: #9f9f9f;
             "
-            *ngFor="let item of [].constructor(10)"
+            *ngIf="this.tasksLoading"
           >
-            <div style="display: flex">
-              <img
-                src="../../../assets/images/daily-tasks-cover.jpg"
-                style="border-radius: 20px"
-                alt=""
-              />
+            <div class="lds-dual-ring"></div>
+          </div>
+          <div *ngIf="!this.tasksLoading">
+            <div *ngFor="let item of this.tasksToShow; let i = index">
               <div
                 style="
                   display: flex;
-                  flex-direction: column;
-                  gap: 10px;
-                  padding: 20px;
+                  direction: rtl;
+                  align-items: center;
+                  justify-content: space-between;
+                  width: 100;
+                  margin-left: 25px;
+                  margin-right: 25px;
+                  margin-bottom: 30px;
+                  background-color: #202124;
+                  border-radius: 20px;
+                  color: #9f9f9f;
                 "
+                *ngFor="let itemb of this.tasksToShow[i].problems"
               >
-                <div style="font-size: 20px; color: white">
-                  Prove Him Wrong
-                  <span
-                    style="color: #348ac7; text-decoration: underline"
-                    onmouseover="this.style.cursor='pointer'"
-                    >1651B</span
+                <div style="display: flex">
+                  <img
+                    src="../../../assets/images/daily-tasks-cover.jpg"
+                    style="border-radius: 20px"
+                    alt=""
+                  />
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      gap: 10px;
+                      padding: 20px;
+                    "
                   >
+                    <div style="font-size: 20px; color: white">
+                      {{ itemb.name }}
+                      <a
+                        href="{{ itemb.url }}"
+                        target="_blank"
+                        style="color: #348ac7; text-decoration: underline"
+                        >{{ itemb.contestId + itemb.index }}</a
+                      >
+                    </div>
+                    <div style="font-size: 15px; color: #9f9f9f">
+                      مستوى صعوبة المسألة
+                      {{
+                        itemb.rating <= 1000
+                          ? "سهل"
+                          : itemb.rating <= 1800
+                          ? "متوسط"
+                          : "متقدم"
+                      }}
+                    </div>
+                    <div
+                      style="
+                        font-size: 15px;
+                        color: #9f9f9f;
+                        display: flex;
+                        gap: 5px;
+                      "
+                    >
+                      <div *ngFor="let itemc of itemb.tags">{{ itemc }}</div>
+                    </div>
+                  </div>
                 </div>
-                <div style="font-size: 15px; color: #9f9f9f">
-                  مستوى الصعوبة سهل
-                </div>
-                <div style="font-size: 15px; color: #9f9f9f">
-                  Greedy Algorithm
+
+                <a
+                  href="{{ itemb.url }}"
+                  target="_blank"
+                  class="btn btn-success"
+                  style="height: min-content; margin: 30px"
+                  *ngIf="!this.isCoach"
+                >
+                  الذهاب لإنجازها
+                </a>
+                <div style="margin: 20px"                   *ngIf="this.isCoach"
+                >
+                  مخصصة للمجموعة {{ item.group.name }}
                 </div>
               </div>
-            </div>
-
-            <div
-              class="btn btn-success"
-              style="height: min-content; margin: 30px"
-            >
-              الذهاب لإنجازها
             </div>
           </div>
         </mat-tab>

@@ -47,23 +47,7 @@ export class ProfileComponent implements OnInit {
     private location: Location,
     private jwtHelper: JwtHelperService
   ) {}
-  // constructor(private http: HttpClient) {
-  //   const username = JSON.parse(localStorage.getItem('user')!!).username;
-  //   const auth= JSON.parse(localStorage.getItem('user')!!).token
 
-  //   var header = {
-  //     headers: new HttpHeaders()
-  //    . set('Authorization',  `Bearer ${auth}`)
-  //   }
-
-  //   http
-  //     .get<Student>('https://cpcmanager.herokuapp.com/api/Users/' + username,header)
-  //     .subscribe({
-  //       next: (r) => this.student=r,
-  //       complete:()=>console.log("ccc")
-
-  //     });
-  // }
 
   goback() {
     this.location.back();

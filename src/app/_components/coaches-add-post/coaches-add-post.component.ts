@@ -1,5 +1,7 @@
+import { Router } from '@angular/router';
+import { TrainingGroup } from './../../_models/training_group';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
 
 @Component({
   selector: 'app-coaches-add-post',
@@ -7,18 +9,78 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./coaches-add-post.component.css'],
 })
 export class CoachesAddPostComponent implements OnInit {
-  constructor() {}
+  problemName: string = '';
+  taskDiscription: string = '';
+  problems: String[] = [];
+  groupDesired: TrainingGroup[] = [];
+  dateUntilSolve: String = '';
+  trainingGroups: TrainingGroup[] = [];
+  loadingFlag = false;
+  constructor(private http: HttpClient, private router: Router) {}
 
-  addProblem() {
-    this.problems.push('new problem');
+  ngOnInit(): void {
+    this.getGroups();
   }
-  addStudent(item :string) {
-    if (this.students.indexOf(item)==-1) {
-
-      this.students.push(item);
+  onGroupSelected(group: TrainingGroup) {
+    if (!this.groupDesired.includes(group)) {
+      this.groupDesired.push(group);
     }
   }
-  ngOnInit(): void {}
-  problems: String[] = [];
-  students: String[] = [];
+  getGroups() {
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+
+    this.http
+      .get<TrainingGroup[]>(
+        'https://cpcmanager.herokuapp.com/api/TrainingGroups',
+        header
+      )
+      .subscribe({
+        next: (res) => {
+          this.trainingGroups = res;
+        },
+        error: (error) => console.log(error),
+        complete: () => {
+          console.log('getting groups compleated');
+        },
+      });
+  }
+  addproblem() {
+    this.problems.push(
+    this.problemName,
+    );
+    this.problemName = '';
+  }
+  addTask() {
+    this.loadingFlag = true;
+    var task = {
+      problems: this.problems,
+      dueDate: this.dateUntilSolve,
+      groupId: this.groupDesired[0].id,
+      description: this.taskDiscription,
+    };
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+    console.log(task);
+
+    this.http
+      .post('https://cpcmanager.herokuapp.com/api/DailyTasks', task, header)
+      .subscribe({
+        next: (res) => {},
+        error: (error) => console.log(error),
+        complete: () => {
+          this.loadingFlag = false;
+          this.problems=[]
+          this.taskDiscription=''
+          this.dateUntilSolve=''
+          this.groupDesired=[]
+        },
+      });
+  }
 }

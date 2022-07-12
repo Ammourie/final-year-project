@@ -9,6 +9,8 @@
   <body>
     <div class="cc">
       <div class="leftside">
+
+
         <div class="ad1">
           <div class="adt">اخر المسائل المحلولة</div>
           <hr style="color: white" />
@@ -61,75 +63,88 @@
       </div>
 
       <div class="main" dir="rtl">
-        <form>
-          <textarea
-            dir="rtl"
-            charswidth="23"
-            name="text_body"
-            placeholder="أكتب إعلاناً..."
-            oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"
-          ></textarea>
-          <button class="btn">نشر</button>
-          <div class="add-task">
-            <h6 style="color: #d2d3d7">أضف مهمة ما</h6>
-            <input
-              type="text"
-              name="p-name"
-              id="p-name"
-              placeholder="اسم مسألة أو رابط لها ..."
-            />
-            <input
-              type="text"
-              name="p-discription"
-              id="p-discription"
-              placeholder="وصف المسألة (إختياري)"
-            />
-            <br />
-            <div class="btn" (click)="addProblem()" style="margin-right: 10px">
-              إضافة المسألة
-            </div>
-            <ul>
-              <li
-                *ngFor="let item of problems"
-                style="color: #d2d3d7; margin-right: 10px"
-              >
-                {{ item }}
-              </li>
-            </ul>
-            <div
-              class="date-pick"
-              style="
-                display: flex;
-                flex-direction: row;
-                justify-content: start;
-                align-items: center;
+        <textarea
+          dir="rtl"
+          charswidth="23"
+          name="text_body"
+          placeholder="أكتب إعلاناً..."
+          oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"
+        ></textarea>
+        <button class="btn">نشر</button>
+        <div class="add-task">
+          <div class="lds-ring" *ngIf="this.loadingFlag">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <h6 style="color: #d2d3d7">أضف مهمة ما</h6>
+          <input
+            autocomplete="off"
+            type="text"
+            name="p-discription"
+            id="p-discription"
+            placeholder="اكتب وصفاً للمهمة"
+            [(ngModel)]="taskDiscription"
+          />
+          <input
+            type="text"
+            name="p-name"
+            id="p-name"
+            placeholder="أضف رابط مسألة ما"
+            [(ngModel)]="problemName"
+            autocomplete="off"
+          />
 
-                direction: rtl;
-              "
+          <br />
+          <br />
+          <div class="btn" style="margin-right: 10px" (click)="addproblem()">
+            إضافة المسألة
+          </div>
+          <ul>
+            <li
+              *ngFor="let item of problems"
+              style="color: #d2d3d7; margin-right: 10px"
             >
-              <div style="color: #d2d3d7; margin-left: 20px">
-                يجب انهاء المهمة قبل
-              </div>
+              {{ item }}
+            </li>
+          </ul>
+          <div
+            class="date-pick"
+            style="
+              display: flex;
+              flex-direction: row;
+              justify-content: start;
+              align-items: center;
 
-              <mat-form-field>
-                <input
-                  class="t"
-                  matInput
-                  [matDatepicker]="datepicker"
-                  placeholder="إختر تاريخاً"
-                />
-                <mat-datepicker-toggle
-                  matSuffix
-                  [for]="datepicker"
-                ></mat-datepicker-toggle>
-                <mat-datepicker #datepicker></mat-datepicker>
-              </mat-form-field>
+              direction: rtl;
+            "
+          >
+            <div style="color: #d2d3d7; margin-left: 20px">
+              يجب انهاء المهمة قبل
             </div>
-            <div style="display: flex;;margin-top: 20px;align-items: center;">
-              <div style="color: #d2d3d7; margin-left: 20px">
-                الطلاب المعنيين بالمهمة
-              </div>
-              <!-- <div
+
+            <mat-form-field>
+              <input
+                class="t"
+                matInput
+                [matDatepicker]="datepicker"
+                placeholder="إختر تاريخاً"
+                [(ngModel)]="dateUntilSolve"
+                autocomplete="off"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="datepicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datepicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div style="display: flex; margin-top: 20px; align-items: center">
+            <div style="color: #d2d3d7; margin-left: 20px">
+              مجموعة الطلاب المعنية بالمهمة:
+            </div>
+            <!-- <div
                 class="btn"
                 (click)="addProblem()"
                 style="margin-right: 10px"
@@ -137,56 +152,45 @@
                 أضف طالباً
               </div> -->
 
-              <div class="dropdown">
-                <div class="btn dropbtn">أضف طالباً</div>
-                <div class="dropdown-content">
-                  <div
-                    href="#"
-                    style="cursor: pointer"
-                    (click)="addStudent('student 1')"
-                  >
-                    student 1
-                  </div>
-                  <div
-                    href="#"
-                    style="cursor: pointer"
-                    (click)="addStudent('student 2')"
-                  >
-                    student 2
-                  </div>
-                  <div
-                    href="#"
-                    style="cursor: pointer"
-                    (click)="addStudent('student 3')"
-                  >
-                    student 3
-                  </div>
-                  <div
-                    href="#"
-                    style="cursor: pointer"
-                    (click)="addStudent('student 4')"
-                  >
-                    student 4
-                  </div>
+            <div class="dropdown">
+              <div class="btn dropbtn">اختر مجموعة</div>
+              <div class="dropdown-content">
+                <div
+                  *ngFor="let item of trainingGroups; let i = index"
+                  href="#"
+                  style="cursor: pointer"
+                  (click)="onGroupSelected(item)"
+                >
+                  {{ item.name + "  " + item.coach }}
                 </div>
               </div>
             </div>
-            <ul>
-              <li
-                *ngFor="let item of students"
-                style="color: #d2d3d7; margin-right: 10px"
-              >
-                {{ item }}
-              </li>
-            </ul>
+          </div>
+          <ul>
+            <li
+              *ngFor="let item of groupDesired"
+              style="color: #d2d3d7; margin-right: 10px"
+            >
+              {{ item.name + "  " + item.coach }}
+            </li>
+          </ul>
 
-            <div style="display: flex;  justify-content: start;">
-              <div class="btn" style="margin-right: 0; margin-top: 80px;"> أضف المهمة</div>
-              <div class="btn cancel-btn" style="margin-right: 20px; margin-top: 80px;"> إلغاء   </div>
-
+          <div style="display: flex; justify-content: start">
+            <div
+              class="btn"
+              style="margin-right: 0; margin-top: 80px"
+              (click)="addTask()"
+            >
+              أضف المهمة
+            </div>
+            <div
+              class="btn cancel-btn"
+              style="margin-right: 20px; margin-top: 80px"
+            >
+              إلغاء
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </body>
