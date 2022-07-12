@@ -1,3 +1,4 @@
+import { Problem } from './../../_models/problem';
 import { Post } from './../../_models/post';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { DailyTask } from './../../_models/daily_task';
@@ -17,8 +18,10 @@ import {
 export class MainPracticePageComponent implements OnInit {
   tasksLoading: boolean = false;
   postsLoading: boolean = false;
+  problemsLoading: boolean = false;
   tasksToShow: DailyTask[] = [];
   post: Post[] = [];
+  recProblems: Problem[] = [];
   token = JSON.parse(localStorage.getItem('user')!!).token;
   x = JSON.stringify(this.jwtHelper.decodeToken(this.token));
   x2 = JSON.parse(this.x);
@@ -27,14 +30,13 @@ export class MainPracticePageComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
-    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.getAllTasks();
     this.getMyTasks();
     this.getPosts();
-    this.cdr.detectChanges();
+    this.getRecommendedProblems();
   }
 
   getPosts() {
@@ -106,6 +108,31 @@ export class MainPracticePageComponent implements OnInit {
         error: (error) => console.log(error),
         complete: () => {
           this.tasksLoading = false;
+        },
+      });
+  }
+  getRecommendedProblems() {
+    this.problemsLoading = true;
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+
+    this.http
+      .get<Problem[]>(
+        'https://cpcmanager.herokuapp.com/api/Recommendation',
+        header
+      )
+      .subscribe({
+        next: (res) => {
+          if (this.isCoach) {
+            this.recProblems = res;
+          }
+        },
+        error: (error) => console.log(error),
+        complete: () => {
+          this.problemsLoading = false;
         },
       });
   }

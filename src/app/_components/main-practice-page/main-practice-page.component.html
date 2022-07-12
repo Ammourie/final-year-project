@@ -202,39 +202,51 @@
           <div *ngIf="!this.postsLoading">
             <div
               class="latest-advertisments-container"
-              *ngFor="let item of this.post;let i=index"
+              *ngFor="let item of this.post; let i = index"
             >
-            <div style="display: flex;  direction: rtl; justify-content: space-between; align-items: center;">
-              <div style="display: flex; align-items: center; gap: 10px">
-                <img
-                  src="../../../assets/images/placeholder2.png"
-                  width="50px"
-                  alt=""
-                  *ngIf="item.author.profilePhoto == null"
-                />
-                <img
-                  [src]="item.author.profilePhoto"
-                  style="width: 50px;
-                  height: 50px;
-                  border-radius: 50%;"
-                  alt=""
-                  *ngIf="item.author.profilePhoto != null"
-                />
-                <div style="display: flex; flex-direction: column">
-                  <div style="color: white; font-size: 15px">{{item.author.userName}}</div>
-                  <div style="color: rgb(110, 106, 106); font-size: 13px">
-                    منذ 15 د
+              <div
+                style="
+                  display: flex;
+                  direction: rtl;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <img
+                    src="../../../assets/images/placeholder2.png"
+                    width="50px"
+                    alt=""
+                    *ngIf="item.author.profilePhoto == null"
+                  />
+                  <img
+                    [src]="item.author.profilePhoto"
+                    style="width: 50px; height: 50px; border-radius: 50%"
+                    alt=""
+                    *ngIf="item.author.profilePhoto != null"
+                  />
+                  <div style="display: flex; flex-direction: column">
+                    <div style="color: white; font-size: 15px">
+                      {{ item.author.userName }}
+                    </div>
+                    <div style="color: rgb(110, 106, 106); font-size: 13px">
+                      منذ 15 د
+                    </div>
                   </div>
                 </div>
+                <i
+                  class="bi bi-trash"
+                  style="
+                    color: rgb(185, 11, 11);
+                    font-size: 20px;
+                    cursor: pointer;
+                  "
+                  (click)="deletePost(i)"
+                  *ngIf="item.author.id == this.loggedinId"
+                ></i>
               </div>
-              <i
-              class="bi bi-trash"
-              style="color: rgb(185, 11, 11); font-size: 20px; cursor: pointer"
-              (click)="deletePost(i)"
-              *ngIf="item.author.id == this.loggedinId"
-            ></i>            </div>
               <br />
-              <p>{{item.content}}  </p>
+              <p>{{ item.content }}</p>
               <div style="display: none; gap: 15px">
                 <div class="btn btn-outline-success" style="width: 100px">
                   جيد
@@ -260,7 +272,7 @@
             <div class="lds-dual-ring"></div>
           </div>
           <div *ngIf="!this.tasksLoading">
-            <div *ngFor="let item of this.tasksToShow; let i = index;">
+            <div *ngFor="let item of this.tasksToShow; let i = index">
               <div
                 style="
                   display: flex;
@@ -339,7 +351,93 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="مسائل قد تعجبك"> Content 3 </mat-tab>
+        <mat-tab label="مسائل مقترحة">
+          <div
+            style="
+              width: 100%;
+              height: 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            "
+            *ngIf="this.problemsLoading"
+          >
+            <div class="lds-dual-ring"></div>
+          </div>
+          <div *ngIf="!this.problemsLoading">
+            <div
+              style="
+                display: flex;
+                direction: rtl;
+                align-items: center;
+                justify-content: space-between;
+                width: 100;
+                margin-left: 25px;
+                margin-right: 25px;
+                margin-bottom: 30px;
+                background-color: #202124;
+                border-radius: 20px;
+                color: #9f9f9f;
+              "
+              *ngFor="let itemb of this.recProblems"
+            >
+              <div style="display: flex">
+                <img
+                  src="../../../assets/images/daily-tasks-cover.jpg"
+                  style="border-radius: 20px"
+                  alt=""
+                />
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    padding: 20px;
+                  "
+                >
+                  <div style="font-size: 20px; color: white">
+                    {{ itemb.name }}
+                    <a
+                      href="{{ itemb.url }}"
+                      target="_blank"
+                      style="color: #348ac7; text-decoration: underline"
+                      >{{ itemb.contestId + itemb.index }}</a
+                    >
+                  </div>
+                  <div style="font-size: 15px; color: #9f9f9f">
+                    مستوى صعوبة المسألة
+                    {{
+                      itemb.rating <= 1000
+                        ? "سهل"
+                        : itemb.rating <= 1800
+                        ? "متوسط"
+                        : "متقدم"
+                    }}
+                  </div>
+                  <div
+                    style="
+                      font-size: 13px;
+                      color: #9f9f9f;
+                      display: flex;
+                      gap: 5px;
+                    "
+                  >
+                    <div *ngFor="let itemc of itemb.tags">{{ itemc }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href="{{ itemb.url }}"
+                target="_blank"
+                class="btn btn-success"
+                style="height: min-content; margin: 30px"
+              >
+                الذهاب لإنجازها
+              </a>
+            </div>
+          </div></mat-tab
+        >
       </mat-tab-group>
     </div>
     <div class="gr-left">
