@@ -54,6 +54,10 @@ export class UsersService {
       error: (error) => console.log(error),
       complete: () => {
         this.gettingcoaches = false;
+        console.log("getting coaches complete");
+        console.log(this.coaches);
+
+
       },
     });
   }

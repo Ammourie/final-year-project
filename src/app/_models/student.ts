@@ -7,9 +7,9 @@ export interface Student {
   userName: string;
   fullName: string;
   isCoach:boolean;
-  bio:String;
-  createdAt: Date;
-  lastActive: Date;
+  bio:string;
+  createdAt: string;
+  lastActive: string;
   codeforcesAccount: string;
   atCoderHandle: string;
   codeChefHandle: string;

@@ -50,12 +50,12 @@
             <div class="dropbtn"><i class="bi bi-list"></i></div>
             <div class="dropdown-content">
               <a
-              [routerLink]="['/main-practice-page']"
-              dir="rtl"
-              routerLinkActive="router-link-active"
-            >
-              الرئيسية
-            </a>
+                [routerLink]="['/main-practice-page']"
+                dir="rtl"
+                routerLinkActive="router-link-active"
+              >
+                الرئيسية
+              </a>
               <a
                 [routerLink]="['/students']"
                 dir="rtl"
@@ -67,13 +67,13 @@
                 [routerLink]="['/coaches/list']"
                 dir="rtl"
                 routerLinkActive="router-link-active"
-
                 >المدربين
               </a>
               <a
                 [routerLink]="['/practice-groups']"
                 dir="rtl"
-                routerLinkActive="router-link-active"       class="selected-btn"
+                routerLinkActive="router-link-active"
+                class="selected-btn"
               >
                 مجموعات التدريب
               </a>
@@ -81,7 +81,6 @@
                 [routerLink]="['/dates']"
                 dir="rtl"
                 routerLinkActive="router-link-active"
-
                 >المواعيد
               </a>
             </div>
@@ -109,7 +108,10 @@
         </div>
       </div>
       <div class="bt-gr">
-        <a [routerLink]="['/main-practice-page']" routerLinkActive="router-link-active">
+        <a
+          [routerLink]="['/main-practice-page']"
+          routerLinkActive="router-link-active"
+        >
           <div
             class="col btn btn-rounded btn0"
             style="text-align: end; width: 100%"
@@ -117,7 +119,7 @@
             الرئيسية
           </div>
         </a>
-        <a [routerLink]="['/students']" routerLinkActive="router-link-active" >
+        <a [routerLink]="['/students']" routerLinkActive="router-link-active">
           <div
             class="col btn btn-rounded btn1"
             style="text-align: end; width: 100%"
@@ -125,19 +127,36 @@
             الطلاب
           </div>
         </a>
-        <a [routerLink]="['/coaches/list']" routerLinkActive="router-link-active" >
-        <div
-          class="col btn btn-rounded btn2"
-          style="text-align: end; width: 100%"
+        <a
+          [routerLink]="['/coaches/list']"
+          routerLinkActive="router-link-active"
         >
-          المدربين
-        </div></a>  <a [routerLink]="['/practice-groups']" routerLinkActive="router-link-active" >
-        <div class="col btn btn-rounded selected-btn" style="text-align: end; width: 100%">
-          مجموعات التدريب
-        </div></a>
-       <a [routerLink]="['/dates']" routerLinkActive="router-link-active" >   <div class="col btn btn-rounded btn4" style="text-align: end; width: 100%">
-          المواعيد
-        </div></a>
+          <div
+            class="col btn btn-rounded btn2"
+            style="text-align: end; width: 100%"
+          >
+            المدربين
+          </div></a
+        >
+        <a
+          [routerLink]="['/practice-groups']"
+          routerLinkActive="router-link-active"
+        >
+          <div
+            class="col btn btn-rounded selected-btn"
+            style="text-align: end; width: 100%"
+          >
+            مجموعات التدريب
+          </div></a
+        >
+        <a [routerLink]="['/dates']" routerLinkActive="router-link-active">
+          <div
+            class="col btn btn-rounded btn4"
+            style="text-align: end; width: 100%"
+          >
+            المواعيد
+          </div></a
+        >
       </div>
     </div>
     <div class="gr-main">
@@ -174,7 +193,7 @@
         </div>
       </div>
 
-      <div dir="rtl">
+      <div dir="rtl" style="display: flex; justify-content: space-between">
         <div
           class="d-flex flex-row justify-content-start"
           style="margin-top: 20px"
@@ -192,94 +211,287 @@
             aria-label="Search"
           />
         </div>
+
+        <div class="add-group" (click)="showGroupCreateModal = true">
+          أنشئ مجموعة جديدة
+        </div>
       </div>
 
-      <div class="row" dir="rtl">
-        <div class="column"  *ngFor="let item of [].constructor(10);let i=index" (click)="showModalDialog()">
+      <div
+        style="
+          width: 100%;
+          height: 200px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+        *ngIf="this.loadingGroups"
+      >
+        <div class="lds-dual-ring"></div>
+      </div>
+      <div class="row" dir="rtl" *ngIf="!this.loadingGroups">
+        <div
+          class="column"
+          *ngFor="let item of this.trainingGroups; let i = index"
+          (click)="showGroupDetailsDialoge()"
+        >
           <div class="wrapper-grid">
             <div
-            [ngClass]="{
-              'img-container-g': i%3==0,
-              'img-container-r': i%3==1,
-              'img-container-o': i%3==2
-
-            }"
+              [ngClass]="{
+                'img-container-g': i % 3 == 0,
+                'img-container-r': i % 3 == 1,
+                'img-container-o': i % 3 == 2
+              }"
             >
-<div class="content">
-<div class="group-header">
-مجموعة {{i+1}}</div>
-<div class="group-coaches">
-  <ul>
-    <li>
-      محمد نور الخليف
-    </li>
-    <li>
-      ياسر ميلاتو
-    </li>
-  </ul>
-</div>
-</div>
+              <div class="content">
+                <div class="group-header">{{item.name}}</div>
+                <div class="group-coaches">
+                  <ul>
+                    <li>{{item.coach}}</li>
 
-          </div>
-          </div>
-        </div> <p-dialog
-        header="طلاب المجموعة :"
-        [(visible)]="displayModal"
-        [modal]="true"
-        [baseZIndex]="10000"
-        [draggable]="false"
-        [resizable]="false"
-        [style]="{ width: '50vw' }"
-      >
-        <div class="confirm-dialog-content">
-          <div
-            class="added-student"
-            *ngFor="let item of [].constructor(100); let i = index"
-          >
-            <div style="display: flex; align-items: center">
-              <img
-                src="../../../assets/images/profile.jpg"
-                style="
-                  border-radius: 50%;
-                  width: 45px;
-                  height: 45px;
-                  margin-left: 15px;
-                "
-                alt="Avatar"
-              />
-              <div style="display: flex; flex-direction: column">
-                <div
-                  style="
-                    color: white;
-                    font-size: 17px;
-                    font-family: sans-serif;
-                  "
-                >
-                  محمد حسين العموري
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <p-dialog
+          header="طلاب المجموعة :"
+          [(visible)]="showGroupDetailsModal"
+          [modal]="true"
+          [baseZIndex]="10000"
+          [draggable]="false"
+          [resizable]="false"
+          [style]="{ width: '50vw' }"
+        >
+          <div class="confirm-dialog-content">
+            <div
+              class="added-student"
+              *ngFor="let item of [].constructor(100); let i = index"
+            >
+              <div style="display: flex; align-items: center">
+                <img
+                  src="../../../assets/images/profile.jpg"
+                  style="
+                    border-radius: 50%;
+                    width: 45px;
+                    height: 45px;
+                    margin-left: 15px;
+                  "
+                  alt="Avatar"
+                />
+                <div style="display: flex; flex-direction: column">
+                  <div
+                    style="
+                      color: white;
+                      font-size: 17px;
+                      font-family: sans-serif;
+                    "
+                  >
+                    محمد حسين العموري
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <ng-template pTemplate="footer">
-
-          <p-button
-
-            (click)="displayModal = false"
-            label="رجوع"
-            class="p-button-text"
-            [style]="{
-              width: '15vw',
-              border: 'none',
-              color: 'white',
-              'background-color': '#005C97',
-              'font-family': 'sans-serif'
-            }"
-          ></p-button>
-        </ng-template>
-      </p-dialog>
+          <ng-template pTemplate="footer">
+            <p-button
+              (click)="showGroupDetailsModal = false"
+              label="رجوع"
+              class="p-button-text"
+              [style]="{
+                width: '15vw',
+                border: 'none',
+                color: 'white',
+                'background-color': '#005C97',
+                'font-family': 'sans-serif'
+              }"
+            ></p-button>
+          </ng-template>
+        </p-dialog>
       </div>
     </div>
+    <p-dialog
+      header="أنشئ مجموعة:"
+      [(visible)]="showGroupCreateModal"
+      [modal]="true"
+      [baseZIndex]="10000"
+      [draggable]="false"
+      [resizable]="false"
+      [style]="{ width: '50vw' }"
+    >
+      <h5
+        style="
+          direction: rtl;
+          color: white;
+          font-family: sans-serif;
+          font-weight: 600;
+          font-size: 1.25rem;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        "
+      >
+        اسم المجموعة
+      </h5>
+      <input
+        type="text"
+        class="form-control form-control-dark"
+        style="
+          width: 97%;
+          background-color: #303136;
+          border: none;
+          border-radius: 5px;
+          color: white;
+          margin-bottom: 20px;
+        "
+        placeholder="اسم المجموعة..."
+        [(ngModel)]="groupForCreate.name"
+      />
+      <h5
+        style="
+          direction: rtl;
+          color: white;
+          font-family: sans-serif;
+          font-weight: 600;
+          font-size: 1.25rem;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        "
+      >
+        اختر مدرباً:
+      </h5>
+      <p-dropdown
+        [options]="this.studentService.coaches"
+        [(ngModel)]="this.selectedCoach"
+        optionLabel="fullName"
+        appendTo="body"
+        placeholder="أختر مدرباً"
+      >
+        <ng-template pTemplate="selectedItem">
+          <div class="coach-item coach-item-value" *ngIf="this.selectedCoach">
+            <div
+              style="
+                display: flex;
+                gap: 20px;
+                align-items: center;
+                color: white;
+              "
+            >
+              <img
+                *ngIf="this.selectedCoach.profilePhoto != null"
+                [src]="this.selectedCoach.profilePhoto"
+                width="30px"
+                height="30px"
+                alt=""
+                srcset=""
+                style="border-radius: 50%"
+              />
+              <img
+                *ngIf="this.selectedCoach.profilePhoto == null"
+                src="../../../assets/images/placeholder2.png"
+                width="30px"
+                height="30px"
+                alt=""
+                srcset=""
+              />
+              <div>{{ this.selectedCoach.fullName }}</div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template let-coach pTemplate="item">
+          <div class="coach-item">
+            <div style="display: flex; gap: 20px; align-items: center">
+              <img
+                *ngIf="this.coach.profilePhoto != null"
+                [src]="this.coach.profilePhoto"
+                width="30px"
+                height="30px"
+                alt=""
+                srcset=""
+                style="border-radius: 50%"
+              />
+              <img
+                *ngIf="this.coach.profilePhoto == null"
+                src="../../../assets/images/placeholder2.png"
+                width="30px"
+                height="30px"
+                alt=""
+                srcset=""
+              />
+              <div>{{ coach.fullName }}</div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+      <h5
+        style="
+          direction: rtl;
+          color: white;
+          font-family: sans-serif;
+          font-weight: 600;
+          font-size: 1.25rem;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        "
+      >
+        اختر مستوى المجموعة:
+      </h5>
+      <p-dropdown
+        [options]="this.levels"
+        [(ngModel)]="this.selectedLevel"
+        optionLabel="level"
+        appendTo="body"
+        placeholder="أختر مستوى المجموعة"
+      >
+        <ng-template pTemplate="selectedItem">
+          <div class="level-item level-item-value" *ngIf="this.selectedLevel">
+            <div
+              style="
+                display: flex;
+                gap: 20px;
+                align-items: center;
+                color: white;
+              "
+            >
+              <div>{{ this.selectedLevel.level }}</div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template let-level pTemplate="item">
+          <div class="coach-item">
+            <div>{{ level.level }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+
+      <ng-template pTemplate="footer">
+        <p-button
+          icon="pi pi-times"
+          (click)="showGroupCreateModal = false"
+          label="رجوع"
+          [style]="{
+            width: '15vw',
+            'background-color': '#970000',
+            color: 'white',
+            border: 'none',
+            'font-family': 'sans-serif'
+          }"
+        ></p-button>
+        <p-button
+          icon="pi pi-check"
+          label="موافق"
+          class="p-button-text"
+          (click)="submitGroup()"
+          [style]="{
+            width: '15vw',
+            border: 'none',
+            color: 'white',
+            'background-color': '#005C97',
+            'font-family': 'sans-serif'
+          }"
+        ></p-button>
+      </ng-template>
+    </p-dialog>
   </body>
 </html>
