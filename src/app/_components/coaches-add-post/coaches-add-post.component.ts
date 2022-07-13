@@ -92,7 +92,7 @@ export class CoachesAddPostComponent implements OnInit {
     formData.append('Content', this.post);
 
     this.http
-      .post('https://cpcmanager.herokuapp.com/api/blog', formData, header)
+      .post('https://cpcmanager.herokuapp.com/api/blogs', formData, header)
       .subscribe({
         next: (res) => {},
         error: (error) => console.log(error),

@@ -27,10 +27,7 @@ export class MainPracticePageComponent implements OnInit {
   x2 = JSON.parse(this.x);
   loggedinId = this.x2.nameid;
   isCoach = this.x2['role'] == 'Member,Coach';
-  constructor(
-    private http: HttpClient,
-    private jwtHelper: JwtHelperService,
-  ) {}
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
   ngOnInit(): void {
     this.getAllTasks();
@@ -48,7 +45,7 @@ export class MainPracticePageComponent implements OnInit {
     };
 
     this.http
-      .get<Post[]>('https://cpcmanager.herokuapp.com/api/Blog', header)
+      .get<Post[]>('https://cpcmanager.herokuapp.com/api/Blogs', header)
       .subscribe({
         next: (res) => {
           this.post = res.reverse();
@@ -145,7 +142,7 @@ export class MainPracticePageComponent implements OnInit {
 
     this.http
       .delete(
-        'https://cpcmanager.herokuapp.com/api/blog/' + this.post[i].id,
+        'https://cpcmanager.herokuapp.com/api/blogs/' + this.post[i].id,
         header
       )
       .subscribe({

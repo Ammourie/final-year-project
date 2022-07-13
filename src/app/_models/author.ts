@@ -1,7 +1,6 @@
 export interface Author {
   id: number;
-  userName: string;
-  lastActive: Date;
+  fullName: string;
   university: string;
   faculty: string;
   profilePhoto: string;

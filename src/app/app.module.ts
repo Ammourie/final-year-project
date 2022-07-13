@@ -35,6 +35,7 @@ import {  TeamsComponent } from './_components/teams/teams.component';
 import { AboutPage2Component } from './_components/about-page2/about-page2.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { DropdownModule } from 'primeng/dropdown';
+
 @NgModule({
   declarations: [
     AppComponent,

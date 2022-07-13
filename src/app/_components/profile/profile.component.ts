@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
     name: '',
     location: '',
     teamName: '',
+    id: 0
   };
 
   constructor(
@@ -102,7 +103,7 @@ export class ProfileComponent implements OnInit {
       );
 
       upload$.subscribe({
-        next: (res) => console.log(res),
+        next: (res) => {},
 
         error: (e) => console.log(e),
 
@@ -149,6 +150,7 @@ export class ProfileComponent implements OnInit {
     this.editingBioPart = true;
   }
   editBioPart() {
+    this.editNamePart();
     this.editingBioPart = false;
   }
   showDialogModal(type: string) {
@@ -231,22 +233,61 @@ export class ProfileComponent implements OnInit {
   }
   addParticibation() {
     console.log(this.participation);
-    this.student?.participations.push(this.participation);
-    this.participation = {
-      rank: '',
-      year: '',
-      name: '',
-      location: '',
-      teamName: '',
+
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${auth}`,
+      }),
     };
-    this.showPDialogModalFlag = false;
+    this.http
+      .post(
+        'https://cpcmanager.herokuapp.com/api/Participations',
+        this.participation,
+        httpOptions
+      )
+      .subscribe({
+        error: (e) => console.log(e),
+        complete: () => {
+          this.student?.participations.push(this.participation);
+
+          this.participation = {
+            rank: '',
+            year: '',
+            name: '',
+            location: '',
+            teamName: '',
+            id:0
+          };
+          this.showPDialogModalFlag = false;
+        },
+      });
   }
   deleteParticipation(id: number) {
     this.showDDialogModalFlag = true;
     this.indexForDelete = id;
   }
   confirmDelete() {
-    this.showDDialogModalFlag = false;
-    this.student?.participations.splice(this.indexForDelete, 1);
+
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${auth}`,
+      }),
+    };
+    this.http
+      .delete(
+        'https://cpcmanager.herokuapp.com/api/Participations/'+this.student?.participations[this.indexForDelete].id,
+        httpOptions
+      )
+      .subscribe({
+        error: (e) => console.log(e),
+        complete: () => {
+
+
+          this.showDDialogModalFlag = false;
+          this.student?.participations.splice(this.indexForDelete, 1);
+        },
+      });
   }
 }
