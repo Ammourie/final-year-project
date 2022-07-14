@@ -209,7 +209,7 @@
         <div class="grid-container">
           <div class="event" *ngFor="let item of this.upcomingEvents">
             <div class="ev-date">
-              <div>{{ item.sessionDate | date: "d" }}</div>
+              <div>{{ item.sessionDate | date: "dd":"UTC" }}</div>
               <div>ــــــــ</div>
               <div>{{ item.sessionDate | date: "M" }}</div>
             </div>
