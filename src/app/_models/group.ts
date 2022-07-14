@@ -4,5 +4,5 @@ export interface Group{
     coach: number,
     students:number[]
     id: number
-
+    level:string
 }

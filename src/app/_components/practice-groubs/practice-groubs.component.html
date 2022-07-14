@@ -212,7 +212,11 @@
           />
         </div>
 
-        <div class="add-group" (click)="showGroupCreateModal = true">
+        <div
+          class="add-group"
+          (click)="showGroupCreateModal = true"
+          *ngIf="isCoach"
+        >
           أنشئ مجموعة جديدة
         </div>
       </div>
@@ -233,23 +237,41 @@
         <div
           class="column"
           *ngFor="let item of this.trainingGroups; let i = index"
-          (click)="showGroupDetailsDialoge()"
+          (click)="showGroupDetailsDialoge(item)"
         >
           <div class="wrapper-grid">
             <div
-              [ngClass]="{
-                'img-container-g': i % 3 == 0,
-                'img-container-r': i % 3 == 1,
-                'img-container-o': i % 3 == 2
-              }"
+              [ngClass]="
+                item.level == 'easy'
+                  ? 'img-container-g'
+                  : item.level == 'medium'
+                  ? 'img-container-o'
+                  : 'img-container-r'
+              "
             >
               <div class="content">
-                <div class="group-header">{{item.name}}</div>
+                <div class="group-header">{{ item.name }}</div>
                 <div class="group-coaches">
                   <ul>
-                    <li>{{item.coach}}</li>
-
+                    <li
+                      onmouseover="this.style.cursor='pointer'"
+                      (click)="
+                        this.router.navigateByUrl('/profile/' + item.coach.id)
+                      "
+                    >
+                      {{ item.coach.fullName }}
+                    </li>
                   </ul>
+                </div>
+                <div
+                  class="btn btn-primary"
+                  style="margin: 20px"
+                  (click)="joinGroup(item)"
+                  *ngIf="
+                    !isCoach && this.currenetUser?.trainingGroups?.length == 0
+                  "
+                >
+                  انضمام للمجموعة
                 </div>
               </div>
             </div>
@@ -267,11 +289,27 @@
           <div class="confirm-dialog-content">
             <div
               class="added-student"
-              *ngFor="let item of [].constructor(100); let i = index"
+              *ngFor="let item of this.groupForView.students; let i = index"
             >
-              <div style="display: flex; align-items: center">
+              <div
+                style="display: flex; align-items: center"
+                (click)="this.router.navigateByUrl('/profile/' + item.id)"
+                onmouseover="this.style.cursor='pointer'"
+              >
                 <img
-                  src="../../../assets/images/profile.jpg"
+                  src="../../../assets/images/placeholder2.png"
+                  style="
+                    border-radius: 50%;
+                    width: 45px;
+                    height: 45px;
+                    margin-left: 15px;
+                  "
+                  *ngIf="item.profilePhoto == null"
+                  alt="Avatar"
+                />
+                <img
+                  [src]="item.profilePhoto"
+                  *ngIf="item.profilePhoto != null"
                   style="
                     border-radius: 50%;
                     width: 45px;
@@ -280,16 +318,10 @@
                   "
                   alt="Avatar"
                 />
-                <div style="display: flex; flex-direction: column">
-                  <div
-                    style="
-                      color: white;
-                      font-size: 17px;
-                      font-family: sans-serif;
-                    "
-                  >
-                    محمد حسين العموري
-                  </div>
+                <div
+                  style="color: white; font-size: 17px; font-family: sans-serif"
+                >
+                  {{ item.fullName }}
                 </div>
               </div>
             </div>

@@ -16,9 +16,25 @@ export class PracticeGroubsComponent implements OnInit {
   showGroupDetailsModal: boolean = false;
   showGroupCreateModal: boolean = false;
   loadingGroups: boolean = false;
+
+  groupForView: TrainingGroup = {
+    id: 0,
+    name: '',
+    coach: {
+      id: 0,
+      fullName: '',
+      codeforcesAccount: '',
+    },
+    students: [],
+    level: ''
+  };
+
+  currenetUser: Student | undefined;
   token = JSON.parse(localStorage.getItem('user')!!).token;
   x = JSON.stringify(this.jwtHelper.decodeToken(this.token));
   x2 = JSON.parse(this.x);
+  loggedinId = this.x2.nameid;
+  isCoach = this.x2['role'] == 'Member,Coach';
   selectedCoach: Student | undefined;
   selectedLevel: any;
   levels = [{ level: 'easy' }, { level: 'medium' }, { level: 'hard' }];
@@ -27,10 +43,11 @@ export class PracticeGroubsComponent implements OnInit {
     coach: 0,
     students: [],
     id: 0,
+    level: '',
   };
   trainingGroups: TrainingGroup[] = [];
   constructor(
-    private router: Router,
+    public router: Router,
     private jwtHelper: JwtHelperService,
     private http: HttpClient,
     public studentService: UsersService
@@ -43,8 +60,30 @@ export class PracticeGroubsComponent implements OnInit {
     }
     this.getGroups();
   }
+  getCurrenetUser() {
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
 
-  showGroupDetailsDialoge() {
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+
+    this.http
+      .get<Student>(
+        'https://cpcmanager.herokuapp.com/api/Users/' + this.x2.nameid,
+        header
+      )
+      .subscribe({
+        next: (r) => {
+          this.currenetUser = r;
+        },
+        error: (error) => {},
+        complete: () => {
+          this.loadingGroups = false;
+        },
+      });
+  }
+  showGroupDetailsDialoge(group: TrainingGroup) {
+    this.groupForView = group;
     this.showGroupDetailsModal = true;
   }
   showGroupCreateDialoge() {
@@ -69,13 +108,15 @@ export class PracticeGroubsComponent implements OnInit {
         },
         error: (error) => console.log(error),
         complete: () => {
-          this.loadingGroups = false;
+          this.getCurrenetUser();
+
           console.log('getting groups compleated');
         },
       });
   }
   submitGroup() {
     this.groupForCreate.coach = this.selectedCoach?.id!;
+    this.groupForCreate.level = this.selectedLevel.level;
     console.log(this.groupForCreate);
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
@@ -106,9 +147,35 @@ export class PracticeGroubsComponent implements OnInit {
             coach: 0,
             students: [],
             id: 0,
+            level: '',
           };
           this.showGroupCreateModal = false;
-          this.getGroups()
+          this.getGroups();
+        },
+      });
+  }
+  joinGroup(group: TrainingGroup) {
+    this.loadingGroups = true;
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${auth}`,
+      }),
+    };
+
+    this.http
+      .post(
+        'https://cpcmanager.herokuapp.com/api/TrainingGroups/' +
+          group.id +
+          '/join',
+        {},
+        httpOptions
+      )
+      .subscribe({
+        next: (e) => {},
+        error: (e) => {},
+        complete: () => {
+          this.getGroups();
         },
       });
   }

@@ -123,9 +123,9 @@ export class MainPracticePageComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          if (this.isCoach) {
+
             this.recProblems = res;
-          }
+
         },
         error: (error) => console.log(error),
         complete: () => {
@@ -150,8 +150,8 @@ export class MainPracticePageComponent implements OnInit {
         error: (error) => console.log(error),
         complete: () => {
           this.tasksLoading = false;
+          this.post.splice(i, 1);
         },
       });
-    this.post.splice(i, 1);
   }
 }

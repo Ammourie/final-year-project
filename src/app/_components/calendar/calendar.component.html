@@ -42,8 +42,13 @@
           </div>
         </div>
         <div style="display: flex; align-items: center">
-          <div style="color: antiquewhite; font-size: 28px">المواعيد</div>
-
+          <i
+            class="btn bi bi-plus-circle"
+            *ngIf="isCoach"
+            style="color: grey; font-size: 25px"
+            (click)="this.showEventPostFlag = true"
+          ></i>
+          <div style="color: antiquewhite; font-size: 30px">المواعيد</div>
           <div class="dropdown">
             <div class="dropbtn"><i class="bi bi-list"></i></div>
             <div class="dropdown-content">
@@ -99,7 +104,10 @@
         </div>
       </div>
       <div class="bt-gr">
-        <a [routerLink]="['/main-practice-page']" routerLinkActive="router-link-active">
+        <a
+          [routerLink]="['/main-practice-page']"
+          routerLinkActive="router-link-active"
+        >
           <div
             class="col btn btn-rounded btn0"
             style="text-align: end; width: 100%"
@@ -107,7 +115,7 @@
             الرئيسية
           </div>
         </a>
-        <a [routerLink]="['/students']" routerLinkActive="router-link-active" >
+        <a [routerLink]="['/students']" routerLinkActive="router-link-active">
           <div
             class="col btn btn-rounded btn1"
             style="text-align: end; width: 100%"
@@ -115,96 +123,207 @@
             الطلاب
           </div>
         </a>
-        <a [routerLink]="['/coaches/list']" routerLinkActive="router-link-active" >
-        <div
-          class="col btn btn-rounded btn1"
-          style="text-align: end; width: 100%"
+        <a
+          [routerLink]="['/coaches/list']"
+          routerLinkActive="router-link-active"
         >
-          المدربين
-        </div></a>  <a [routerLink]="['/practice-groups']" routerLinkActive="router-link-active" >
-        <div class="col btn btn-rounded btn3" style="text-align: end; width: 100%">
-          مجموعات التدريب
-        </div></a>
-       <a [routerLink]="['/dates']" routerLinkActive="router-link-active" >   <div class="col btn btn-rounded selected-btn" style="text-align: end; width: 100%">
-          المواعيد
-        </div></a>
+          <div
+            class="col btn btn-rounded btn1"
+            style="text-align: end; width: 100%"
+          >
+            المدربين
+          </div></a
+        >
+        <a
+          [routerLink]="['/practice-groups']"
+          routerLinkActive="router-link-active"
+        >
+          <div
+            class="col btn btn-rounded btn3"
+            style="text-align: end; width: 100%"
+          >
+            مجموعات التدريب
+          </div></a
+        >
+        <a [routerLink]="['/dates']" routerLinkActive="router-link-active">
+          <div
+            class="col btn btn-rounded selected-btn"
+            style="text-align: end; width: 100%"
+          >
+            المواعيد
+          </div></a
+        >
       </div>
     </div>
     <div class="gr-main">
-    <div style="width: 100%;">
-      <div class="month">
-        <ul>
-          <li class="prev">&#10094;</li>
-          <li class="next">&#10095;</li>
-          <li>
-            أيلول<br />
-            <span style="font-size: 18px">2021</span>
+      <div
+        style="
+          width: 100%;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+        *ngIf="this.loading"
+      >
+        <div class="lds-dual-ring"></div>
+      </div>
+      <div style="width: 100%" *ngIf="!this.loading">
+        <div class="month">
+          <ul>
+            <!-- <li class="prev">&#10094;</li>
+            <li class="next">&#10095;</li> -->
+            <li>
+              {{ this.month }}<br />
+              <span style="font-size: 18px">{{ this.year }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <ul class="weekdays">
+          <li>Mo</li>
+          <li>Tu</li>
+          <li>We</li>
+          <li>Th</li>
+          <li>Fr</li>
+          <li>Sa</li>
+          <li>Su</li>
+        </ul>
+
+        <ul class="days">
+          <li *ngFor="let item of [].constructor(31); let i = index">
+            <span
+              *ngIf="activeCell(i + 1)"
+              class="active"
+              (click)="showEvent(i + 1)"
+              >{{ i + 1 }}</span
+            >
+            <span *ngIf="!activeCell(i + 1)">{{ i + 1 }}</span>
           </li>
         </ul>
       </div>
-
-      <ul class="weekdays">
-        <li>Mo</li>
-        <li>Tu</li>
-        <li>We</li>
-        <li>Th</li>
-        <li>Fr</li>
-        <li>Sa</li>
-        <li>Su</li>
-      </ul>
-
-      <ul class="days">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li><span class="active">10</span></li>
-        <li>11</li>
-        <li>12</li>
-        <li><span class="active">13</span></li>
-        <li>14</li>
-        <li>15</li>
-        <li>16</li>
-        <li>17</li>
-        <li>18</li>
-        <li>19</li>
-        <li>20</li>
-        <li>21</li>
-        <li>22</li>
-        <li>23</li>
-        <li>24</li>
-        <li>25</li>
-        <li>26</li>
-        <li>27</li>
-        <li>28</li>
-        <li>29</li>
-        <li>30</li>
-        <li>31</li>
-      </ul>
-    </div>
-<div class="events">
-  <h5 style="color: white; font-size: 30px;font-family: sans-serif;">الأحداث القريبة :</h5>
-<div class="grid-container" >
-  <div class="event" *ngFor="let item of [1,2,3,4]">
-    <div class="ev-date"  >
-    <div>10</div>
-    <div>ــــــــ</div>
-    <div>حزيران</div>
-    </div>
-    <div class="ev-content"  >
-    يوجد محاضرة في البرمجة المتقدمة في المخبر ال5 الساعة 2 ظهراً سيعطيها الكوتش الفاشل ياسر ميلاتو
-    </div>
+      <div class="events" *ngIf="!this.loading">
+        <h5 style="color: white; font-size: 30px; font-family: sans-serif">
+          الأحداث القريبة :
+        </h5>
+        <div class="grid-container">
+          <div class="event" *ngFor="let item of this.upcomingEvents">
+            <div class="ev-date">
+              <div>{{ item.sessionDate | date: "d" }}</div>
+              <div>ــــــــ</div>
+              <div>{{ item.sessionDate | date: "M" }}</div>
+            </div>
+            <div class="ev-content">
+              {{ item.description }}
+            </div>
+          </div>
+        </div>
       </div>
-</div>
-
-</div>
     </div>
+    <p-dialog
+      header="الحدث:"
+      [(visible)]="this.showEventFlag"
+      [modal]="true"
+      [baseZIndex]="10000"
+      [draggable]="false"
+      [resizable]="false"
+      [style]="{ width: '50vw' }"
+    >
+      <div class="confirm-dialog-content">
+        <p>
+          {{ this.event?.description }}
+        </p>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <p-button
+          label="رجوع"
+          class="p-button-text"
+          (click)="this.showEventFlag = false"
+          [style]="{
+            width: '15vw',
+            border: 'none',
+            color: 'white',
+            'background-color': '#005C97',
+            'font-family': 'sans-serif'
+          }"
+        ></p-button>
+      </ng-template>
+    </p-dialog>
+    <p-dialog
+      header="أضف حدثاً:"
+      [(visible)]="this.showEventPostFlag"
+      [modal]="true"
+      [baseZIndex]="10000"
+      [draggable]="false"
+      [resizable]="false"
+      [style]="{ width: '50vw' }"
+    >
+      <div style="display: flex; flex-direction: column; gap: 20px; direction: rtl">
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="3"
+          style="
+            direction: rtl;
+            background: #1e2021;
+            border: none;
+            resize: none;
+            padding: 20px;
+            color: white;
+            border-radius: 20px;
+            margin-top: 20px;
+
+          "
+          [(ngModel)]="postEvent.description"
+          oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"
+          placeholder="أدخل وصف الحدث هنا!!"        >
+        </textarea>
+
+        <input
+          type="text"
+          onfocusin="(this.type='date')"
+          onfocusout="(this.type='text')"
+          class="form-control form-control-dark"
+          style="
+            background-color: #303136;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            margin-bottom: 20px;
+          "
+          [(ngModel)]="postSessionDate"
+          placeholder="تاريخ الحدث"
+        />
+      </div>
+      <ng-template pTemplate="footer">
+        <p-button
+          icon="pi pi-times"
+          (click)="this.showEventPostFlag = false"
+          label="رجوع"
+          [style]="{
+            width: '15vw',
+            'background-color': '#970000',
+            color: 'white',
+            border: 'none',
+            'font-family': 'sans-serif'
+          }"
+        ></p-button>
+        <p-button
+          icon="pi pi-check"
+          (click)="uploadEvent()"
+          label="موافق"
+          class="p-button-text"
+          [style]="{
+            width: '15vw',
+            border: 'none',
+            color: 'white',
+            'background-color': '#005C97',
+            'font-family': 'sans-serif'
+          }"
+        ></p-button>
+      </ng-template>
+    </p-dialog>
   </body>
 </html>
-
-

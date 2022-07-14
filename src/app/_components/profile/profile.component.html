@@ -320,7 +320,7 @@
               />
                 <div
                   class="hovered"
-                  *ngIf="this.student?.atCoderHandle == null"
+                  *ngIf="this.student?.atCoderHandle == null && this.student?.id==this.loggedinId"
                   (click)="showDialogModal('atcoder')"
                 ></div>
               </div>
@@ -350,7 +350,7 @@
                 />
                 <div
                   class="hovered"
-                  *ngIf="this.student?.codeChefHandle == null"
+                  *ngIf="this.student?.codeChefHandle == null && this.student?.id==this.loggedinId"
                   (click)="showDialogModal('codechef')"
                 ></div>
               </div>
@@ -380,7 +380,7 @@
                 />
                 <div
                   class="hovered"
-                  *ngIf="this.student?.codeforcesAccount == null"
+                  *ngIf="this.student?.codeforcesAccount == null && this.student?.id==this.loggedinId"
                   (click)="showDialogModal('codeforces')"
                 ></div>
               </div>

@@ -80,7 +80,7 @@ body {
   color: #777;
 }
 
-.days li .active {
+ .active {
   padding: 5px;
   background: #7474bf; /* fallback for old browsers */
 
@@ -392,9 +392,9 @@ body {
 }
 .grid-container {
   display: grid;
-  /* grid-template-columns: 40% 40%; */
-  gap: 50px;
-  grid-template-columns: auto auto;
+  grid-template-columns: 40% 40%;
+  /* grid-template-columns: auto auto; */
+  gap: 100px;
   padding: 10px;
 }
 .event {
@@ -424,13 +424,68 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 30%;
 }
 .ev-content {
   border-radius: 20px 0px 0px 20px;
   padding: 20px;
   font-size: 20px;
+  width: 70%;
   background-color: #1e2021;
   color: #eee;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+:host ::ng-deep .p-dialog > ::-webkit-scrollbar {
+  display: none;
+}
+:host ::ng-deep .p-dialog .p-button {
+  min-width: 6rem;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  background-color: #26282a;
+  color: white;
+  direction: rtl;
+  font-family: sans-serif;
+}
+:host ::ng-deep .p-dialog .p-dialog-content {
+  background-color: #26282a;
+  direction: rtl;
+}
+:host ::ng-deep .p-dialog .p-dialog-footer {
+  background-color: #26282a;
+  direction: rtl;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.confirm-dialog-content {
+direction: rtl;
+color: white;
 }
 @media (max-width: 1000px) {
   .gr-header {

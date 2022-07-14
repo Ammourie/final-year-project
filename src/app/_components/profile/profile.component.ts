@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
     this.location.back();
   }
   ngOnInit(): void {
-    const username =
+    const id =
       this.router.url.split('/')[this.router.url.split('/').length - 1];
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
 
     this.http
       .get<Student>(
-        'https://cpcmanager.herokuapp.com/api/Users/' + username,
+        'https://cpcmanager.herokuapp.com/api/Users/' + id,
         header
       )
       .subscribe({

@@ -35,6 +35,7 @@ import {  TeamsComponent } from './_components/teams/teams.component';
 import { AboutPage2Component } from './_components/about-page2/about-page2.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { DropdownModule } from 'primeng/dropdown';
+import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { DropdownModule } from 'primeng/dropdown';
     TeamsComponent,
     AboutPage2Component,
     TeamsRegisterComponent,
+    DateAsAgoPipe,
 
   ],
   imports: [
@@ -80,5 +82,8 @@ import { DropdownModule } from 'primeng/dropdown';
     JwtHelperService,
   ],
   bootstrap: [AppComponent],
+  exports: [
+    DateAsAgoPipe
+  ],
 })
 export class AppModule {}
