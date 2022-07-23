@@ -165,16 +165,59 @@
     <div class="gr-main">
       <div class="st">
         <div class="st-item">
-          <img src="assets/images/placeholder1.png" class="st-image" />
-          <h1 class="st-text">نسبة الطلاب المشاركون أول مرة</h1>
+          <div
+            style="display: flex; justify-content: center; width: 100%"
+            *ngIf="this.statsService.gettingStats"
+          >
+            <p-progressSpinner></p-progressSpinner>
+          </div>
+          <p-knob
+            [(ngModel)]="this.statsService.stats!.percentageOfNewParticipants"
+            [size]="130"
+            [readonly]="true"
+            valueTemplate="{value}%"
+            [min]="0"
+            [max]="100"
+            *ngIf="!this.statsService.gettingStats"
+          >
+          </p-knob>
+
+          <h1 class="st-text" *ngIf="!this.statsService.gettingStats">
+            نسبة الطلاب المشاركون أول مرة
+          </h1>
         </div>
         <div class="st-item">
-          <img src="assets/images/placeholder2.png" class="st-image" />
-          <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+          <div
+            style="display: flex; justify-content: center; width: 100%"
+            *ngIf="this.statsService.gettingStats"
+          >
+            <p-progressSpinner></p-progressSpinner>
+          </div>
+          <img
+            src="assets/images/placeholder2.png"
+            class="st-image"
+            *ngIf="!this.statsService.gettingStats"
+          />
+          <h1 class="st-text" *ngIf="!this.statsService.gettingStats">
+            عدد الطلاب المتواجدون
+            {{ this.statsService.stats!.numStudentsCurrentlyTraining }} طالباً
+          </h1>
         </div>
         <div class="st-item">
-          <img src="assets/images/placeholder3.png" class="st-image" />
-          <h1 class="st-text">عدد الفرق المسجلة 35 فريقاً</h1>
+          <div
+            style="display: flex; justify-content: center; width: 100%"
+            *ngIf="this.statsService.gettingStats"
+          >
+            <p-progressSpinner></p-progressSpinner>
+          </div>
+          <img
+            src="assets/images/placeholder3.png"
+            class="st-image"
+            *ngIf="!this.statsService.gettingStats"
+          />
+          <h1 class="st-text" *ngIf="!this.statsService.gettingStats">
+            عدد الفرق المسجلة {{ this.statsService.stats!.numOfTeams }} فريقاً
+          </h1>
         </div>
       </div>
 
@@ -249,11 +292,10 @@
                     text-align: right;
                   "
                 >
-                  طالب هندسة معلوماتية
+                  {{i.university?i.university:"لم يتم تحديد الجامعة بعد"}}
                 </div>
               </div>
             </div>
-            <p style="color: grey; font-size: 22px">مبتدئ</p>
           </div>
         </div>
       </div>

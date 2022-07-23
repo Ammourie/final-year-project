@@ -57,56 +57,56 @@ export class MainPracticePageComponent implements OnInit {
       });
   }
   getMyTasks() {
-    this.tasksLoading = true;
-    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+    if (!this.isCoach) {
+      this.tasksLoading = true;
+      const auth = JSON.parse(localStorage.getItem('user')!!).token;
 
-    var header = {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
-    };
+      var header = {
+        headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+      };
 
-    this.http
-      .get<DailyTask[]>(
-        'https://cpcmanager.herokuapp.com/api/DailyTasks/My',
-        header
-      )
-      .subscribe({
-        next: (res) => {
-          if (!this.isCoach) {
+      this.http
+        .get<DailyTask[]>(
+          'https://cpcmanager.herokuapp.com/api/DailyTasks/my',
+          header
+        )
+        .subscribe({
+          next: (res) => {
             this.tasksToShow = res.reverse();
             console.log('added my tasks');
-          }
-        },
-        error: (error) => console.log(error),
-        complete: () => {
-          this.tasksLoading = false;
-        },
-      });
+          },
+          error: (error) => console.log(error),
+          complete: () => {
+            this.tasksLoading = false;
+          },
+        });
+    }
   }
   getAllTasks() {
-    this.tasksLoading = true;
-    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+    if (this.isCoach) {
+      this.tasksLoading = true;
+      const auth = JSON.parse(localStorage.getItem('user')!!).token;
 
-    var header = {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
-    };
+      var header = {
+        headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+      };
 
-    this.http
-      .get<DailyTask[]>(
-        'https://cpcmanager.herokuapp.com/api/DailyTasks',
-        header
-      )
-      .subscribe({
-        next: (res) => {
-          if (this.isCoach) {
+      this.http
+        .get<DailyTask[]>(
+          'https://cpcmanager.herokuapp.com/api/DailyTasks',
+          header
+        )
+        .subscribe({
+          next: (res) => {
             this.tasksToShow = res.reverse();
             console.log('added all tasks');
-          }
-        },
-        error: (error) => console.log(error),
-        complete: () => {
-          this.tasksLoading = false;
-        },
-      });
+          },
+          error: (error) => console.log(error),
+          complete: () => {
+            this.tasksLoading = false;
+          },
+        });
+    }
   }
   getRecommendedProblems() {
     this.problemsLoading = true;
@@ -123,9 +123,7 @@ export class MainPracticePageComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-
-            this.recProblems = res;
-
+          this.recProblems = res;
         },
         error: (error) => console.log(error),
         complete: () => {

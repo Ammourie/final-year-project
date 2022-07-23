@@ -1,3 +1,4 @@
+import { StatsService } from './../../_services/stats.service';
 import { UsersService } from '../../_services/users.service';
 import { Student } from './../../_models/student';
 
@@ -12,23 +13,30 @@ import { Location } from '@angular/common';
   styleUrls: ['./students.component.css'],
 })
 export class StudentsComponent implements OnInit {
+  value:number=69
   constructor(
     public studentService: UsersService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    public statsService:StatsService
   ) {}
   ngOnInit() {
     if (this.studentService.students.length == 0) {
       this.studentService.getstudents();
+
+    }
+    if(this.statsService.stats==null)
+    {
+      this.statsService.getStats()
     }
   }
   goback() {
-    console.log("vvv");
+    console.log('vvv');
 
     this.location.back();
   }
   gotoProfile(student: Student) {
-    this.router.navigateByUrl('/profile/' + student.id,);
+    this.router.navigateByUrl('/profile/' + student.id);
   }
   // getStudent() {
   //   this.studentService.getstudents().subscribe({

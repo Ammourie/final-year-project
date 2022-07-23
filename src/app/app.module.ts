@@ -31,11 +31,13 @@ import { MainPracticePageComponent } from './_components/main-practice-page/main
 import { MatTabsModule } from '@angular/material/tabs';
 import { ProfileComponent } from './_components/profile/profile.component';
 import { PagenotfoundComponentComponent } from './_components/pagenotfound-component/pagenotfound-component.component';
-import {  TeamsComponent } from './_components/teams/teams.component';
+import { TeamsComponent } from './_components/teams/teams.component';
 import { AboutPage2Component } from './_components/about-page2/about-page2.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { DropdownModule } from 'primeng/dropdown';
 import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
+import { KnobModule } from 'primeng/knob';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,6 @@ import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
     AboutPage2Component,
     TeamsRegisterComponent,
     DateAsAgoPipe,
-
   ],
   imports: [
     BrowserModule,
@@ -76,14 +77,14 @@ import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
     HttpClientModule,
     MatTabsModule,
     DropdownModule,
+    KnobModule,
+    ProgressSpinnerModule,
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
   ],
   bootstrap: [AppComponent],
-  exports: [
-    DateAsAgoPipe
-  ],
+  exports: [DateAsAgoPipe],
 })
 export class AppModule {}

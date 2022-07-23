@@ -159,7 +159,7 @@
                   style="cursor: pointer"
                   (click)="onGroupSelected(item)"
                 >
-                  {{ item.name + "  " + item.coach }}
+                  {{ item.name + "  " + item.coach.fullName }}
                 </div>
               </div>
             </div>
@@ -169,7 +169,7 @@
               *ngFor="let item of groupDesired"
               style="color: #d2d3d7; margin-right: 10px"
             >
-              {{ item.name + "  " + item.coach }}
+              {{ item.name + "  " + item.coach.fullName }}
             </li>
           </ul>
 

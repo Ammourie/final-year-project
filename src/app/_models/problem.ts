@@ -5,4 +5,5 @@ export interface Problem {
   tags: string[];
   index: string;
   contestId: number;
+  solved:boolean
 }

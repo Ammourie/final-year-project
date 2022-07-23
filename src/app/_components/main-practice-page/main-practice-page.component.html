@@ -334,16 +334,27 @@
                     </div>
                   </div>
                 </div>
-
                 <a
-                  href="{{ itemb.url }}"
-                  target="_blank"
+                href="{{ itemb.url }}"
+                target="_blank"
+                class="btn btn-success"
+                style="height: min-content; margin: 30px"
+                *ngIf="!this.isCoach && !itemb.solved"
+              >
+                الذهاب لإنجازها
+              </a>
+                <div
                   class="btn btn-success"
-                  style="height: min-content; margin: 30px"
-                  *ngIf="!this.isCoach"
+                  style="
+                    height: min-content;
+                    margin: 30px;
+                    display: flex;
+                    gap: 10px;
+                  "
+                  *ngIf="!this.isCoach && itemb.solved"
                 >
-                  الذهاب لإنجازها
-                </a>
+                  <i class="bi bi-clipboard-check"></i>تم انجازها
+                </div>
                 <div style="margin: 20px" *ngIf="this.isCoach">
                   مخصصة للمجموعة {{ item.group.name }}
                 </div>

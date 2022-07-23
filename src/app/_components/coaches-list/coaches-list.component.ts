@@ -1,3 +1,4 @@
+import { StatsService } from './../../_services/stats.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Student } from './../../_models/student';
 import { Router } from '@angular/router';
@@ -14,6 +15,7 @@ export class CoachesListComponent implements OnInit {
     public coachService: UsersService,
     private router: Router,
     private jwtHelper: JwtHelperService
+    ,public statsService:StatsService
   ) {}
   token = JSON.parse(localStorage.getItem('user')!!).token;
   x = JSON.stringify(this.jwtHelper.decodeToken(this.token));
@@ -21,6 +23,11 @@ export class CoachesListComponent implements OnInit {
   ngOnInit(): void {
     if (this.coachService.coaches.length == 0) {
       this.coachService.getcoaches();
+
+    }
+    if(this.statsService.stats==null)
+    {
+      this.statsService.getStats()
     }
   }
 

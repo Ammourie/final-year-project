@@ -3,7 +3,7 @@ import { Problem } from './problem';
 export interface DailyTask {
   id: number;
   problems: Problem[];
-  dueDate: Date;
+  dueDate: string;
   group: Group;
   description: string;
 }

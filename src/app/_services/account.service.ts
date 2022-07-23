@@ -36,7 +36,7 @@ export class AccountService {
           this.loggingIndicator = false;
         },
         complete: () => {
-          console.log("compleated");
+          console.log('compleated');
 
           this.loggingIndicator = false;
           this.router.navigate(['/']);
@@ -61,5 +61,9 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
+  }
+  getMyToken(): string {
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+    return auth;
   }
 }

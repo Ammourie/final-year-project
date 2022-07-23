@@ -1,16 +1,59 @@
 <div class="gr-main">
   <div class="st">
     <div class="st-item">
-      <img src="assets/images/logo.png" class="st-image" />
-      <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+      <div
+        style="display: flex; justify-content: center; width: 100%"
+        *ngIf="this.statsService.gettingStats"
+      >
+        <p-progressSpinner></p-progressSpinner>
+      </div>
+      <p-knob
+        [(ngModel)]="this.statsService.stats!.percentageOfNewParticipants"
+        [size]="130"
+        [readonly]="true"
+        valueTemplate="{value}%"
+        [min]="0"
+        [max]="100"
+        *ngIf="!this.statsService.gettingStats"
+      >
+      </p-knob>
+
+      <h1 class="st-text" *ngIf="!this.statsService.gettingStats">
+        نسبة الطلاب المشاركون أول مرة
+      </h1>
     </div>
     <div class="st-item">
-      <img src="assets/images/logo.png" class="st-image" />
-      <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+      <div
+        style="display: flex; justify-content: center; width: 100%"
+        *ngIf="this.statsService.gettingStats"
+      >
+        <p-progressSpinner></p-progressSpinner>
+      </div>
+      <img
+        src="assets/images/placeholder2.png"
+        class="st-image"
+        *ngIf="!this.statsService.gettingStats"
+      />
+      <h1 class="st-text" *ngIf="!this.statsService.gettingStats">
+        عدد الطلاب المتواجدون
+        {{ this.statsService.stats!.numStudentsCurrentlyTraining }} طالباً
+      </h1>
     </div>
     <div class="st-item">
-      <img src="assets/images/logo.png" class="st-image" />
-      <h1 class="st-text">عدد الطلاب المتواجدون 358 طالباً</h1>
+      <div
+        style="display: flex; justify-content: center; width: 100%"
+        *ngIf="this.statsService.gettingStats"
+      >
+        <p-progressSpinner></p-progressSpinner>
+      </div>
+      <img
+        src="assets/images/placeholder3.png"
+        class="st-image"
+        *ngIf="!this.statsService.gettingStats"
+      />
+      <h1 class="st-text" *ngIf="!this.statsService.gettingStats">
+        عدد الفرق المسجلة {{ this.statsService.stats!.numOfTeams }} فريقاً
+      </h1>
     </div>
   </div>
 
@@ -36,7 +79,7 @@
         [routerLink]="['/coaches/add-post']"
         routerLinkActive="router-link-active"
         style="text-decoration: none"
-        *ngIf="this.x2['role']=='Member,Coach'"
+        *ngIf="this.x2['role'] == 'Member,Coach'"
       >
         <div class="add-post">أضف منشورً أو مهمةً</div>
       </a>
@@ -71,11 +114,13 @@
             alt="profile image"
             class="profile-img"
           />
-          <h1 class="name">{{ item.fullName }}</h1>
-          <p class="description">
-            اسمي محمد العموري وأنا طالب في كلية الهندسة المعلوماتية في جامعة حمص
-            في السنة الرابعة ومدرب متوسط في المسابقة البرمجية
+          <h1 class="name" *ngIf="item.fullName==null">لايوجد اسم</h1>
+          <h1 class="name" *ngIf="item.fullName!=null">{{ item.fullName }}</h1>
+          <p class="description" style="height: 100px" *ngIf="item.bio!=null">
+            {{ item.bio }}
           </p>
+          <p class="description" style="height: 100px"  *ngIf="item.bio==null">
+لا يوجد سيرة ذاتية          </p>
           <button class="btnn" (click)="gotoProfile(item)">المزيد</button>
         </div>
       </div>
