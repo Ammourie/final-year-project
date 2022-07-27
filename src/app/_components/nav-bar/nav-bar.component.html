@@ -44,9 +44,7 @@
             >التدريب</a
           >
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">الإعلانات</a>
-        </li>
+
         <li class="nav-item">
           <a
             class="nav-link"
@@ -63,12 +61,35 @@
     >
       <ul class="navbar-nav list-inline text-center align-items-center" st>
         <li class="nav-item">
-          <input
+          <!-- <input
             type="text"
             class="search-click"
             name=""
             placeholder="ابحث هنا ..."
+          /> -->
+          <img
+
+            src="assets/images/person.svg"
+            *ngIf="this.student?.profilePhoto == null && this.accountService.getLoggidIn()"
+            width="45px"
+            height="45px"
+            style="border-radius: 30px"
+            onmouseover="this.style.cursor='pointer'"
+            (click)="goToMyProfile()"
+
           />
+          <img
+            [src]=this.student?.profilePhoto
+            *ngIf="this.student?.profilePhoto != null && this.accountService.getLoggidIn()"
+            width="45px"
+            height="45px"
+            style="border-radius: 30px"
+            onmouseover="this.style.cursor='pointer'"
+            (click)="goToMyProfile()"
+
+          />
+          <!-- <div style="color: white" >{{this.student?.fullName}}hello</div>
+          <div style="color: white">{{this.student?.profilePhoto}}</div> -->
         </li>
         <li class="nav-item">
           <a

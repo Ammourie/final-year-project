@@ -67,7 +67,7 @@ export class MainPracticePageComponent implements OnInit {
 
       this.http
         .get<DailyTask[]>(
-          'https://cpcmanager.herokuapp.com/api/DailyTasks/my',
+          'https://cpcmanager.herokuapp.com/api/DailyTasks/my-stats',
           header
         )
         .subscribe({

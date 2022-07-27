@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
     name: '',
     location: '',
     teamName: '',
-    id: 0
+    id: 0,
   };
 
   constructor(
@@ -54,7 +54,11 @@ export class ProfileComponent implements OnInit {
   }
   ngOnInit(): void {
     const id =
-      this.router.url.split('/')[this.router.url.split('/').length - 1];
+    this.router.url.split('/')[this.router.url.split('/').length - 1];
+    this.getUser(id);
+  }
+  getUser(id:any) {
+
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
 
@@ -63,10 +67,7 @@ export class ProfileComponent implements OnInit {
     };
 
     this.http
-      .get<Student>(
-        'https://cpcmanager.herokuapp.com/api/Users/' + id,
-        header
-      )
+      .get<Student>('https://cpcmanager.herokuapp.com/api/Users/' + id, header)
       .subscribe({
         next: (r) => {
           this.student = r;
@@ -257,7 +258,7 @@ export class ProfileComponent implements OnInit {
             name: '',
             location: '',
             teamName: '',
-            id:0
+            id: 0,
           };
           this.showPDialogModalFlag = false;
         },
@@ -268,7 +269,6 @@ export class ProfileComponent implements OnInit {
     this.indexForDelete = id;
   }
   confirmDelete() {
-
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
     const httpOptions = {
       headers: new HttpHeaders({
@@ -277,14 +277,13 @@ export class ProfileComponent implements OnInit {
     };
     this.http
       .delete(
-        'https://cpcmanager.herokuapp.com/api/Participations/'+this.student?.participations[this.indexForDelete].id,
+        'https://cpcmanager.herokuapp.com/api/Participations/' +
+          this.student?.participations[this.indexForDelete].id,
         httpOptions
       )
       .subscribe({
         error: (e) => console.log(e),
         complete: () => {
-
-
           this.showDDialogModalFlag = false;
           this.student?.participations.splice(this.indexForDelete, 1);
         },

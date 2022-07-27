@@ -394,12 +394,12 @@
       </div>
       <div
         class="lds-ring"
-        *ngIf="this.studentService.gettingStudents"
+        *ngIf="this.teamsService.gettingUnteamedRecommendedStudent"
         style="
           width: min-content;
           height: min-content;
           align-self: center;
-          margin-top: 7%;
+          margin-top: 5%;
           margin-bottom: 15%;
         "
       >
@@ -416,8 +416,8 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
       </div> -->
 
       <p-carousel
-        *ngIf="!this.studentService.gettingStudents"
-        [value]="this.studentService.students"
+        *ngIf="!this.teamsService.gettingUnteamedRecommendedStudent"
+        [value]="this.teamsService.recommendedStudents"
         [numVisible]="3"
         [numScroll]="3"
         [circular]="false"
@@ -451,27 +451,16 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
               <p style="color: white; font-size: 18px; font-family: sans-serif">
                 {{ student.fullName }} <br /><span
                   style="font-size: 15px; color: gray"
-                  >مستوى التدريب متوسط</span
+                  >مستوى التدريب
+                  {{
+                    student.trainingGroups[0]?.level ?? "غير معروف بعد"
+                  }}</span
                 >
               </p>
             </div>
-            <ul dir="rtl">
-              <li
-                style="color: #9f9f9f; font-size: 15px; font-family: sans-serif"
-              >
-                بدأ بالتدريب منذ 2019
-              </li>
-              <li
-                style="color: #9f9f9f; font-size: 15px; font-family: sans-serif"
-              >
-                تأهل للمسابقة العالمية 3 مرات
-              </li>
-              <li
-                style="color: #9f9f9f; font-size: 15px; font-family: sans-serif"
-              >
-                جيد في ال math
-              </li>
-            </ul>
+            <p style="color: #9f9f9f; font-size: 15px; font-family: sans-serif">
+              {{ student.bio ? student.bio : "لا يوجد سيرة ليتم عرضها" }}
+            </p>
             <div
               class="btn btn-primary"
               style="width: 60%; border-radius: 10px"
@@ -503,17 +492,17 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
         </div>
       </div>
 
-      <div class="lds-ring" *ngIf="this.studentService.gettingStudents">
+      <div class="lds-ring" *ngIf="this.teamsService.gettingUnteamedStudent">
         <div></div>
         <div></div>
         <div></div>
         <div></div>
       </div>
-      <div *ngIf="!this.studentService.gettingStudents">
+      <div *ngIf="!this.teamsService.gettingUnteamedStudent">
         <div class="row" dir="rtl">
           <div
             class="column"
-            *ngFor="let item of this.studentService.students; let i = index"
+            *ngFor="let item of this.teamsService.students; let i = index"
           >
             <div class="wrapper-grid">
               <div class="student-container">
@@ -563,7 +552,16 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
                   >
                     {{ item.fullName }}<br /><span
                       style="font-size: 18px; color: gray"
-                      >مستوى التدريب متوسط</span
+                      >مستوى التدريب
+                      {{
+                        item.trainingGroups[0]?.level == "easy"
+                          ? "مبتدئ"
+                          : item.trainingGroups[0]?.level == "medium"
+                          ? "متوسط"
+                          : item.trainingGroups[0]?.level == "hard"
+                          ? "متقدم"
+                          : "لم يتم التحديد بعد"
+                      }}</span
                     >
                   </p>
                   <div

@@ -171,9 +171,9 @@
       <div class="grid-container">
         <div
           class="group"
-          *ngFor="let item of [].constructor(10); let i = index"
+          *ngFor="let team of teams; let i = index"
         >
-          <h5 style="align-self: center">المجموعة {{ i + 1 }}</h5>
+          <h5 style="align-self: center">{{team.name}}</h5>
           <div class="group-mem">
             <img
               src="../../../assets/images/placeholder2.png"
@@ -187,10 +187,10 @@
               alt=""
               srcset=""
             />
-            <div style="color: white">عمر البيطار</div>
+            <div style="color: white">{{team.coach.fullName}}</div>
             <div style="color: grey">(مدرب)</div>
           </div>
-          <div class="group-mem" *ngFor="let item of [1, 2, 3]">
+          <div class="group-mem" *ngFor="let item of team.members">
             <img
               src="../../../assets/images/placeholder2.png"
               style="
@@ -203,14 +203,14 @@
               alt=""
               srcset=""
             />
-            <div style="color: white">عمر البيطار</div>
+            <div style="color: white">{{item.fullName}}</div>
           </div>
-          <button class="btn btn-primary" style="width: 60%; border-radius: 10px;align-self: center;" *ngIf="i%2==0 || i%5==0">
+          <!-- <button class="btn btn-primary" style="width: 60%; border-radius: 10px;align-self: center;" *ngIf="i%2==0 || i%5==0">
             إسناد مهمة
           </button>
           <button disabled class="btn btn-primary"  style="width: 60%; border-radius: 10px;align-self: center; opacity: 0; " *ngIf="i%2!=0 && i%5!=0">
             إسناد مهمة
-          </button>
+          </button> -->
         </div>
       </div>
     </div>

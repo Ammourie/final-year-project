@@ -1,8 +1,10 @@
+import { Student } from './../_models/student';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from './../_models/user';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { map, ReplaySubject } from 'rxjs';
+import { map, ReplaySubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,11 @@ export class AccountService {
   loggingIndicator: boolean = false;
   private currentUserSource = new ReplaySubject(1);
   currentUser$ = this.currentUserSource.asObservable();
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private jwtHelper: JwtHelperService
+  ) {}
 
   login(model: any) {
     this.loggingIndicator = true;
@@ -46,6 +52,19 @@ export class AccountService {
   setCurrentUser(user: User) {
     this.currentUserSource.next(user);
   }
+  getUser(id: Number): Observable<Student> {
+    var tmp;
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+
+    return this.http.get<Student>(
+      'https://cpcmanager.herokuapp.com/api/Users/' + id,
+      header
+    );
+  }
 
   register(model: any) {
     // console.log(model);
@@ -65,5 +84,18 @@ export class AccountService {
   getMyToken(): string {
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
     return auth;
+  }
+  getMyId(): Number {
+    const token = JSON.parse(localStorage.getItem('user')!!).token;
+    const x = JSON.stringify(this.jwtHelper.decodeToken(token));
+    const x2 = JSON.parse(x);
+    const loggedinId = x2.nameid;
+    return loggedinId;
+  }
+  getLoggidIn() {
+    if (localStorage.getItem('user') != null) return true;
+    return false;
+
+    // return this.loggedIn
   }
 }

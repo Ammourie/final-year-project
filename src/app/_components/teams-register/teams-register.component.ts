@@ -1,3 +1,4 @@
+import { TeamsService } from './../../_services/teams.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Student } from '../../_models/student';
 import { Router } from '@angular/router';
@@ -27,6 +28,7 @@ export class TeamsRegisterComponent implements OnInit {
     private router: Router,
     private location: Location,
     private httpclient: HttpClient
+    ,public teamsService:TeamsService
   ) {
     this.responsiveOptions = [
       {
@@ -43,7 +45,9 @@ export class TeamsRegisterComponent implements OnInit {
   }
   ngOnInit() {
     if (this.studentService.students.length == 0) {
-      this.studentService.getstudents();
+      this.teamsService.getUnteamedRecommendedStudents()
+      this.teamsService.getUnteamedStudents()
+
       this.studentService.getcoaches();
       this.selectedCoach = this.studentService.coaches[0];
     }

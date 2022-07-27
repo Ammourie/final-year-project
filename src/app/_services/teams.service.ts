@@ -1,20 +1,19 @@
-import { Student } from '../_models/student';
+import { Student } from './../_models/student';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class TeamsService {
   students: Student[] = [];
-  coaches: Student[] = [];
-  gettingStudents = false;
-  gettingcoaches = false;
-
+  recommendedStudents: Student[] = [];
+  gettingUnteamedStudent = false;
+  gettingUnteamedRecommendedStudent = false;
   baseUrl = 'https://cpcmanager.herokuapp.com/api/';
   constructor(private http: HttpClient) {}
-  getstudents():Student[] {
-    this.gettingStudents = true;
+  getUnteamedStudents(): Student[] {
+    this.gettingUnteamedStudent = true;
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
 
@@ -24,20 +23,20 @@ export class UsersService {
 
     this.http.get<Student[]>(this.baseUrl + 'Users', header).subscribe({
       next: (res) => {
-        for (const i of res) {
-          if (!i['isCoach']) this.students.push(i);
-        }
+        res.forEach((element) => {
+          if (!element.isCoach && element.teams.length == 0)
+            this.students.push(element);
+        });
       },
       error: (error) => console.log(error),
       complete: () => {
-        this.gettingStudents = false;
-
+        this.gettingUnteamedStudent = false;
       },
     });
-    return this.students
+    return this.students;
   }
-  getcoaches() {
-    this.gettingcoaches = true;
+  getUnteamedRecommendedStudents(): Student[] {
+    this.gettingUnteamedRecommendedStudent = true;
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
 
@@ -47,17 +46,17 @@ export class UsersService {
 
     this.http.get<Student[]>(this.baseUrl + 'Users', header).subscribe({
       next: (res) => {
-        for (var i in res) {
-          if (res[i].isCoach) {
-            this.coaches.push(res[i]);
-          }
-        }
+
+        res.forEach((element) => {
+          if (!element.isCoach && element.teams.length == 0)
+            this.recommendedStudents.push(element);
+        });
       },
       error: (error) => console.log(error),
       complete: () => {
-        this.gettingcoaches = false;
-
+        this.gettingUnteamedRecommendedStudent = false;
       },
     });
+    return this.recommendedStudents;
   }
 }

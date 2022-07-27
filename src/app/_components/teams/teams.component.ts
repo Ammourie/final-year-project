@@ -11,11 +11,11 @@ import { Location } from '@angular/common';
 export class TeamsComponent implements OnInit {
   constructor(private location: Location, private httpclient: HttpClient) {}
   gettingTeams: boolean = true;
-  team: Team[] | undefined;
+  teams: Team[] | undefined;
   ngOnInit(): void {
-    this.getGroups();
+    this.getTeams();
   }
-  getGroups() {
+  getTeams() {
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
     const httpOptions = {
       headers: new HttpHeaders({
@@ -28,10 +28,10 @@ export class TeamsComponent implements OnInit {
         httpOptions
       )
       .subscribe({
-        next: (res) => (this.team = res),
+        next: (res) => (this.teams = res),
         error: (e) => console.log(e),
         complete: () => {
-          console.log(this.team), (this.gettingTeams = false);
+          console.log(this.teams), (this.gettingTeams = false);
         },
       });
   }

@@ -27,8 +27,8 @@
 
   <body *ngIf="!this.loading">
     <div class="gr-header">
-      <div class="d-flex flex-row justify-content-between">
-        <div class="d-flex flex-row">
+      <div class="d-flex flex-row"  style="direction: rtl;">
+        <!-- <div class="d-flex flex-row">
           <div style="margin-left: 20%">
             <img
               src="assets/images/person.svg"
@@ -46,7 +46,7 @@
               srcset=""
             />
           </div>
-        </div>
+        </div> -->
         <div style="display: flex; align-items: center">
           <div style="color: antiquewhite; font-size: 28px">
             {{ this.student!.fullName }}
