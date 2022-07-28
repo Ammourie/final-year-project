@@ -1,6 +1,7 @@
+import { SearchService } from './../../_services/search.service';
 import { TeamsService } from './../../_services/teams.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Student } from '../../_models/student';
+import { User } from '../../_models/user';
 import { Router } from '@angular/router';
 import { UsersService } from '../../_services/users.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,8 +14,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./teams-register.component.css'],
 })
 export class TeamsRegisterComponent implements OnInit {
-  students: Student[] = [];
-  selectedCoach: Student | undefined;
+  students: User[] = [];
+  searchString=""
+  selectedCoach: User | undefined;
   team: any = {
     name: '',
     members: [],
@@ -28,7 +30,8 @@ export class TeamsRegisterComponent implements OnInit {
     private router: Router,
     private location: Location,
     private httpclient: HttpClient
-    ,public teamsService:TeamsService
+    ,public teamsService:TeamsService,
+    public searchService:SearchService
   ) {
     this.responsiveOptions = [
       {
@@ -46,7 +49,6 @@ export class TeamsRegisterComponent implements OnInit {
   ngOnInit() {
     if (this.studentService.students.length == 0) {
       this.teamsService.getUnteamedRecommendedStudents()
-      this.teamsService.getUnteamedStudents()
 
       this.studentService.getcoaches();
       this.selectedCoach = this.studentService.coaches[0];
@@ -57,10 +59,10 @@ export class TeamsRegisterComponent implements OnInit {
   goback() {
     this.location.back();
   }
-  gotoProfile(student: Student) {
+  gotoProfile(student: User) {
     this.router.navigateByUrl('/profile/' + student.id);
   }
-  addStudent(student: Student) {
+  addStudent(student: User) {
     if (!this.students.includes(student)) {
       if (this.students.length < 3) this.students.push(student);
     }
@@ -109,4 +111,20 @@ export class TeamsRegisterComponent implements OnInit {
         },
       });
   }
+  searchForStudent() {
+    this.searchService.studentsSearch(this.searchString).subscribe({
+      next: (res:any) => {
+        this.teamsService.students=[]
+        res.forEach((element:any) => {
+          if (!element.isCoach && element.teams.length == 0)
+            this.teamsService.students.push(element);
+        });
+      },
+      error: (error:any) => console.log(error),
+      complete: () => {
+        this.searchService.gettingSearchedStudents = false;
+      },
+    });
+  }
+
 }

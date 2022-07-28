@@ -2,7 +2,7 @@ import { Participation } from './../../_models/participation';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Student } from './../../_models/student';
+import { User } from '../../_models/user';
 import { Component, OnInit } from '@angular/core';
 import { VERSION, ViewChild, ElementRef } from '@angular/core';
 
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   indexForDelete: number = 0;
   dialogeTitle: string = '';
   dialogeType: string = '';
-  student: Student | undefined;
+  student: User | undefined;
   // codeforces: any = { handle: null};
   dialogeValue: String = '';
   imgUrl: any;
@@ -67,7 +67,7 @@ export class ProfileComponent implements OnInit {
     };
 
     this.http
-      .get<Student>('https://cpcmanager.herokuapp.com/api/Users/' + id, header)
+      .get<User>('https://cpcmanager.herokuapp.com/api/Users/' + id, header)
       .subscribe({
         next: (r) => {
           this.student = r;

@@ -1,6 +1,7 @@
+import { SearchService } from './../../_services/search.service';
+import { User } from './../../_models/user';
 import { StatsService } from './../../_services/stats.service';
 import { UsersService } from '../../_services/users.service';
-import { Student } from './../../_models/student';
 
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
@@ -20,7 +21,8 @@ export class StudentsComponent implements OnInit {
     public studentService: UsersService,
     private router: Router,
     private location: Location,
-    public statsService: StatsService
+    public statsService: StatsService,
+    public searchService: SearchService
   ) {}
   ngOnInit() {
     if (this.studentService.students.length == 0) {
@@ -35,8 +37,21 @@ export class StudentsComponent implements OnInit {
 
     this.location.back();
   }
-  gotoProfile(student: Student) {
+  gotoProfile(student: User) {
     this.router.navigateByUrl('/profile/' + student.id);
+  }
+  searchForStudent() {
+    this.searchService.studentsSearch(this.searchString).subscribe({
+      next: (res:any) => {
+      this.studentService.students=res
+      console.log(this.studentService.students);
+
+      },
+      error: (error:any) => console.log(error),
+      complete: () => {
+        this.searchService.gettingSearchedStudents = false;
+      },
+    });
   }
   // getStudent() {
   //   this.studentService.getstudents().subscribe({
@@ -58,7 +73,5 @@ export class StudentsComponent implements OnInit {
   //     .pipe(distinctUntilChanged())
   //     .subscribe((data) => this.x());
   // }
-  x() {
-    console.log(this.searchString);
-  }
+
 }

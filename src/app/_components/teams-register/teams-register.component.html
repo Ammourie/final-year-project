@@ -475,30 +475,43 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
         <div style="display: flex; justify-content: space-between">
           <div
             class="d-flex flex-row justify-content-start"
-            style="margin-top: 20px; margin-bottom: 20px"
+            style="margin-top: 20px; margin-bottom: 20px; margin-right: 40px"
           >
-            <input
+            <!-- <input
               type="text"
               class="form-control form-control-dark ft"
               placeholder="فلترة"
-            />
+            /> -->
             <input
               type="text"
               class="form-control form-control-dark search"
               placeholder="ابحث ..."
               aria-label="Search"
+              (keyup.enter)="searchForStudent()"
+              [(ngModel)]="searchString"
             />
           </div>
         </div>
       </div>
 
-      <div class="lds-ring" *ngIf="this.teamsService.gettingUnteamedStudent">
+      <div
+        class="lds-ring"
+        *ngIf="
+          this.teamsService.gettingUnteamedStudent ||
+          this.searchService.gettingSearchedStudents
+        "
+      >
         <div></div>
         <div></div>
         <div></div>
         <div></div>
       </div>
-      <div *ngIf="!this.teamsService.gettingUnteamedStudent">
+      <div
+        *ngIf="
+          !this.teamsService.gettingUnteamedStudent &&
+          ! this.searchService.gettingSearchedStudents
+        "
+      >
         <div class="row" dir="rtl">
           <div
             class="column"

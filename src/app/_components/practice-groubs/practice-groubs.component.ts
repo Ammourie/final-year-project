@@ -1,6 +1,6 @@
+import { User } from './../../_models/user';
 import { TrainingGroup } from './../../_models/training_group';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Student } from './../../_models/student';
 import { UsersService } from './../../_services/users.service';
 import { Group } from './../../_models/group';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -29,13 +29,13 @@ export class PracticeGroubsComponent implements OnInit {
     level: ''
   };
 
-  currenetUser: Student | undefined;
+  currenetUser: User | undefined;
   token = JSON.parse(localStorage.getItem('user')!!).token;
   x = JSON.stringify(this.jwtHelper.decodeToken(this.token));
   x2 = JSON.parse(this.x);
   loggedinId = this.x2.nameid;
   isCoach = this.x2['role'] == 'Member,Coach';
-  selectedCoach: Student | undefined;
+  selectedCoach: User | undefined;
   selectedLevel: any;
   levels = [{ level: 'easy' }, { level: 'medium' }, { level: 'hard' }];
   groupForCreate: Group = {
@@ -68,7 +68,7 @@ export class PracticeGroubsComponent implements OnInit {
     };
 
     this.http
-      .get<Student>(
+      .get<User>(
         'https://cpcmanager.herokuapp.com/api/Users/' + this.x2.nameid,
         header
       )

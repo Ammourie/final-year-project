@@ -1,4 +1,4 @@
-import { Student } from './student';
+import { User } from './user';
 export interface TrainingGroup {
   id: number;
   name: string;
@@ -8,5 +8,5 @@ export interface TrainingGroup {
     fullName: string;
     codeforcesAccount: string;
   };
-  students: Student[];
+  students: User[];
 }

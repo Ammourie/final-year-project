@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { Student } from './../../_models/student';
 import { Team } from '../../_models/team';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -11,13 +10,17 @@ import { Location } from '@angular/common';
   styleUrls: ['./teams.component.css'],
 })
 export class TeamsComponent implements OnInit {
-  constructor(private location: Location, private httpclient: HttpClient,private router:Router) {}
+  constructor(
+    private location: Location,
+    private httpclient: HttpClient,
+    private router: Router
+  ) {}
   gettingTeams: boolean = true;
   teams: Team[] | undefined;
   ngOnInit(): void {
     this.getTeams();
   }
-  gotoProfile(id:Number) {
+  gotoProfile(id: Number) {
     this.router.navigateByUrl('/profile/' + id);
   }
   getTeams() {

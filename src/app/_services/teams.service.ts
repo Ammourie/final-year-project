@@ -1,4 +1,4 @@
-import { Student } from './../_models/student';
+import { User } from '../_models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -6,13 +6,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class TeamsService {
-  students: Student[] = [];
-  recommendedStudents: Student[] = [];
+  students: User[] = [];
+  recommendedStudents: User[] = [];
   gettingUnteamedStudent = false;
   gettingUnteamedRecommendedStudent = false;
   baseUrl = 'https://cpcmanager.herokuapp.com/api/';
   constructor(private http: HttpClient) {}
-  getUnteamedStudents(): Student[] {
+  getUnteamedStudents(): User[] {
     this.gettingUnteamedStudent = true;
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
@@ -21,7 +21,7 @@ export class TeamsService {
       headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
     };
 
-    this.http.get<Student[]>(this.baseUrl + 'Users', header).subscribe({
+    this.http.get<User[]>(this.baseUrl + 'Users', header).subscribe({
       next: (res) => {
         res.forEach((element) => {
           if (!element.isCoach && element.teams.length == 0)
@@ -35,7 +35,7 @@ export class TeamsService {
     });
     return this.students;
   }
-  getUnteamedRecommendedStudents(): Student[] {
+  getUnteamedRecommendedStudents(): User[] {
     this.gettingUnteamedRecommendedStudent = true;
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
@@ -44,9 +44,8 @@ export class TeamsService {
       headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
     };
 
-    this.http.get<Student[]>(this.baseUrl + 'Users', header).subscribe({
+    this.http.get<User[]>(this.baseUrl + 'Users', header).subscribe({
       next: (res) => {
-
         res.forEach((element) => {
           if (!element.isCoach && element.teams.length == 0)
             this.recommendedStudents.push(element);
@@ -55,6 +54,7 @@ export class TeamsService {
       error: (error) => console.log(error),
       complete: () => {
         this.gettingUnteamedRecommendedStudent = false;
+        this.getUnteamedStudents();
       },
     });
     return this.recommendedStudents;
