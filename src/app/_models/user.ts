@@ -2,7 +2,7 @@ import { Participation } from './participation';
 import { TeachingGroup } from './teaching_group';
 import { Team } from './team';
 import { TrainingGroup } from './training_group';
-export interface Student {
+export interface User {
   id: number;
   userName: string;
   fullName: string;

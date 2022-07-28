@@ -1,4 +1,4 @@
-import { Student } from '../_models/student';
+import { User } from '../_models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -6,14 +6,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UsersService {
-  students: Student[] = [];
-  coaches: Student[] = [];
+  students: User[] = [];
+  coaches: User[] = [];
   gettingStudents = false;
   gettingcoaches = false;
 
   baseUrl = 'https://cpcmanager.herokuapp.com/api/';
   constructor(private http: HttpClient) {}
-  getstudents():Student[] {
+  getstudents():User[] {
     this.gettingStudents = true;
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
@@ -22,7 +22,7 @@ export class UsersService {
       headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
     };
 
-    this.http.get<Student[]>(this.baseUrl + 'Users', header).subscribe({
+    this.http.get<User[]>(this.baseUrl + 'Users', header).subscribe({
       next: (res) => {
         for (const i of res) {
           if (!i['isCoach']) this.students.push(i);
@@ -45,7 +45,7 @@ export class UsersService {
       headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
     };
 
-    this.http.get<Student[]>(this.baseUrl + 'Users', header).subscribe({
+    this.http.get<User[]>(this.baseUrl + 'Users', header).subscribe({
       next: (res) => {
         for (var i in res) {
           if (res[i].isCoach) {

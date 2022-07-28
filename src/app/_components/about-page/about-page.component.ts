@@ -1,7 +1,7 @@
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Student } from './../../_models/student';
+import { User } from '../../_models/user';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about-page.component.css'],
 })
 export class AboutPageComponent implements OnInit {
-  student: Student | undefined;
+  student: User | undefined;
   constructor(private http: HttpClient, private router: Router,private jwtHelper :JwtHelperService
     ) {}
   ngOnInit(): void {}

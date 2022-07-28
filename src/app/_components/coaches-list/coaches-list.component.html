@@ -60,19 +60,16 @@
   <div dir="rtl">
     <div style="display: flex; justify-content: space-between">
       <div
-        class="d-flex flex-row justify-content-start"
-        style="margin-top: 20px; margin-bottom: 20px"
+        style="margin-top: 20px; margin-bottom: 20px;margin-right: 40px; display: flex;"
       >
-        <input
-          type="text"
-          class="form-control form-control-dark ft"
-          placeholder="فلترة"
-        />
+
         <input
           type="text"
           class="form-control form-control-dark search"
           placeholder="ابحث ..."
           aria-label="Search"
+          (keyup.enter)="searchForCoaches()"
+          [(ngModel)]="searchText"
         />
       </div>
       <a
@@ -86,16 +83,16 @@
     </div>
   </div>
   <!-- <router-outlet></router-outlet> -->
-  <div class="lds-ring" *ngIf="this.coachService.gettingcoaches">
+  <div class="lds-ring" *ngIf="this.coachService.gettingcoaches ||this.searchService.gettingSearchedCoaches">
     <div></div>
     <div></div>
     <div></div>
     <div></div>
   </div>
 
-  <div class="row" *ngIf="!this.coachService.gettingcoaches" dir="rtl">
+  <div class="row" *ngIf="!this.coachService.gettingcoaches && !this.searchService.gettingSearchedCoaches" dir="rtl">
     <div class="column" *ngFor="let item of this.coachService.coaches">
-      <div class="wrapper-grid">
+      <div class="wrapper-grid" >
         <div class="img-container">
           <div class="banner-img"></div>
           <img

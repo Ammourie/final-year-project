@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Student } from './../../_models/student';
+import { User } from '../../_models/user';
 import { AccountService } from './../../_services/account.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
   constructor(public accountService: AccountService, private router: Router) {}
-  student: Student | undefined;
+  student: User | undefined;
   ngOnInit(): void {
   if(this.accountService.getLoggidIn())
       this.getUser(this.accountService.getMyId());

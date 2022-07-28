@@ -1,4 +1,4 @@
-import { Student } from './../_models/student';
+import { User } from '../_models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthUser } from '../_models/auth_user';
 import { Injectable } from '@angular/core';
@@ -52,7 +52,7 @@ export class AccountService {
   setCurrentUser(user: AuthUser) {
     this.currentUserSource.next(user);
   }
-  getUser(id: Number): Observable<Student> {
+  getUser(id: Number): Observable<User> {
     var tmp;
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
 
@@ -60,7 +60,7 @@ export class AccountService {
       headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
     };
 
-    return this.http.get<Student>(
+    return this.http.get<User>(
       'https://cpcmanager.herokuapp.com/api/Users/' + id,
       header
     );
