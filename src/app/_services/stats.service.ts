@@ -23,9 +23,9 @@ export class StatsService {
     this.http.get<Stats>(this.baseUrl + 'Users/stats', header).subscribe({
       next: (res) => {
         this.stats = res;
-        this.stats.percentageOfFemaleUsers=this.stats.percentageOfFemaleUsers*100
-        this.stats.percentageOfMaleUsers=this.stats.percentageOfMaleUsers*100
-        this.stats.percentageOfNewParticipants=this.stats.percentageOfNewParticipants*100
+        this.stats.percentageOfFemaleUsers=Math.round(this.stats.percentageOfFemaleUsers*100)
+        this.stats.percentageOfMaleUsers=Math.round(this.stats.percentageOfMaleUsers*100)
+        this.stats.percentageOfNewParticipants=Math.round(this.stats.percentageOfNewParticipants*100)
         console.log(this.stats);
 
       },

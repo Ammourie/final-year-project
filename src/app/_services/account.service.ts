@@ -1,6 +1,6 @@
 import { Student } from './../_models/student';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { User } from './../_models/user';
+import { AuthUser } from '../_models/auth_user';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -24,9 +24,9 @@ export class AccountService {
   login(model: any) {
     this.loggingIndicator = true;
     this.http
-      .post<User>(this.baseUrl + 'Account/login', model)
+      .post<AuthUser>(this.baseUrl + 'Account/login', model)
       .pipe(
-        map((response: User) => {
+        map((response: AuthUser) => {
           console.log(response);
           const user = response;
           if (user) {
@@ -49,7 +49,7 @@ export class AccountService {
         },
       });
   }
-  setCurrentUser(user: User) {
+  setCurrentUser(user: AuthUser) {
     this.currentUserSource.next(user);
   }
   getUser(id: Number): Observable<Student> {
@@ -69,7 +69,7 @@ export class AccountService {
   register(model: any) {
     // console.log(model);
     this.loggingIndicator = true;
-    this.http.post<User>(this.baseUrl + 'Account/register', model).subscribe({
+    this.http.post<AuthUser>(this.baseUrl + 'Account/register', model).subscribe({
       error: (error) => {
         console.log(error);
         this.loggingIndicator = false;

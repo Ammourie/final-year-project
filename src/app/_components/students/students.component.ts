@@ -2,10 +2,11 @@ import { StatsService } from './../../_services/stats.service';
 import { UsersService } from '../../_services/users.service';
 import { Student } from './../../_models/student';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
 
 @Component({
   selector: 'app-students',
@@ -13,21 +14,20 @@ import { Location } from '@angular/common';
   styleUrls: ['./students.component.css'],
 })
 export class StudentsComponent implements OnInit {
-  value:number=69
+  value: number = 69;
+  searchString = '';
   constructor(
     public studentService: UsersService,
     private router: Router,
     private location: Location,
-    public statsService:StatsService
+    public statsService: StatsService
   ) {}
   ngOnInit() {
     if (this.studentService.students.length == 0) {
       this.studentService.getstudents();
-
     }
-    if(this.statsService.stats==null)
-    {
-      this.statsService.getStats()
+    if (this.statsService.stats == null) {
+      this.statsService.getStats();
     }
   }
   goback() {
@@ -49,4 +49,16 @@ export class StudentsComponent implements OnInit {
   //   });;
 
   // }
+  // @ViewChild('searchElement') searchElement: ElementRef | undefined;
+
+  // ngAfterViewInit(): void {
+  //   fromEvent(this.searchElement?.nativeElement, 'input')
+  //     .pipe(map((event: any) => (event.target as HTMLInputElement).value))
+  //     .pipe(debounceTime(1000))
+  //     .pipe(distinctUntilChanged())
+  //     .subscribe((data) => this.x());
+  // }
+  x() {
+    console.log(this.searchString);
+  }
 }

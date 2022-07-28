@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { Student } from './../../_models/student';
 import { Team } from '../../_models/team';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -9,11 +11,14 @@ import { Location } from '@angular/common';
   styleUrls: ['./teams.component.css'],
 })
 export class TeamsComponent implements OnInit {
-  constructor(private location: Location, private httpclient: HttpClient) {}
+  constructor(private location: Location, private httpclient: HttpClient,private router:Router) {}
   gettingTeams: boolean = true;
   teams: Team[] | undefined;
   ngOnInit(): void {
     this.getTeams();
+  }
+  gotoProfile(id:Number) {
+    this.router.navigateByUrl('/profile/' + id);
   }
   getTeams() {
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
@@ -23,10 +28,7 @@ export class TeamsComponent implements OnInit {
       }),
     };
     this.httpclient
-      .get<Team[]>(
-        'https://cpcmanager.herokuapp.com/api/Teams',
-        httpOptions
-      )
+      .get<Team[]>('https://cpcmanager.herokuapp.com/api/Teams', httpOptions)
       .subscribe({
         next: (res) => (this.teams = res),
         error: (e) => console.log(e),

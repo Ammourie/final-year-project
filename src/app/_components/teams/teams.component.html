@@ -90,6 +90,7 @@
         </div>
       </div>
     </div>
+
     <div class="gr-menu">
       <div style="height: 40px; width: 40px">
         <img
@@ -167,14 +168,22 @@
         >
       </div>
     </div>
+
     <div class="gr-main">
-      <div class="grid-container">
-        <div
-          class="group"
-          *ngFor="let team of teams; let i = index"
-        >
-          <h5 style="align-self: center">{{team.name}}</h5>
-          <div class="group-mem">
+      <div class="lds-ring" *ngIf="this.gettingTeams">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="grid-container" *ngIf="!this.gettingTeams">
+        <div class="group" *ngFor="let team of teams; let i = index">
+          <h5 style="align-self: center">{{ team.name }}</h5>
+          <div
+            class="group-mem"
+            onmouseover="this.style.cursor='pointer'"
+            (click)="gotoProfile(team.coach.id)"
+          >
             <img
               src="../../../assets/images/placeholder2.png"
               style="
@@ -187,10 +196,16 @@
               alt=""
               srcset=""
             />
-            <div style="color: white">{{team.coach.fullName}}</div>
+
+            <div style="color: white">{{ team.coach.fullName }}</div>
             <div style="color: grey">(مدرب)</div>
           </div>
-          <div class="group-mem" *ngFor="let item of team.members">
+          <div
+            class="group-mem"
+            *ngFor="let item of team.members"
+            onmouseover="this.style.cursor='pointer'"
+            (click)="gotoProfile(item.id)"
+          >
             <img
               src="../../../assets/images/placeholder2.png"
               style="
@@ -203,7 +218,7 @@
               alt=""
               srcset=""
             />
-            <div style="color: white">{{item.fullName}}</div>
+            <div style="color: white">{{ item.fullName }}</div>
           </div>
           <!-- <button class="btn btn-primary" style="width: 60%; border-radius: 10px;align-self: center;" *ngIf="i%2==0 || i%5==0">
             إسناد مهمة

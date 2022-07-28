@@ -223,20 +223,22 @@
 
       <div dir="rtl">
         <div
-          class="d-flex flex-row justify-content-start"
           style="margin-top: 20px"
-          style="margin-bottom: 20px"
+          style="margin-bottom: 20px; margin-right: 20px; display: flex"
         >
-          <input
+          <!-- <input
             type="text"
             class="form-control form-control-dark ft"
             placeholder="فلترة"
-          />
+          /> -->
           <input
+          #searchElement
             type="text"
             class="form-control form-control-dark search"
             placeholder="ابحث ..."
             aria-label="Search"
+            (keyup.enter)="x()"
+            [(ngModel)]="searchString"
           />
         </div>
       </div>
@@ -292,7 +294,7 @@
                     text-align: right;
                   "
                 >
-                  {{i.university?i.university:"لم يتم تحديد الجامعة بعد"}}
+                  {{ i.university ? i.university : "لم يتم تحديد الجامعة بعد" }}
                 </div>
               </div>
             </div>
