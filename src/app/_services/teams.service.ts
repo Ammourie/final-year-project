@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class TeamsService {
   students: User[] = [];
   recommendedStudents: User[] = [];
-  gettingUnteamedStudent = false;
+  gettingUnteamedStudent = true;
   gettingUnteamedRecommendedStudent = false;
   baseUrl = 'https://cpcmanager.herokuapp.com/api/';
   constructor(private http: HttpClient) {}
