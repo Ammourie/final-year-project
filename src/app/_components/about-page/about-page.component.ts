@@ -16,10 +16,7 @@ export class AboutPageComponent implements OnInit {
   ngOnInit(): void {}
 
   test2(): void {
-    const username = JSON.parse(localStorage.getItem('user')!!).username;
-    const token = JSON.parse(localStorage.getItem('user')!!).token;
-    const x=JSON.stringify(this.jwtHelper.decodeToken(token));
-    const x2=JSON.parse(x);
-    this.router.navigateByUrl('/profile/'+x2['nameid']);
+
+    this.router.navigateByUrl('/about');
   }
 }

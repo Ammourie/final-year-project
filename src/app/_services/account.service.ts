@@ -10,6 +10,9 @@ import { map, ReplaySubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AccountService {
+  showErrorDialoge = false;
+  dialogeText = '';
+
   baseUrl = 'https://cpcmanager.herokuapp.com/api/';
   loggedIn: boolean = false;
   loggingIndicator: boolean = false;
@@ -22,32 +25,42 @@ export class AccountService {
   ) {}
 
   login(model: any) {
-    this.loggingIndicator = true;
-    this.http
-      .post<AuthUser>(this.baseUrl + 'Account/login', model)
-      .pipe(
-        map((response: AuthUser) => {
-          console.log(response);
-          const user = response;
-          if (user) {
-            localStorage.setItem('user', JSON.stringify(user));
-            this.currentUserSource.next(user);
-          }
-        })
-      )
-      .subscribe({
-        next: (res) => {},
-        error: (error) => {
-          console.log(error);
-          this.loggingIndicator = false;
-        },
-        complete: () => {
-          console.log('compleated');
+    if (this.showErrorDialoge == false) {
+      this.loggingIndicator = true;
+      this.http
+        .post<AuthUser>(this.baseUrl + 'Account/login', model)
+        .pipe(
+          map((response: AuthUser) => {
+            console.log(response);
+            const user = response;
+            if (user) {
+              localStorage.setItem('user', JSON.stringify(user));
+              this.currentUserSource.next(user);
+            }
+          })
+        )
+        .subscribe({
+          next: (res) => {},
+          error: (error) => {
+            console.log(error);
+            this.showErrorDialoge = true;
+            if (error.error == 'invalid username') {
+              this.dialogeText =
+                'البريد الإلكتروني الذي أدخلته غير صحيح لرجاء إعادة المحاولة !!';
+            } else {
+              this.dialogeText =
+                'كلمة السر التي أدخلتها غير صحيحة الرجاء إعادة المحاولة !!';
+            }
+            this.loggingIndicator = false;
+          },
+          complete: () => {
+            console.log('compleated');
 
-          this.loggingIndicator = false;
-          this.router.navigate(['/']);
-        },
-      });
+            this.loggingIndicator = false;
+            this.router.navigate(['/']);
+          },
+        });
+    }
   }
   setCurrentUser(user: AuthUser) {
     this.currentUserSource.next(user);
@@ -69,13 +82,38 @@ export class AccountService {
   register(model: any) {
     // console.log(model);
     this.loggingIndicator = true;
-    this.http.post<AuthUser>(this.baseUrl + 'Account/register', model).subscribe({
-      error: (error) => {
-        console.log(error);
-        this.loggingIndicator = false;
-      },
-      complete: () => this.login(model),
-    });
+    this.http
+      .post<AuthUser>(this.baseUrl + 'Account/register', model)
+      .subscribe({
+        error: (error) => {
+          console.log(error);
+          this.showErrorDialoge = true;
+          if (error.error.errors) {
+            for (const key in error.error.errors) {
+              if (error.error.errors.hasOwnProperty(key)) {
+                var val = error.error.errors[key];
+                console.log(val);
+
+                if (val[0] == 'The Email field is required.')
+                  this.dialogeText += 'الرجاء إدخال بريد الكتروني' + '\n';
+                else if (val[0] == 'The FullName field is required.')
+                  this.dialogeText += 'الرجاء إدخال اسمك الكامل' + '\n';
+                else
+                  this.dialogeText +=
+                    'الرجاء إدخال كلمة سر تحوي أرقاماً وأحرفاً لايقل طولها عن 5 ولا يزيد عن 16' +
+                    '\n';
+              }
+            }
+          } else {
+            this.dialogeText =
+            'البريد الإلكتروني الذي أدخلته مأخوذ مسبقاُ الرجاء إدخال بريد آخر !!';
+          }
+          this.loggingIndicator = false;
+        },
+        complete: () => {
+          this.login(model);
+        },
+      });
   }
   logout() {
     localStorage.removeItem('user');

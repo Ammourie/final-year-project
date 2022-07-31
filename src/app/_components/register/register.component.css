@@ -1,4 +1,31 @@
-.gradient-curve {
+host ::ng-deep .p-dialog > ::-webkit-scrollbar {
+  display: none;
+}
+:host ::ng-deep .p-dialog .p-button {
+  min-width: 6rem;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  background-color: #26282a;
+  color: white;
+  direction: rtl;
+  font-family: sans-serif;
+}
+:host ::ng-deep .p-dialog .p-dialog-content {
+  background-color: #26282a;
+  direction: rtl;
+}
+:host ::ng-deep .p-dialog .p-dialog-footer {
+  background-color: #26282a;
+  direction: rtl;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.confirm-dialog-content {
+direction: rtl;
+color: white;
+}.gradient-curve {
   width: 100vw;
   height: 100vh;
   background: url("../../../assets/images/login.png") no-repeat;

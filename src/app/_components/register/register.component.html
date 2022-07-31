@@ -1,4 +1,9 @@
-<div class="lds-ring" *ngIf="accountService.loggingIndicator"><div></div><div></div><div></div><div></div></div>
+<div class="lds-ring" *ngIf="accountService.loggingIndicator">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
 <div class="d-flex">
   <div class="gradient-curve">
     <div style="width: 50%; height: 100%">
@@ -23,7 +28,7 @@
       />
     </div>
   </div>
-  <div class="login-form ">
+  <div class="login-form">
     <h1
       style="
         margin-top: 10%;
@@ -34,7 +39,13 @@
     >
       التسجيل
     </h1>
-    <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off"  action="" dir="rtl">
+    <form
+      #registerForm="ngForm"
+      (ngSubmit)="register()"
+      autocomplete="off"
+      action=""
+      dir="rtl"
+    >
       <!-- <input type="text" class="name-input" name="fullName" placeholder="" />
     <label for="fullName" style="color: wheat;">الاسم</label> -->
 
@@ -112,9 +123,46 @@
         "
       >
         <button type="submit" class="btn btn-rounded btnn">إنشاء</button>
-        <a style="color: #7b7a7d; text-decoration: none;"  [routerLink]="['/login']"> لديك حساب بالفعل؟ </a>
-
+        <a
+          style="color: #7b7a7d; text-decoration: none"
+          [routerLink]="['/login']"
+        >
+          لديك حساب بالفعل؟
+        </a>
       </div>
     </form>
   </div>
 </div>
+<p-dialog
+  header="حدث خطأ ما:"
+  [(visible)]="this.accountService.showErrorDialoge"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '50vw' }"
+>
+  <div class="confirm-dialog-content">
+    <p style="white-space: pre">
+      {{ this.accountService.dialogeText }}
+    </p>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      label="رجوع"
+      class="p-button-text"
+      (click)="
+        this.accountService.showErrorDialoge = false;
+        this.accountService.dialogeText = ''
+      "
+      [style]="{
+        width: '15vw',
+        border: 'none',
+        color: 'white',
+        'background-color': '#005C97',
+        'font-family': 'sans-serif'
+      }"
+    ></p-button>
+  </ng-template>
+</p-dialog>

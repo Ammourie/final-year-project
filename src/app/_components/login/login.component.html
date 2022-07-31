@@ -81,3 +81,33 @@
     </form>
   </div>
 </div>
+<p-dialog
+header="حدث خطأ ما:"
+[(visible)]="this.accountService.showErrorDialoge"
+[modal]="true"
+[baseZIndex]="10000"
+[draggable]="false"
+[resizable]="false"
+[style]="{ width: '50vw' }"
+>
+<div class="confirm-dialog-content">
+  <p>
+{{this.accountService.dialogeText}}
+  </p>
+</div>
+
+<ng-template pTemplate="footer">
+  <p-button
+    label="رجوع"
+    class="p-button-text"
+    (click)="this.accountService.showErrorDialoge = false"
+    [style]="{
+      width: '15vw',
+      border: 'none',
+      color: 'white',
+      'background-color': '#005C97',
+      'font-family': 'sans-serif'
+    }"
+  ></p-button>
+</ng-template>
+</p-dialog>
