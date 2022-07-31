@@ -185,7 +185,21 @@
             (click)="gotoProfile(team.coach.id)"
           >
             <img
+              *ngIf="team.coach.profilePhoto == null"
               src="../../../assets/images/placeholder2.png"
+              style="
+                border-radius: 50%;
+
+                width: 45px;
+                height: 45px;
+                border: 1px solid rgb(68, 68, 68);
+              "
+              alt=""
+              srcset=""
+            />
+            <img
+              *ngIf="team.coach.profilePhoto != null"
+              src="{{ team.coach.profilePhoto }}"
               style="
                 border-radius: 50%;
 
@@ -207,7 +221,21 @@
             (click)="gotoProfile(item.id)"
           >
             <img
+              *ngIf="item.profilePhoto == null"
               src="../../../assets/images/placeholder2.png"
+              style="
+                border-radius: 50%;
+
+                width: 45px;
+                height: 45px;
+                border: 1px solid rgb(68, 68, 68);
+              "
+              alt=""
+              srcset=""
+            />
+            <img
+              *ngIf="item.profilePhoto != null"
+              src="{{ item.profilePhoto }}"
               style="
                 border-radius: 50%;
 

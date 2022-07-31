@@ -260,9 +260,14 @@
           !this.searchService.gettingSearchedStudents
         "
       >
-        <div class="students" *ngFor="let i of this.studentService.students">
+        <div
+          class="students"
+          style="display: grid; grid-template-columns: 50% 50%;direction: rtl;"
+        >
           <div
             class="student d-flex flex-row justify-content-between"
+            *ngFor="let i of this.studentService.students"
+
             onmouseover="this.style.cursor='pointer'"
             dir="rtl"
             (click)="gotoProfile(i)"
@@ -311,6 +316,7 @@
           </div>
         </div>
       </div>
+      <p-paginator [rows]="this.studentService.studentsItemsPerPage" [totalRecords]="this.studentService.studentsTotal" [style]="{'background-color':'#26282A'}" (onPageChange)="onPageChange($event)" *ngIf="!this.searchFlag"></p-paginator>
     </div>
   </body>
 </html>

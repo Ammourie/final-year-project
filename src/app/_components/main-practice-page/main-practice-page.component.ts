@@ -1,3 +1,5 @@
+import { UsersService } from './../../_services/users.service';
+import { User } from './../../_models/user';
 import { Problem } from './../../_models/problem';
 import { Post } from './../../_models/post';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -19,21 +21,28 @@ export class MainPracticePageComponent implements OnInit {
   tasksLoading: boolean = false;
   postsLoading: boolean = false;
   problemsLoading: boolean = false;
+  usersLoading: boolean = false;
   tasksToShow: DailyTask[] = [];
   post: Post[] = [];
   recProblems: Problem[] = [];
+  recUsers: User[] = [];
   token = JSON.parse(localStorage.getItem('user')!!).token;
   x = JSON.stringify(this.jwtHelper.decodeToken(this.token));
   x2 = JSON.parse(this.x);
   loggedinId = this.x2.nameid;
   isCoach = this.x2['role'] == 'Member,Coach';
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
+    public userService: UsersService
+  ) {}
 
   ngOnInit(): void {
     this.getAllTasks();
     this.getMyTasks();
     this.getPosts();
     this.getRecommendedProblems();
+    this.getRecommendedUsers();
   }
 
   getPosts() {
@@ -118,7 +127,7 @@ export class MainPracticePageComponent implements OnInit {
 
     this.http
       .get<Problem[]>(
-        'https://cpcmanager.herokuapp.com/api/Recommendation',
+        'https://cpcmanager.herokuapp.com/api/Recommendation/Problems',
         header
       )
       .subscribe({
@@ -128,6 +137,30 @@ export class MainPracticePageComponent implements OnInit {
         error: (error) => console.log(error),
         complete: () => {
           this.problemsLoading = false;
+        },
+      });
+  }
+  getRecommendedUsers() {
+    this.usersLoading = true;
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+
+    this.http
+      .get<User[]>(
+        'https://cpcmanager.herokuapp.com/api/Recommendation/users',
+        header
+      )
+      .subscribe({
+        next: (res) => {
+          this.recUsers = res;
+          console.log(res);
+        },
+        error: (error) => console.log(error),
+        complete: () => {
+          this.usersLoading = false;
         },
       });
   }

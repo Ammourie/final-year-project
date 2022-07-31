@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoachesListComponent implements OnInit {
   searchText = '';
+  searchFlag = false;
   constructor(
     public coachService: UsersService,
     private router: Router,
@@ -25,7 +26,7 @@ export class CoachesListComponent implements OnInit {
   x2 = JSON.parse(this.x);
   ngOnInit(): void {
     if (this.coachService.coaches.length == 0) {
-      this.coachService.getcoaches();
+      this.coachService.getcoaches(1, 10);
     }
     if (this.statsService.stats == null) {
       this.statsService.getStats();
@@ -36,19 +37,30 @@ export class CoachesListComponent implements OnInit {
     this.router.navigateByUrl('/profile/' + student.id);
   }
   searchForCoaches() {
-    this.searchService.coachesSearch(this.searchText).subscribe({
-      next: (res) => {
-        this.coachService.coaches = [];
-        console.log(res);
+    if (this.searchText == '') {
+      this.searchFlag = false;
+      this.coachService.getcoaches(1, 10);
+    } else {
+      this.searchFlag = true;
 
-        res.forEach((element) => {
-          if (element.isCoach) this.coachService.coaches.push(element);
-        });
-      },
-      error: (error) => console.log(error),
-      complete: () => {
-        this.searchService.gettingSearchedCoaches = false;
-      },
-    });
+      this.searchService.coachesSearch(this.searchText).subscribe({
+        next: (res) => {
+          this.coachService.coaches = [];
+          console.log(res);
+
+          res.forEach((element) => {
+            if (element.isCoach) this.coachService.coaches.push(element);
+          });
+        },
+        error: (error) => console.log(error),
+        complete: () => {
+          this.searchService.gettingSearchedCoaches = false;
+        },
+      });
+    }
+  }
+  onPageChange(event: any) {
+    if (this.coachService.coachesCurrentPage != event.page + 1)
+      this.coachService.getcoaches(event.page + 1, 10);
   }
 }

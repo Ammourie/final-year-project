@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { User } from '../../_models/user';
 import { AccountService } from './../../_services/account.service';
@@ -9,13 +10,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit {
-  constructor(public accountService: AccountService, private router: Router) {}
+  constructor(
+    public accountService: AccountService,
+    private router: Router,
+    private jwtHelper: JwtHelperService
+  ) {}
   student: User | undefined;
   ngOnInit(): void {
-  if(this.accountService.getLoggidIn())
+    if (this.accountService.getLoggidIn())
       this.getUser(this.accountService.getMyId());
-
-
   }
   getUser(id: Number) {
     this.accountService.getUser(id).subscribe({
@@ -35,5 +38,15 @@ export class NavBarComponent implements OnInit {
   }
   goToMyProfile(): void {
     this.router.navigateByUrl('/profile/' + this.accountService.getMyId());
+  }
+  isCoach() {
+    try {
+      const token = JSON.parse(localStorage.getItem('user')!!).token;
+      const x = JSON.stringify(this.jwtHelper.decodeToken(token));
+      const x2 = JSON.parse(x);
+      const isCoach = x2['role'] == 'Member,Coach';
+      return isCoach;
+    } catch (error) {}
+    return false
   }
 }

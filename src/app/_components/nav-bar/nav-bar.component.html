@@ -38,6 +38,14 @@
         </li>
         <li class="nav-item">
           <a
+            *ngIf="!this.accountService.getLoggidIn()"
+            class="nav-link"
+            [routerLink]="null"
+            routerLinkActive="router-link-active"
+            >التدريب</a
+          >
+          <a
+            *ngIf="this.accountService.getLoggidIn()"
             class="nav-link"
             [routerLink]="['/main-practice-page']"
             routerLinkActive="router-link-active"
@@ -47,6 +55,14 @@
 
         <li class="nav-item">
           <a
+            *ngIf="!isCoach()"
+            class="nav-link"
+            [routerLink]="null"
+            routerLinkActive="router-link-active"
+            >تشكيل الفرق</a
+          >
+          <a
+            *ngIf="isCoach()"
             class="nav-link"
             [routerLink]="['/team-register']"
             routerLinkActive="router-link-active"
@@ -55,10 +71,20 @@
         </li>
         <li class="nav-item">
           <a
+            *ngIf="!this.accountService.getLoggidIn()"
+            class="nav-link"
+            [routerLink]="null"
+            routerLinkActive="router-link-active"
+          >
+            الفرق</a
+          >
+          <a
+            *ngIf="this.accountService.getLoggidIn()"
             class="nav-link"
             [routerLink]="['/teams']"
             routerLinkActive="router-link-active"
-            > الفرق</a
+          >
+            الفرق</a
           >
         </li>
       </ul>
@@ -76,25 +102,28 @@
             placeholder="ابحث هنا ..."
           /> -->
           <img
-
             src="assets/images/person.svg"
-            *ngIf="this.student?.profilePhoto == null && this.accountService.getLoggidIn()"
+            *ngIf="
+              this.student?.profilePhoto == null &&
+              this.accountService.getLoggidIn()
+            "
             width="45px"
             height="45px"
             style="border-radius: 30px"
             onmouseover="this.style.cursor='pointer'"
             (click)="goToMyProfile()"
-
           />
           <img
-            [src]=this.student?.profilePhoto
-            *ngIf="this.student?.profilePhoto != null && this.accountService.getLoggidIn()"
+            [src]="this.student?.profilePhoto"
+            *ngIf="
+              this.student?.profilePhoto != null &&
+              this.accountService.getLoggidIn()
+            "
             width="45px"
             height="45px"
             style="border-radius: 30px"
             onmouseover="this.style.cursor='pointer'"
             (click)="goToMyProfile()"
-
           />
           <!-- <div style="color: white" >{{this.student?.fullName}}hello</div>
           <div style="color: white">{{this.student?.profilePhoto}}</div> -->

@@ -21,19 +21,16 @@ export class SearchService {
     var header = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
     };
-    if (keyword != '')
       return this.http.get<User[]>(
         'https://cpcmanager.herokuapp.com/api/users/search?q=' +
           keyword +
           '&coachOnly=True',
         header
       );
-    return this.http.get<User[]>(
-      'https://cpcmanager.herokuapp.com/api/users',
-      header
-    );
+
   }
   studentsSearch(keyword: string): any {
+
     this.gettingSearchedStudents = true;
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
@@ -41,16 +38,26 @@ export class SearchService {
     var header = {
       headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
     };
-    if (keyword != '')
+    if (keyword==""){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth}`,
+        }),
+
+      };
+      return this.http
+        .get<User[]>(
+          "https://cpcmanager.herokuapp.com/api/Users?NotInATeam=true&CoachesOnly=false&PageSize=10&PageNumber=1",
+          httpOptions
+        )
+    }
       return this.http.get<User[]>(
         'https://cpcmanager.herokuapp.com/api/users/search?q=' +
           keyword +
           '&coachOnly=False',
         header
       );
-    return this.http.get<User[]>(
-      'https://cpcmanager.herokuapp.com/api/users',
-      header
-    );
+
   }
 }

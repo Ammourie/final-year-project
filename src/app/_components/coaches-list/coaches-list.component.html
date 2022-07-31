@@ -60,9 +60,13 @@
   <div dir="rtl">
     <div style="display: flex; justify-content: space-between">
       <div
-        style="margin-top: 20px; margin-bottom: 20px;margin-right: 40px; display: flex;"
+        style="
+          margin-top: 20px;
+          margin-bottom: 20px;
+          margin-right: 40px;
+          display: flex;
+        "
       >
-
         <input
           type="text"
           class="form-control form-control-dark search"
@@ -83,16 +87,29 @@
     </div>
   </div>
   <!-- <router-outlet></router-outlet> -->
-  <div class="lds-ring" *ngIf="this.coachService.gettingcoaches ||this.searchService.gettingSearchedCoaches">
+  <div
+    class="lds-ring"
+    *ngIf="
+      this.coachService.gettingcoaches ||
+      this.searchService.gettingSearchedCoaches
+    "
+  >
     <div></div>
     <div></div>
     <div></div>
     <div></div>
   </div>
 
-  <div class="row" *ngIf="!this.coachService.gettingcoaches && !this.searchService.gettingSearchedCoaches" dir="rtl">
+  <div
+    class="row"
+    *ngIf="
+      !this.coachService.gettingcoaches &&
+      !this.searchService.gettingSearchedCoaches
+    "
+    dir="rtl"
+  >
     <div class="column" *ngFor="let item of this.coachService.coaches">
-      <div class="wrapper-grid" >
+      <div class="wrapper-grid">
         <div class="img-container">
           <div class="banner-img"></div>
           <img
@@ -111,16 +128,26 @@
             alt="profile image"
             class="profile-img"
           />
-          <h1 class="name" *ngIf="item.fullName==null">لايوجد اسم</h1>
-          <h1 class="name" *ngIf="item.fullName!=null">{{ item.fullName }}</h1>
-          <p class="description" style="height: 100px" *ngIf="item.bio!=null">
+          <h1 class="name" *ngIf="item.fullName == null">لايوجد اسم</h1>
+          <h1 class="name" *ngIf="item.fullName != null">
+            {{ item.fullName }}
+          </h1>
+          <p class="description" style="height: 100px" *ngIf="item.bio != null">
             {{ item.bio }}
           </p>
-          <p class="description" style="height: 100px"  *ngIf="item.bio==null">
-لا يوجد سيرة ذاتية          </p>
+          <p class="description" style="height: 100px" *ngIf="item.bio == null">
+            لا يوجد سيرة ذاتية
+          </p>
           <button class="btnn" (click)="gotoProfile(item)">المزيد</button>
         </div>
       </div>
     </div>
   </div>
+  <p-paginator
+    [rows]="this.coachService.coachesItemsPerPage"
+    [totalRecords]="this.coachService.coachesTotal"
+    [style]="{ 'background-color': '#26282A' }"
+    (onPageChange)="onPageChange($event)"
+    *ngIf="!this.searchFlag"
+  ></p-paginator>
 </div>

@@ -15,7 +15,8 @@ import { Location } from '@angular/common';
 })
 export class TeamsRegisterComponent implements OnInit {
   students: User[] = [];
-  searchString=""
+  searchString = '';
+  searchFlag = false;
   selectedCoach: User | undefined;
   team: any = {
     name: '',
@@ -29,9 +30,9 @@ export class TeamsRegisterComponent implements OnInit {
     public studentService: UsersService,
     private router: Router,
     private location: Location,
-    private httpclient: HttpClient
-    ,public teamsService:TeamsService,
-    public searchService:SearchService
+    private httpclient: HttpClient,
+    public teamsService: TeamsService,
+    public searchService: SearchService
   ) {
     this.responsiveOptions = [
       {
@@ -48,9 +49,9 @@ export class TeamsRegisterComponent implements OnInit {
   }
   ngOnInit() {
     if (this.studentService.students.length == 0) {
-      this.teamsService.getUnteamedRecommendedStudents()
+      this.teamsService.getUnteamedRecommendedStudents();
 
-      this.studentService.getcoaches();
+      this.studentService.getcoaches(1, 100);
       this.selectedCoach = this.studentService.coaches[0];
     }
 
@@ -84,9 +85,8 @@ export class TeamsRegisterComponent implements OnInit {
     for (const i of this.students) {
       this.team.members.push(i.id);
     }
-    this.team.coachId=this.selectedCoach?.id
+    this.team.coachId = this.selectedCoach?.id;
     console.log(this.team);
-
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
     const httpOptions = {
@@ -112,19 +112,29 @@ export class TeamsRegisterComponent implements OnInit {
       });
   }
   searchForStudent() {
+    if (this.searchString == '') {
+      this.searchFlag = false;
+    } else {
+      this.searchFlag = true;
+    }
+
     this.searchService.studentsSearch(this.searchString).subscribe({
-      next: (res:any) => {
-        this.teamsService.students=[]
-        res.forEach((element:any) => {
+      next: (res: any) => {
+        this.teamsService.students = [];
+        res.forEach((element: any) => {
           if (!element.isCoach && element.teams.length == 0)
             this.teamsService.students.push(element);
         });
       },
-      error: (error:any) => console.log(error),
+      error: (error: any) => console.log(error),
       complete: () => {
         this.searchService.gettingSearchedStudents = false;
       },
     });
   }
-
+  onPageChange(page: any) {
+    if (this.teamsService.studentsCurrentPage != page.page + 1) {
+      this.teamsService.getUnteamedStudents(page.page + 1);
+    }
+  }
 }

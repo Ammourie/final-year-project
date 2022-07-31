@@ -453,7 +453,9 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
                   style="font-size: 15px; color: gray"
                   >مستوى التدريب
                   {{
-                    student.trainingGroups[0]?.level ?? "غير معروف بعد"
+                    student.trainingGroups == null
+                      ? "غير معروف بعد"
+                      : student.trainingGroups[0]?.level ?? "غير معروف بعد"
                   }}</span
                 >
               </p>
@@ -600,6 +602,13 @@ height: 200px; margin-right: 10px;" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1
           </div>
         </div>
       </div>
+      <p-paginator
+        [rows]="this.teamsService.studentsItemsPerPage"
+        [totalRecords]="this.teamsService.studentsTotal"
+        [style]="{ 'background-color': '#26282A' }"
+        (onPageChange)="onPageChange($event)"
+        *ngIf="!this.searchFlag"
+      ></p-paginator>
     </div>
   </body>
 </html>

@@ -17,6 +17,8 @@ import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
 export class StudentsComponent implements OnInit {
   value: number = 69;
   searchString = '';
+  searchFlag = false;
+
   constructor(
     public studentService: UsersService,
     private router: Router,
@@ -26,7 +28,7 @@ export class StudentsComponent implements OnInit {
   ) {}
   ngOnInit() {
     if (this.studentService.students.length == 0) {
-      this.studentService.getstudents();
+      this.studentService.getstudents(1);
     }
     if (this.statsService.stats == null) {
       this.statsService.getStats();
@@ -41,17 +43,28 @@ export class StudentsComponent implements OnInit {
     this.router.navigateByUrl('/profile/' + student.id);
   }
   searchForStudent() {
-    this.searchService.studentsSearch(this.searchString).subscribe({
-      next: (res:any) => {
-      this.studentService.students=res
-      console.log(this.studentService.students);
+    if (this.searchString == '') {
+      this.searchFlag = false;
+      this.studentService.getstudents(1)
+    } else {
+      this.searchFlag = true;
 
+    this.searchService.studentsSearch(this.searchString).subscribe({
+      next: (res: any) => {
+        this.studentService.students = res;
+        console.log(this.studentService.students);
       },
-      error: (error:any) => console.log(error),
+      error: (error: any) => console.log(error),
       complete: () => {
         this.searchService.gettingSearchedStudents = false;
       },
-    });
+    });}
+  }
+  onPageChange(page: any) {
+    if (this.studentService.studentsCurrentPage!=page.page + 1) {
+
+      this.studentService.getstudents(page.page + 1);
+    }
   }
   // getStudent() {
   //   this.studentService.getstudents().subscribe({
@@ -73,5 +86,4 @@ export class StudentsComponent implements OnInit {
   //     .pipe(distinctUntilChanged())
   //     .subscribe((data) => this.x());
   // }
-
 }

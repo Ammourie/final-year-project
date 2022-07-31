@@ -55,7 +55,7 @@ export class PracticeGroubsComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.studentService.students.length == 0) {
-      this.studentService.getcoaches();
+      this.studentService.getcoaches(1,10);
       this.selectedCoach = this.studentService.coaches[0];
     }
     this.getGroups();

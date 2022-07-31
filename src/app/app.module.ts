@@ -38,6 +38,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
 import { KnobModule } from 'primeng/knob';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     DropdownModule,
     KnobModule,
     ProgressSpinnerModule,
+    PaginatorModule,
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
