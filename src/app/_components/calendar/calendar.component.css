@@ -51,22 +51,25 @@ body {
 .weekdays {
   margin: 0;
   padding: 10px 0;
-  background-color: #ddd;
   width: 100%;
+  background: #202023;
+
 }
 
 .weekdays li {
   display: inline-block;
   width: 13.6%;
-  color: #666;
+  color: rgb(200, 199, 199);
   text-align: center;
 }
 
 .days {
   padding: 10px 0;
-  background: #eee;
+  background-color:#1c1e1f;
+
   margin: 0;
   width: 100%;
+
 }
 
 .days li {

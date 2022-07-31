@@ -479,7 +479,7 @@
           <div class="lds-dual-ring"></div>
         </div>
         <div *ngIf="!this.usersLoading">
-          <div class="rec-team-member" *ngFor="let item of this.recUsers" onmouseover="this.style.cursor='pointer'" (click)="this.userService.gotoProfile(this.accountService.getMyId())">
+          <div class="rec-team-member" *ngFor="let item of this.recUsers" onmouseover="this.style.cursor='pointer'" (click)="this.userService.gotoProfile(item.id)">
             <div>
               <img
               *ngIf="item.profilePhoto==null"
