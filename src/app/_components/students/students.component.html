@@ -25,21 +25,29 @@
         <div class="d-flex flex-row">
           <div style="margin-left: 20%">
             <img
-              src="assets/images/person.svg"
-              style="color: red"
-              alt=""
-              srcset=""
-            />
+            src="assets/images/person.svg"
+            *ngIf="
+              this.studentService.me?.profilePhoto == null "
+            width="45px"
+            height="45px"
+            style="border-radius: 30px"
+            onmouseover="this.style.cursor='pointer'"
+            (click)="this.studentService.gotoProfile(this.accountService.getMyId())"
+          />
+          <img
+            [src]="this.studentService.me?.profilePhoto"
+            *ngIf="
+              this.studentService.me?.profilePhoto != null
+            "
+            width="45px"
+            height="45px"
+            style="border-radius: 30px"
+            onmouseover="this.style.cursor='pointer'"
+            (click)="this.studentService.gotoProfile(this.accountService.getMyId())"
+          />
           </div>
 
-          <div style="margin-left: 20px">
-            <img
-              src="assets/images/notifications.svg"
-              style="color: red"
-              alt=""
-              srcset=""
-            />
-          </div>
+
         </div>
         <div style="display: flex; align-items: center">
           <div style="color: antiquewhite; font-size: 28px">الطلاب</div>
@@ -93,6 +101,7 @@
           (click)="goback()"
           alt=""
           srcset=""
+          onmouseover="this.style.cursor='pointer'"
         />
       </div>
       <div style="display: flex; flex-direction: column; align-items: center">

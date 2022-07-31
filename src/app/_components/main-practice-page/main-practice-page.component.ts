@@ -1,3 +1,4 @@
+import { AccountService } from 'src/app/_services/account.service';
 import { UsersService } from './../../_services/users.service';
 import { User } from './../../_models/user';
 import { Problem } from './../../_models/problem';
@@ -5,6 +6,8 @@ import { Post } from './../../_models/post';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { DailyTask } from './../../_models/daily_task';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Location } from '@angular/common';
+
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -34,10 +37,12 @@ export class MainPracticePageComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
-    public userService: UsersService
+    public userService: UsersService,
+    private location: Location,public accountService:AccountService
   ) {}
 
   ngOnInit(): void {
+    this.userService.getMyUser()
     this.getAllTasks();
     this.getMyTasks();
     this.getPosts();
@@ -185,4 +190,10 @@ export class MainPracticePageComponent implements OnInit {
         },
       });
   }
+  goback() {
+    console.log('vvv');
+
+    this.location.back();
+  }
 }
+

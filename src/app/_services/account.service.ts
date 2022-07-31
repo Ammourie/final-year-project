@@ -85,7 +85,7 @@ export class AccountService {
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
     return auth;
   }
-  getMyId(): Number {
+  getMyId(): number {
     const token = JSON.parse(localStorage.getItem('user')!!).token;
     const x = JSON.stringify(this.jwtHelper.decodeToken(token));
     const x2 = JSON.parse(x);

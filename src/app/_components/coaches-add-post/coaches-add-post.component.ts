@@ -103,4 +103,10 @@ export class CoachesAddPostComponent implements OnInit {
         },
       });
   }
+  cancel(){
+    this.problems = [];
+    this.taskDiscription = '';
+    this.dateUntilSolve = '';
+    this.groupDesired = [];
+  }
 }

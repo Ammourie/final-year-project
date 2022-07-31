@@ -1,3 +1,5 @@
+import { AccountService } from 'src/app/_services/account.service';
+import { UsersService } from './../../_services/users.service';
 import { Router } from '@angular/router';
 import { Team } from '../../_models/team';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -13,11 +15,14 @@ export class TeamsComponent implements OnInit {
   constructor(
     private location: Location,
     private httpclient: HttpClient,
-    private router: Router
+    private router: Router,
+    public userService:UsersService,
+    public accountService:AccountService
   ) {}
   gettingTeams: boolean = true;
   teams: Team[] | undefined;
   ngOnInit(): void {
+    this.userService.getMyUser()
     this.getTeams();
   }
   gotoProfile(id: Number) {

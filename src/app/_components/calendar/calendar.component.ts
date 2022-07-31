@@ -1,7 +1,11 @@
+import { UsersService } from './../../_services/users.service';
+import { User } from './../../_models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CalenderEvent } from './../../_models/event';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-calendar',
@@ -32,10 +36,17 @@ export class CalendarComponent implements OnInit {
   postSessionDate = '';
   showEventFlag = false;
   showEventPostFlag = false;
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
+    private location: Location,
+    public userService: UsersService,
+    public accountService:AccountService
+  ) {}
 
   ngOnInit(): void {
     this.getEvents();
+    this.userService.getMyUser();
   }
   activeCell(i: number): boolean {
     var x = false;
@@ -148,5 +159,10 @@ export class CalendarComponent implements OnInit {
           this.getEvents();
         },
       });
+  }
+  goback() {
+    console.log('vvv');
+
+    this.location.back();
   }
 }

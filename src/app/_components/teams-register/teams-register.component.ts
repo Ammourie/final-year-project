@@ -1,3 +1,4 @@
+import { AccountService } from 'src/app/_services/account.service';
 import { SearchService } from './../../_services/search.service';
 import { TeamsService } from './../../_services/teams.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -32,7 +33,8 @@ export class TeamsRegisterComponent implements OnInit {
     private location: Location,
     private httpclient: HttpClient,
     public teamsService: TeamsService,
-    public searchService: SearchService
+    public searchService: SearchService,
+    public accountService:AccountService
   ) {
     this.responsiveOptions = [
       {
@@ -48,6 +50,7 @@ export class TeamsRegisterComponent implements OnInit {
     ];
   }
   ngOnInit() {
+    this.studentService.getMyUser()
     if (this.studentService.students.length == 0) {
       this.teamsService.getUnteamedRecommendedStudents();
 

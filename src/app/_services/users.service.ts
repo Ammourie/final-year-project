@@ -1,3 +1,4 @@
+import { AccountService } from './account.service';
 import { Router } from '@angular/router';
 import { User } from '../_models/user';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
@@ -20,9 +21,13 @@ export class UsersService {
   coachesTotalPages = 10;
   coachesTotal = 100;
   coachesItemsPerPage = 10;
-
+  me: User | undefined;
   baseUrl = 'https://cpcmanager.herokuapp.com/api/';
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private accountService: AccountService
+  ) {}
   getstudents(page: number): User[] {
     this.studentsCurrentPage = page;
     this.gettingStudents = true;
@@ -61,7 +66,34 @@ export class UsersService {
       });
     return this.students;
   }
-  getcoaches(page: number,pageSize:number) {
+  getMyUser() {
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+
+    this.http
+      .get<User>(
+        'https://cpcmanager.herokuapp.com/api/Users/' +
+          this.accountService.getMyId(),
+        header
+      )
+      .subscribe({
+        next: (r) => {
+          this.me = r;
+          console.log(r);
+
+        },
+        error: (error) => {
+        console.log(error);
+
+        },
+        complete: () => {
+        },
+      });
+  }
+  getcoaches(page: number, pageSize: number) {
     this.coachesCurrentPage = page;
     this.gettingcoaches = true;
 
@@ -77,12 +109,16 @@ export class UsersService {
 
     this.http
       .get<any>(
-        this.baseUrl + 'Users?CoachesOnly=true&PageSize='+pageSize+'&PageNumber='+page,
+        this.baseUrl +
+          'Users?CoachesOnly=true&PageSize=' +
+          pageSize +
+          '&PageNumber=' +
+          page,
         httpOptions
       )
       .subscribe({
         next: (res) => {
-          console.log(res.headers.get("Pagination"));
+          console.log(res.headers.get('Pagination'));
 
           this.coachesTotalPages = JSON.parse(
             res.headers.get('Pagination')!
@@ -101,7 +137,7 @@ export class UsersService {
         },
       });
   }
-  gotoProfile(student: User) {
-    this.router.navigateByUrl('/profile/' + student.id);
+  gotoProfile(id: number) {
+    this.router.navigateByUrl('/profile/' + id);
   }
 }

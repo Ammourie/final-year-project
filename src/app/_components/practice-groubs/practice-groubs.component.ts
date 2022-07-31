@@ -1,3 +1,4 @@
+import { AccountService } from 'src/app/_services/account.service';
 import { User } from './../../_models/user';
 import { TrainingGroup } from './../../_models/training_group';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -6,6 +7,7 @@ import { Group } from './../../_models/group';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-practice-groubs',
@@ -26,7 +28,7 @@ export class PracticeGroubsComponent implements OnInit {
       codeforcesAccount: '',
     },
     students: [],
-    level: ''
+    level: '',
   };
 
   currenetUser: User | undefined;
@@ -50,13 +52,16 @@ export class PracticeGroubsComponent implements OnInit {
     public router: Router,
     private jwtHelper: JwtHelperService,
     private http: HttpClient,
-    public studentService: UsersService
+    public studentService: UsersService,
+    private location: Location,
+    public accountService: AccountService
   ) {}
 
   ngOnInit(): void {
     if (this.studentService.students.length == 0) {
-      this.studentService.getcoaches(1,10);
+      this.studentService.getcoaches(1, 10);
       this.selectedCoach = this.studentService.coaches[0];
+      this.studentService.getMyUser();
     }
     this.getGroups();
   }
@@ -178,5 +183,10 @@ export class PracticeGroubsComponent implements OnInit {
           this.getGroups();
         },
       });
+  }
+  goback() {
+    console.log('vvv');
+
+    this.location.back();
   }
 }

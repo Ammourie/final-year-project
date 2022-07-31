@@ -1,3 +1,4 @@
+import { AccountService } from 'src/app/_services/account.service';
 import { SearchService } from './../../_services/search.service';
 import { User } from './../../_models/user';
 import { StatsService } from './../../_services/stats.service';
@@ -24,9 +25,11 @@ export class StudentsComponent implements OnInit {
     private router: Router,
     private location: Location,
     public statsService: StatsService,
-    public searchService: SearchService
+    public searchService: SearchService,
+    public accountService:AccountService
   ) {}
   ngOnInit() {
+    this.studentService.getMyUser()
     if (this.studentService.students.length == 0) {
       this.studentService.getstudents(1);
     }

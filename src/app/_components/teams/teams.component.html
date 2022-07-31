@@ -30,21 +30,29 @@
         <div class="d-flex flex-row">
           <div style="margin-left: 20%">
             <img
-              src="assets/images/person.svg"
-              style="color: red"
-              alt=""
-              srcset=""
-            />
+            src="assets/images/person.svg"
+            *ngIf="
+              this.userService.me?.profilePhoto == null "
+            width="45px"
+            height="45px"
+            style="border-radius: 30px"
+            onmouseover="this.style.cursor='pointer'"
+            (click)="this.userService.gotoProfile(this.accountService.getMyId())"
+          />
+          <img
+            [src]="this.userService.me?.profilePhoto"
+            *ngIf="
+              this.userService.me?.profilePhoto != null
+            "
+            width="45px"
+            height="45px"
+            style="border-radius: 30px"
+            onmouseover="this.style.cursor='pointer'"
+            (click)="this.userService.gotoProfile(this.accountService.getMyId())"
+          />
           </div>
 
-          <div style="margin-left: 20px">
-            <img
-              src="assets/images/notifications.svg"
-              style="color: red"
-              alt=""
-              srcset=""
-            />
-          </div>
+
         </div>
         <div style="display: flex; align-items: center">
           <div style="color: antiquewhite; font-size: 28px">الفرق</div>

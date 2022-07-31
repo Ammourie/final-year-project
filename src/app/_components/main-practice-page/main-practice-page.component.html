@@ -30,21 +30,29 @@
         <div class="d-flex flex-row">
           <div style="margin-left: 20%">
             <img
-              src="assets/images/person.svg"
-              style="color: red"
-              alt=""
-              srcset=""
-            />
+            src="assets/images/person.svg"
+            *ngIf="
+              this.userService.me?.profilePhoto == null "
+            width="45px"
+            height="45px"
+            style="border-radius: 30px"
+            onmouseover="this.style.cursor='pointer'"
+            (click)="this.userService.gotoProfile(this.accountService.getMyId())"
+          />
+          <img
+            [src]="this.userService.me?.profilePhoto"
+            *ngIf="
+              this.userService.me?.profilePhoto != null
+            "
+            width="45px"
+            height="45px"
+            style="border-radius: 30px"
+            onmouseover="this.style.cursor='pointer'"
+            (click)="this.userService.gotoProfile(this.accountService.getMyId())"
+          />
           </div>
 
-          <div style="margin-left: 20px">
-            <img
-              src="assets/images/notifications.svg"
-              style="color: red"
-              alt=""
-              srcset=""
-            />
-          </div>
+
         </div>
         <div style="display: flex; align-items: center">
           <div style="color: antiquewhite; font-size: 28px">الرئيسية</div>
@@ -86,7 +94,7 @@
     </div>
     <div class="gr-menu">
       <div style="height: 40px; width: 40px">
-        <img src="assets/images/back-icon.svg" alt="" srcset="" />
+        <img src="assets/images/back-icon.svg" alt="" srcset="" (click)="goback()"  onmouseover="this.style.cursor='pointer'"/>
       </div>
       <div style="display: flex; flex-direction: column; align-items: center">
         <img
@@ -471,7 +479,7 @@
           <div class="lds-dual-ring"></div>
         </div>
         <div *ngIf="!this.usersLoading">
-          <div class="rec-team-member" *ngFor="let item of this.recUsers" onmouseover="this.style.cursor='pointer'" (click)="this.userService.gotoProfile(item)">
+          <div class="rec-team-member" *ngFor="let item of this.recUsers" onmouseover="this.style.cursor='pointer'" (click)="this.userService.gotoProfile(this.accountService.getMyId())">
             <div>
               <img
               *ngIf="item.profilePhoto==null"
