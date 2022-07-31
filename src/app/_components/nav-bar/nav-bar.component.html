@@ -104,7 +104,7 @@
           <img
             src="assets/images/person.svg"
             *ngIf="
-              this.student?.profilePhoto == null &&
+              this.userService.me?.profilePhoto == null &&
               this.accountService.getLoggidIn()
             "
             width="45px"
@@ -114,9 +114,9 @@
             (click)="goToMyProfile()"
           />
           <img
-            [src]="this.student?.profilePhoto"
+            [src]="this.userService.me?.profilePhoto"
             *ngIf="
-              this.student?.profilePhoto != null &&
+              this.userService.me?.profilePhoto != null &&
               this.accountService.getLoggidIn()
             "
             width="45px"

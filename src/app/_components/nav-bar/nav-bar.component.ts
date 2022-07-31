@@ -1,3 +1,4 @@
+import { UsersService } from './../../_services/users.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { User } from '../../_models/user';
@@ -13,26 +14,15 @@ export class NavBarComponent implements OnInit {
   constructor(
     public accountService: AccountService,
     private router: Router,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
+    public userService:UsersService
   ) {}
-  student: User | undefined;
+
   ngOnInit(): void {
     if (this.accountService.getLoggidIn())
-      this.getUser(this.accountService.getMyId());
+      this.userService.getMyUser();
   }
-  getUser(id: Number) {
-    this.accountService.getUser(id).subscribe({
-      next: (r) => {
-        this.student = r;
-      },
-      error: (error) => {
-        if (error.status == 404) {
-          this.router.navigateByUrl('/notfound');
-        }
-      },
-      complete: () => {},
-    });
-  }
+
   logout() {
     this.accountService.logout();
   }
