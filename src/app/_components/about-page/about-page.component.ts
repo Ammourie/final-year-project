@@ -1,3 +1,4 @@
+import { AccountService } from './../../_services/account.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -10,13 +11,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about-page.component.css'],
 })
 export class AboutPageComponent implements OnInit {
-  student: User | undefined;
-  constructor(private http: HttpClient, private router: Router,private jwtHelper :JwtHelperService
-    ) {}
+  constructor(public accountService: AccountService, private router: Router) {}
   ngOnInit(): void {}
 
   test2(): void {
-
     this.router.navigateByUrl('/about');
   }
 }

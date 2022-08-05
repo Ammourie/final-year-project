@@ -59,6 +59,7 @@ export class TeamsService {
 
   getUnteamedRecommendedStudents(): User[] {
     this.gettingUnteamedRecommendedStudent = true;
+    this.gettingUnteamedStudent = true;
 
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
 

@@ -8,22 +8,62 @@
       src="assets/images/logo.png"
       width="100px"
       height="auto"
+      class="disapper-small"
       alt=""
       srcset=""
     />
     <div>
       <div class="nav flex-row justify-content-between gap-4">
-        <li class="nav-item mb-2">
+        <li class="nav-item mb-1">
           <a href="#" class="nav-link p-0 text-muted">الرئيسية</a>
         </li>
-        <li class="nav-item mb-2">
-          <a href="#" class="nav-link p-0 text-muted">حول الموقع</a>
+        <li class="nav-item mb-1">
+          <a
+            *ngIf="!this.accountService.getLoggidIn()"
+            class="nav-link p-0 text-muted"
+            [routerLink]="null"
+            routerLinkActive="router-link-active"
+            >التدريب</a
+          >
+          <a
+            *ngIf="this.accountService.getLoggidIn()"
+            class="nav-link p-0 text-muted"
+            [routerLink]="['/main-practice-page']"
+            routerLinkActive="router-link-active"
+            >التدريب</a
+          >
         </li>
-        <li class="nav-item mb-2">
-          <a href="#" class="nav-link p-0 text-muted">حول المسابقة</a>
+        <li class="nav-item mb-1">
+          <a
+            class="nav-link p-0 text-muted"
+            *ngIf="isCoach()"
+            [routerLink]="['/team-register']"
+            routerLinkActive="router-link-active"
+            >تشكيل الفرق</a
+          >
+          <a
+            class="nav-link p-0 text-muted"
+            *ngIf="!isCoach()"
+            [routerLink]="null"
+            routerLinkActive="router-link-active"
+            >تشكيل الفرق</a
+          >
         </li>
-        <li class="nav-item mb-2">
-          <a href="#" class="nav-link p-0 text-muted">فريق العمل</a>
+        <li class="nav-item mb-1">
+          <a
+            class="nav-link p-0 text-muted"
+            *ngIf="this.accountService.getLoggidIn()"
+            [routerLink]="['/teams']"
+            routerLinkActive="router-link-active"
+            >الفرق</a
+          >
+          <a
+            class="nav-link p-0 text-muted"
+            *ngIf="!this.accountService.getLoggidIn()"
+            [routerLink]="null"
+            routerLinkActive="router-link-active"
+            >الفرق</a
+          >
         </li>
       </div>
     </div>
@@ -31,57 +71,60 @@
 
     <h4 style="color: aliceblue">مواقع مفيدة</h4>
     <ul>
-      <li><a href="#" class="nav-link p-0 text-muted">CodeForces</a></li>
-      <li><a href="#" class="nav-link p-0 text-muted">CodeChef</a></li>
-      <li><a href="#" class="nav-link p-0 text-muted">AtCoder</a></li>
+      <li>
+        <a
+          href="https://codeforces.com/"
+          class="nav-link p-0 text-muted"
+          target="blank"
+          >CodeForces</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://atcoder.jp/"
+          class="nav-link p-0 text-muted"
+          target="blank"
+          >CodeChef</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.codechef.com/"
+          class="nav-link p-0 text-muted"
+          target="blank"
+          >AtCoder</a
+        >
+      </li>
     </ul>
   </div>
 
   <div class="d-flex flex-column justify-content-start gap-2">
-    <h4 style="color: aliceblue">انضم لنشرة الأخبار الخاصة بنا</h4>
-    <div style="height: 20px; background-color: #151618"></div>
-
-    <form>
-      <div class="form-group">
-        <input
-          type="email"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="أدخل البريد الإلكتروني هنا"
-        />
-      </div>
-    </form>
-
-    <div
-      class="d-flex flex-column justify-content-between py-4 my-2 border-top"
-    >
-      <h6 style="color: aliceblue">تواصل معنا</h6>
-      <div class="list-unstyled d-flex">
-        <li class="ms-3">
-          <a class="link-dark" href="#">
-            <span
-              class="bi bi-twitter"
-              style="font-size: 25px; color: grey"
-            ></span>
-          </a>
-        </li>
-        <li class="ms-3">
-          <a class="link-dark" href="#">
-            <span
-              class="bi bi-facebook"
-              style="font-size: 25px; color: grey"
-            ></span>
-          </a>
-        </li>
-        <li class="ms-3">
-          <a class="link-dark" href="#">
-            <span
-              class="bi bi-instagram"
-              style="font-size: 25px; color: grey"
-            ></span
-          ></a>
-        </li>
-      </div>
+    <h6 style="color: aliceblue">تواصل معنا</h6>
+    <div class="list-unstyled d-flex">
+      <li class="ms-3">
+        <a class="link-dark" href="#">
+          <span
+            class="bi bi-twitter"
+            style="font-size: 25px; color: grey"
+          ></span>
+        </a>
+      </li>
+      <li class="ms-3">
+        <a class="link-dark" href="#">
+          <span
+            class="bi bi-facebook"
+            style="font-size: 25px; color: grey"
+          ></span>
+        </a>
+      </li>
+      <li class="ms-3">
+        <a class="link-dark" href="#">
+          <span
+            class="bi bi-instagram"
+            style="font-size: 25px; color: grey"
+          ></span
+        ></a>
+      </li>
     </div>
   </div>
 </div>

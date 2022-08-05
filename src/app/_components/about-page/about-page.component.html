@@ -1,15 +1,23 @@
 <app-nav-bar></app-nav-bar>
 <div
-  class="d-flex flex-row justify-content-between"
   style="
+    display: flex;
     background-color: #26282a;
     padding-top: 100px;
     padding-left: 10%;
     padding-right: 7%;
+    justify-content: space-between;
+    align-items: center;
   "
 >
-  <img src="assets/images/logo.png" width="450" height="300" alt="" srcset="" />
-  <div class="flex-column" style="text-align: right" dir="rtl">
+  <img
+    src="../../../assets/images/logo.png"
+    style="width: 30vw; height: 20vw"
+    alt=""
+    srcset=""
+    class="disapper-small"
+  />
+  <div class="comp-first" style="text-align: right" dir="rtl">
     <h2 style="color: aliceblue">
       المسابقة <span style="color: #7474bf">البرمجية</span>
     </h2>
@@ -17,7 +25,7 @@
       <span style="color: #7474bf">السورية</span> لطلاب الجامعات
     </h2>
     <div style="height: 20px"></div>
-    <p style="color: grey; width: 75%">
+    <p style="color: grey">
       تستهدف هذه المسابقة طلاب الجامعات من أي تخصص، حيث يتسابقون ضمن فرق تمثل
       جامعاتهم. تتمايز هذه الفرق حسب مستواها العلمي وقدرتها على تحليل المسائل
       وتصميم وتنجيز خوارزميات حلها، وبذلك تختبر المسابقة المهارات التحليلية
@@ -26,7 +34,7 @@
     </p>
     <div style="height: 20px"></div>
 
-    <button class="col btn btn-dark-blue btn-rounded" (click)="test2()">
+    <button class="col btn btn-dark-blue btn-rounded" style="width: 400px;" (click)="test2()">
       المزيد حول المسابقة
     </button>
   </div>
@@ -34,7 +42,13 @@
 
 <div style="height: 50px; background-color: #26282a"></div>
 
-<img src="assets/images/im1.png" width="100%" height="auto" alt="" srcset="" />
+<img
+  src="../../../assets/images/im1.png"
+  width="100%"
+  height="auto"
+  alt=""
+  srcset=""
+/>
 
 <div style="height: 50px; background-color: #26282a"></div>
 
@@ -49,16 +63,16 @@
     <div class="d-flex flex-row justify-content-center">
       <div class="rec d-flex flex-column">
         <img
+          class="img-imp"
           src="../../../assets/images/pic2.png"
-          width="300"
           style="align-self: center"
           alt=""
           srcset=""
         />
-        <div style="height: 30px; color: #202124"></div>
-        <h4 style="color: aliceblue">التفكير وحل المشكلات</h4>
-        <div style="height: 10px; color: #202124"></div>
-        <p style="color: gray">
+        <h4 style="color: aliceblue" class="header-imp">
+          التفكير وحل المشكلات
+        </h4>
+        <p style="color: gray" class="content-imp">
           تعبّر مهارات حلّ المشكلات كما يشير إليها اسمها عن القدرة على إيجاد
           الحلول الفعّالة لمختلف المشكلات التي تواجهنا في الحياة العملية أو
           الخاصة، وفي الوقت المناسب الذي يضمن تفادي الخسائر أو تقليلها قدر
@@ -68,19 +82,18 @@
       <div class="rec d-flex flex-column">
         <img
           src="../../../assets/images/pic1.png"
-          width="300"
+          class="img-imp"
           style="align-self: center"
           alt=""
           srcset=""
         />
-        <div style="height: 30px; color: #202124"></div>
-        <h4 style="color: aliceblue">التفكير وحل المشكلات</h4>
-        <div style="height: 10px; color: #202124"></div>
-        <p style="color: gray">
-          تعبّر مهارات حلّ المشكلات كما يشير إليها اسمها عن القدرة على إيجاد
-          الحلول الفعّالة لمختلف المشكلات التي تواجهنا في الحياة العملية أو
-          الخاصة، وفي الوقت المناسب الذي يضمن تفادي الخسائر أو تقليلها قدر
-          الإمكان. ويتضمّن ذلك عدّة خطوات رئيسية لابدّ من اتباعها
+        <h4 style="color: aliceblue" class="header-imp">
+          تكوين المعارف والصداقات
+        </h4>
+        <p style="color: gray" class="content-imp">
+          تستطيع من خلال المسابقة البرمجية تكوين العديد من الصداقات والمعارف من
+          خلال المشاركة معهم والإعتماد عليهم في المواقف التي لا تستطيع حلها
+          بمفردك
         </p>
       </div>
     </div>
@@ -88,38 +101,30 @@
       <div class="rec d-flex flex-column">
         <img
           src="../../../assets/images/pic3.png"
-          width="300"
+          class="img-imp"
           style="align-self: center"
           alt=""
           srcset=""
         />
-        <div style="height: 30px; color: #202124"></div>
-        <h4 style="color: aliceblue">التفكير وحل المشكلات</h4>
-        <div style="height: 10px; color: #202124"></div>
-        <p style="color: gray">
-          تعبّر مهارات حلّ المشكلات كما يشير إليها اسمها عن القدرة على إيجاد
-          الحلول الفعّالة لمختلف المشكلات التي تواجهنا في الحياة العملية أو
-          الخاصة، وفي الوقت المناسب الذي يضمن تفادي الخسائر أو تقليلها قدر
-          الإمكان. ويتضمّن ذلك عدّة خطوات رئيسية لابدّ من اتباعها
+        <h4 style="color: aliceblue" class="header-imp">العمل في فريق</h4>
+        <p style="color: gray" class="content-imp">
+          من خلال المشاركة في المسابقة البرمجية فأنت سوف تتعلم العمل ضمن فريق
+          وتهيئة نفسك للعمل مستقبلاً في مختلف الشركات البرمجبة
         </p>
       </div>
 
       <div class="rec d-flex flex-column">
         <img
           src="../../../assets/images/pic3.png"
-          width="300"
+          class="img-imp"
           style="align-self: center"
           alt=""
           srcset=""
         />
-        <div style="height: 30px; color: #202124"></div>
-        <h4 style="color: aliceblue">التفكير وحل المشكلات</h4>
-        <div style="height: 10px; color: #202124"></div>
-        <p style="color: gray">
-          تعبّر مهارات حلّ المشكلات كما يشير إليها اسمها عن القدرة على إيجاد
-          الحلول الفعّالة لمختلف المشكلات التي تواجهنا في الحياة العملية أو
-          الخاصة، وفي الوقت المناسب الذي يضمن تفادي الخسائر أو تقليلها قدر
-          الإمكان. ويتضمّن ذلك عدّة خطوات رئيسية لابدّ من اتباعها
+        <h4 style="color: aliceblue" class="header-imp">وغيرها الكثير</h4>
+        <p style="color: gray" class="content-imp">
+          تفيد المسابقة البرمجية أيضا في تعليمك العديد من الخوارزميات المفيدة لك
+          في الحياة وتعلمك العمل تحت الضغط والاتزام بالمواعيد
         </p>
       </div>
     </div>
@@ -140,37 +145,55 @@
 >
   <img
     src="../../../assets/images/think.png"
-    width="200"
-    height="400"
+
+    class="disapper-small"
     alt=""
     srcset=""
   />
-  <div class="flex-column" style="text-align: right" dir="rtl">
+  <div class="comp-first" style="text-align: right;gap: 20px;" dir="rtl">
     <h2 style="color: aliceblue">
       كيف يمكنني <span style="color: #fbb836"> المشاركة؟</span>
     </h2>
 
-    <div style="height: 50px"></div>
-    <p style="color: grey; width: 75%">
+    <p style="color: grey; font-size: 1.vw;">
       تستهدف هذه المسابقة طلاب الجامعات من أي تخصص، حيث يتسابقون ضمن فرق تمثل
       جامعاتهم. تتمايز هذه الفرق حسب مستواها العلمي وقدرتها على تحليل المسائل
       وتصميم وتنجيز خوارزميات حلها، وبذلك تختبر المسابقة المهارات التحليلية
       والبرمجية للمتسابقين كما تضع أمامهم تحدياً يتمثل في استثمار الوقت وتوزيع
       المهام وتعاون أعضاء الفريق وعملهم بشكل جماعي.
     </p>
-    <div style="height: 100px"></div>
 
-    <button
-      class="col btn btn-rounded"
-      style="
-        background-color: #fbb836;
-        color: aliceblue;
-        padding-left: 40px;
-        padding-right: 40px;
-      "
-    >
-      منصة التدريب
-    </button>
+   <div style="margin-top: 50px;">
+    <a
+    class="col btn btn-rounded"
+    style="
+      background-color: #fbb836;
+      color: aliceblue;
+      width: 200px;
+      align-self: center;
+    "
+    *ngIf="this.accountService.getLoggidIn()"
+    [routerLink]="['/main-practice-page']"
+    routerLinkActive="router-link-active"
+  >
+    منصة التدريب
+  </a>
+  <a
+    class="col btn btn-rounded"
+    style="
+      background-color: #fbb836;
+      color: aliceblue;
+      width: 200px;
+      align-self: center;
+
+    "
+    *ngIf="!this.accountService.getLoggidIn()"
+    [routerLink]="['/login']"
+    routerLinkActive="router-link-active"
+  >
+    منصة التدريب
+  </a>
+   </div>
   </div>
 </div>
 <app-footer></app-footer>
