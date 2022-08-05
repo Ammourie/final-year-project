@@ -13,8 +13,24 @@
 .card {
   background-color: transparent;
 }
+.card2 {
+  background-color: #1e2021;
+  width: 100%;
+  padding: 10px;
+  padding-right: 142px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .card-body {
   padding: 0;
+}
+.name-part {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-right: 20px;
 }
 .profile-card-2 .card-img-block {
   background-color: transparent;
@@ -100,6 +116,9 @@ p {
 .profile-card-2 h5 {
   font-weight: 600;
   color: white;
+}
+.card-text {
+  margin-right: 20px;
 }
 .profile-card-2 .card-text {
   font-weight: 300;
@@ -406,8 +425,10 @@ p {
   align-items: center;
   justify-content: center;
 }
-
-:host ::ng-deep .p-dialog .p-button {
+:host ::ng-deep .p-dialog {
+  width: 50%;
+}
+:host ::ng-deep .p-button {
   min-width: 6rem;
 }
 
@@ -434,13 +455,75 @@ p {
   column-gap: 3%;
   row-gap: 20px;
 }
-
+.coach-badge {
+  height: 24px;
+}
+.card-images {
+  height: 40px;
+  width: 40px;
+}
+.websites {
+  display: flex;
+  gap: 15px;
+}
 @media (max-width: 800px) {
+  .participates-part {
+   width: 100px;
+  }
+.hovered{
+width: 30px;
+height: 30px;
+}
+.hovered:hover{
+  width: 30px;
+  height: 30px;
+}
+
+
+  :host ::ng-deep .p-dialog {
+    width: 90%;
+  }
+
+  .websites {
+    gap: 5px;
+  }
+  .card-images {
+    height: 30px;
+    width: 30px;
+  }
+  .card-title {
+    font-size: 15px;
+  }
+  .card-text {
+    font-size: 11px;
+    margin-right: 0px;
+  }
+  .name-part {
+    gap: 5px;
+  }
+  .coach-badge {
+    height: 17px;
+    width: 60px;
+  }
+  .card2 {
+    padding-right: 100px;
+  }
+  .name-part {
+    margin: 0px;
+  }
   .gr-header {
     margin-right: 0;
   }
   .gr-menu {
     display: none;
+  }
+  .profile {
+    width: 70px;
+    height: 70px;
+  }
+  .hoverable {
+    width: 75px;
+    height: 75px;
   }
 
   .dropdown {
@@ -498,19 +581,17 @@ p {
 .t {
   color: #d2d3d7;
 }
-input matInput{
+input matInput {
   color: #d2d3d7;
 }
 .hovered:hover {
   background: url("../../../assets/images/plus.svg") no-repeat scroll;
   background-position-x: 50%;
   background-position-y: 50%;
-  background-size: 150%;
+  background-size: 100%;
   background-color: rgba(128, 128, 128, 0.426);
   cursor: pointer;
-  width: 40px;
   position: absolute;
-  height: 40px;
   top: 0;
   left: 0;
   border-radius: 5px;

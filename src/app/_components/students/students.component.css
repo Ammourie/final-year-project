@@ -270,7 +270,31 @@
   display: block;
 }
 
+.student-name {
+  color: whitesmoke;
+  font-size: 20px;
+  margin-right: 20px;
+  text-align: right;
+}
+.student-university {
+  color: grey;
+  font-size: 12px;
+  margin-right: 20px;
+  text-align: right;
+}
 @media (max-width: 800px) {
+  .student-university {
+    color: grey;
+    font-size: 10px;
+    margin-right: 10px;
+    text-align: right;
+  }
+  .student-name{
+    color: whitesmoke;
+    font-size: 15px;
+    margin-right: 10px;
+    text-align: right;
+  }
   .gr-header {
     margin-right: 0;
   }

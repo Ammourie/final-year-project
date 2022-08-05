@@ -25,29 +25,28 @@
         <div class="d-flex flex-row">
           <div style="margin-left: 20%">
             <img
-            src="assets/images/person.svg"
-            *ngIf="
-              this.studentService.me?.profilePhoto == null "
-            width="45px"
-            height="45px"
-            style="border-radius: 30px"
-            onmouseover="this.style.cursor='pointer'"
-            (click)="this.studentService.gotoProfile(this.accountService.getMyId())"
-          />
-          <img
-            [src]="this.studentService.me?.profilePhoto"
-            *ngIf="
-              this.studentService.me?.profilePhoto != null
-            "
-            width="45px"
-            height="45px"
-            style="border-radius: 30px"
-            onmouseover="this.style.cursor='pointer'"
-            (click)="this.studentService.gotoProfile(this.accountService.getMyId())"
-          />
+              src="assets/images/person.svg"
+              *ngIf="this.studentService.me?.profilePhoto == null"
+              width="45px"
+              height="45px"
+              style="border-radius: 30px"
+              onmouseover="this.style.cursor='pointer'"
+              (click)="
+                this.studentService.gotoProfile(this.accountService.getMyId())
+              "
+            />
+            <img
+              [src]="this.studentService.me?.profilePhoto"
+              *ngIf="this.studentService.me?.profilePhoto != null"
+              width="45px"
+              height="45px"
+              style="border-radius: 30px"
+              onmouseover="this.style.cursor='pointer'"
+              (click)="
+                this.studentService.gotoProfile(this.accountService.getMyId())
+              "
+            />
           </div>
-
-
         </div>
         <div style="display: flex; align-items: center">
           <div style="color: antiquewhite; font-size: 28px">الطلاب</div>
@@ -271,12 +270,11 @@
       >
         <div
           class="students"
-          style="display: grid; grid-template-columns: 50% 50%;direction: rtl;"
+          style="display: grid; grid-template-columns: 50% 50%; direction: rtl"
         >
           <div
-            class="student d-flex flex-row justify-content-between"
+            class="student d-flex flex-row"
             *ngFor="let i of this.studentService.students"
-
             onmouseover="this.style.cursor='pointer'"
             dir="rtl"
             (click)="gotoProfile(i)"
@@ -300,24 +298,10 @@
                 srcset=""
               />
               <div>
-                <div
-                  style="
-                    color: whitesmoke;
-                    font-size: 20px;
-                    margin-right: 20px;
-                    text-align: right;
-                  "
-                >
+                <div class="student-name">
                   {{ i.fullName }}
                 </div>
-                <div
-                  style="
-                    color: grey;
-                    font-size: 12px;
-                    margin-right: 20px;
-                    text-align: right;
-                  "
-                >
+                <div class="student-university">
                   {{ i.university ? i.university : "لم يتم تحديد الجامعة بعد" }}
                 </div>
               </div>
@@ -325,7 +309,13 @@
           </div>
         </div>
       </div>
-      <p-paginator [rows]="this.studentService.studentsItemsPerPage" [totalRecords]="this.studentService.studentsTotal" [style]="{'background-color':'#26282A'}" (onPageChange)="onPageChange($event)" *ngIf="!this.searchFlag"></p-paginator>
+      <p-paginator
+        [rows]="this.studentService.studentsItemsPerPage"
+        [totalRecords]="this.studentService.studentsTotal"
+        [style]="{ 'background-color': '#26282A' }"
+        (onPageChange)="onPageChange($event)"
+        *ngIf="!this.searchFlag"
+      ></p-paginator>
     </div>
   </body>
 </html>

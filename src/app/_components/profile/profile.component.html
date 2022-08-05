@@ -27,7 +27,7 @@
 
   <body *ngIf="!this.loading">
     <div class="gr-header">
-      <div class="d-flex flex-row"  style="direction: rtl;">
+      <div class="d-flex flex-row" style="direction: rtl">
         <!-- <div class="d-flex flex-row">
           <div style="margin-left: 20%">
             <img
@@ -213,27 +213,11 @@
             *ngIf="this.student?.id == this.loggedinId"
           />
 
-          <div
-            style="
-              background-color: #1e2021;
-              width: 100%;
-              padding: 10px;
-              padding-right: 142px;
-              height: 80px;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-            "
-          >
-            <div>
-              <div
-                style="
-                  display: flex;
-                  gap: 20px;
-                  align-items: center;
-                  margin-right: 20px;
-                "
-              >
+          <div class="card2">
+            <div
+              style="display: flex; flex-direction: column; align-items: start"
+            >
+              <div class="name-part">
                 <h5 class="card-title" *ngIf="!this.editingNamePart">
                   {{ this.student?.fullName }}
                 </h5>
@@ -252,7 +236,7 @@
                 <img
                   *ngIf="this.student?.isCoach"
                   src="../../../assets/images/coach-badge.png"
-                  height="24px"
+                  class="coach-badge"
                   alt=""
                 />
                 <i
@@ -270,11 +254,7 @@
                   style="color: grey; font-size: 18px"
                 ></i>
               </div>
-              <p
-                class="card-text"
-                style="margin-right: 20px"
-                *ngIf="!this.editingNamePart"
-              >
+              <p class="card-text" *ngIf="!this.editingNamePart">
                 {{
                   this.student?.university == null
                     ? "لم يتم تحديد جامعة بعد"
@@ -294,34 +274,35 @@
                 [(ngModel)]="model1.university"
               />
             </div>
-            <div style="display: flex; gap: 15px">
+            <div class="websites">
               <div style="position: relative">
                 <a
-                href="https://atcoder.jp/users/{{
-                  this.student?.atCoderHandle
-                }}"
-                target="_blank"
-                rel="noopener noreferrer"
-                *ngIf="this.student?.atCoderHandle != null"
-              >
+                  href="https://atcoder.jp/users/{{
+                    this.student?.atCoderHandle
+                  }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  *ngIf="this.student?.atCoderHandle != null"
+                >
+                  <img
+                    src="../../../assets/images/at-coder.png "
+                    class="card-images"
+                    alt=""
+                  />
+                </a>
+
                 <img
                   src="../../../assets/images/at-coder.png "
-                  width="40px"
-                  height="40px"
+                  class="card-images"
                   alt=""
+                  *ngIf="this.student?.atCoderHandle == null"
                 />
-              </a>
-
-              <img
-                src="../../../assets/images/at-coder.png "
-                width="40px"
-                height="40px"
-                alt=""
-                *ngIf="this.student?.atCoderHandle == null"
-              />
                 <div
                   class="hovered"
-                  *ngIf="this.student?.atCoderHandle == null && this.student?.id==this.loggedinId"
+                  *ngIf="
+                    this.student?.atCoderHandle == null &&
+                    this.student?.id == this.loggedinId
+                  "
                   (click)="showDialogModal('atcoder')"
                 ></div>
               </div>
@@ -336,22 +317,24 @@
                 >
                   <img
                     src="../../../assets/images/code-cheaf.png "
-                    width="40px"
-                    height="40px"
+                    class="card-images"
                     alt=""
                   />
                 </a>
 
                 <img
                   src="../../../assets/images/code-cheaf.png "
-                  width="40px"
-                  height="40px"
+                                      class="card-images"
+
                   alt=""
                   *ngIf="this.student?.codeChefHandle == null"
                 />
                 <div
                   class="hovered"
-                  *ngIf="this.student?.codeChefHandle == null && this.student?.id==this.loggedinId"
+                  *ngIf="
+                    this.student?.codeChefHandle == null &&
+                    this.student?.id == this.loggedinId
+                  "
                   (click)="showDialogModal('codechef')"
                 ></div>
               </div>
@@ -366,80 +349,29 @@
                 >
                   <img
                     src="../../../assets/images/code-forces.png "
-                    width="40px"
-                    height="40px"
+                    class="card-images"
                     alt=""
                   />
                 </a>
 
                 <img
                   src="../../../assets/images/code-forces.png "
-                  width="40px"
-                  height="40px"
+                                      class="card-images"
+
                   alt=""
                   *ngIf="this.student?.codeforcesAccount == null"
                 />
                 <div
                   class="hovered"
-                  *ngIf="this.student?.codeforcesAccount == null && this.student?.id==this.loggedinId"
+                  *ngIf="
+                    this.student?.codeforcesAccount == null &&
+                    this.student?.id == this.loggedinId
+                  "
                   (click)="showDialogModal('codeforces')"
                 ></div>
               </div>
             </div>
           </div>
-          <p-dialog
-            [header]="this.dialogeTitle"
-            [(visible)]="this.showDialogModalFlag"
-            [modal]="true"
-            [baseZIndex]="10000"
-            [draggable]="false"
-            [resizable]="false"
-            [style]="{ width: '50vw' }"
-          >
-            <input
-              type="text"
-              class="form-control form-control-dark"
-              style="
-                width: 97%;
-                background-color: #303136;
-                border: none;
-                border-radius: 5px;
-                color: white;
-                margin-bottom: 20px;
-                margin-top: 20px;
-              "
-              [(ngModel)]="dialogeValue"
-              placeholder="e.g Ammourie99"
-            />
-
-            <ng-template pTemplate="footer">
-              <p-button
-                icon="pi pi-times"
-                (click)="showDialogModalFlag = false"
-                label="رجوع"
-                [style]="{
-                  width: '15vw',
-                  'background-color': '#970000',
-                  color: 'white',
-                  border: 'none',
-                  'font-family': 'sans-serif'
-                }"
-              ></p-button>
-              <p-button
-                icon="pi pi-check"
-                (click)="submitDialoge()"
-                label="موافق"
-                class="p-button-text"
-                [style]="{
-                  width: '15vw',
-                  border: 'none',
-                  color: 'white',
-                  'background-color': '#005C97',
-                  'font-family': 'sans-serif'
-                }"
-              ></p-button>
-            </ng-template>
-          </p-dialog>
 
           <!-- <div class="icon-block"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"> <i class="fa fa-twitter"></i></a><a href="#"> <i class="fa fa-google-plus"></i></a></div> -->
         </div>
@@ -500,128 +432,7 @@
           (click)="this.showPDialogModalFlag = true"
         ></i>
       </h4>
-      <p-dialog
-        header="أضف مشاركة:"
-        [(visible)]="this.showPDialogModalFlag"
-        [modal]="true"
-        [baseZIndex]="10000"
-        [draggable]="false"
-        [resizable]="false"
-        [style]="{ width: '50vw' }"
-      >
-        <div
-          style="
-            display: grid;
-            grid-template-columns: auto auto;
-            direction: rtl;
-          "
-        >
-          <input
-            type="text"
-            class="form-control form-control-dark"
-            style="
-              width: 97%;
-              background-color: #303136;
-              border: none;
-              border-radius: 5px;
-              color: white;
-              margin-bottom: 20px;
-              margin-top: 20px;
-            "
-            [(ngModel)]="participation.name"
-            placeholder="اسم المشاركة"
-          />
-          <input
-            type="text"
-            class="form-control form-control-dark"
-            style="
-              width: 97%;
-              background-color: #303136;
-              border: none;
-              border-radius: 5px;
-              color: white;
-              margin-bottom: 20px;
-              margin-top: 20px;
-            "
-            [(ngModel)]="participation.location"
-            placeholder="مكان المشاركة"
-          />
-          <input
-            type="text"
-            onfocusin="(this.type='date')"
-            onfocusout="(this.type='text')"
-            class="form-control form-control-dark"
-            style="
-              width: 97%;
-              background-color: #303136;
-              border: none;
-              border-radius: 5px;
-              color: white;
-              margin-bottom: 20px;
-              margin-top: 20px;
-            "
-            [(ngModel)]="participation.year"
-            placeholder="تاريخ المشاركة"
-          />
-          <input
-            type="text"
-            class="form-control form-control-dark"
-            style="
-              width: 97%;
-              background-color: #303136;
-              border: none;
-              border-radius: 5px;
-              color: white;
-              margin-bottom: 20px;
-              margin-top: 20px;
-            "
-            [(ngModel)]="participation.teamName"
-            placeholder="اسم الفريق الذي شاركت معه"
-          />
-          <input
-            type="text"
-            class="form-control form-control-dark"
-            style="
-              width: 97%;
-              background-color: #303136;
-              border: none;
-              border-radius: 5px;
-              color: white;
-              margin-bottom: 20px;
-              margin-top: 20px;
-            "
-            [(ngModel)]="participation.rank"
-            placeholder="المركز الذي احتليته"
-          />
-        </div>
-        <ng-template pTemplate="footer">
-          <p-button
-            icon="pi pi-times"
-            (click)="showPDialogModalFlag = false"
-            label="رجوع"
-            [style]="{
-              width: '15vw',
-              'background-color': '#970000',
-              color: 'white',
-              border: 'none',
-              'font-family': 'sans-serif'
-            }"
-          ></p-button>
-          <p-button
-            icon="pi pi-check"
-            (click)="addParticibation()"
-            label="موافق"
-            class="p-button-text"
-            [style]="{
-              width: '15vw',
-              border: 'none',
-              color: 'white',
-              'background-color': '#005C97',
-              'font-family': 'sans-serif'
-            }"
-          ></p-button>
-        </ng-template>
-      </p-dialog>
+
       <div
         style="
           color: white;
@@ -648,7 +459,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            margin-left: 200px;
+            margin-left: 20px;
           "
         >
           <div style="display: flex; gap: 20px">
@@ -660,43 +471,7 @@
               *ngIf="this.student?.id == this.loggedinId"
             ></i>
           </div>
-          <p-dialog
-            header="هل أنت متأكد؟"
-            [(visible)]="this.showDDialogModalFlag"
-            [modal]="true"
-            [baseZIndex]="10000"
-            [draggable]="false"
-            [resizable]="false"
-            [style]="{ width: '50vw' }"
-          >
-            <ng-template pTemplate="footer">
-              <p-button
-                icon="pi pi-times"
-                (click)="showDDialogModalFlag = false"
-                label="رجوع"
-                [style]="{
-                  width: '15vw',
-                  'background-color': '#970000',
-                  color: 'white',
-                  border: 'none',
-                  'font-family': 'sans-serif'
-                }"
-              ></p-button>
-              <p-button
-                icon="pi pi-check"
-                (click)="confirmDelete()"
-                label="موافق"
-                class="p-button-text"
-                [style]="{
-                  width: '15vw',
-                  border: 'none',
-                  color: 'white',
-                  'background-color': '#005C97',
-                  'font-family': 'sans-serif'
-                }"
-              ></p-button>
-            </ng-template>
-          </p-dialog>
+
           <div style="display: flex; gap: 5px; align-items: center">
             <i class="bi bi-geo-alt" style="color: grey"></i>
             <div class="p-item">{{ item.location }}</div>
@@ -724,3 +499,206 @@
     </div>
   </body>
 </html>
+<p-dialog
+  [header]="this.dialogeTitle"
+  [(visible)]="this.showDialogModalFlag"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <input
+    type="text"
+    class="form-control form-control-dark"
+    style="
+      width: 97%;
+      background-color: #303136;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    "
+    [(ngModel)]="dialogeValue"
+    placeholder="e.g Ammourie99"
+  />
+
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-times"
+      (click)="showDialogModalFlag = false"
+      label="رجوع"
+      [style]="{
+        width: '15vw',
+        'background-color': '#970000',
+        color: 'white',
+        border: 'none',
+        'font-family': 'sans-serif'
+      }"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      (click)="submitDialoge()"
+      label="موافق"
+      class="p-button-text"
+      [style]="{
+        width: '15vw',
+        border: 'none',
+        color: 'white',
+        'background-color': '#005C97',
+        'font-family': 'sans-serif'
+      }"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+<p-dialog
+  header="أضف مشاركة:"
+  [(visible)]="this.showPDialogModalFlag"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div style="display: grid; grid-template-columns: auto auto; direction: rtl">
+    <input
+      type="text"
+      class="form-control form-control-dark"
+      style="
+        width: 97%;
+        background-color: #303136;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        margin-bottom: 20px;
+        margin-top: 20px;
+      "
+      [(ngModel)]="participation.name"
+      placeholder="اسم المشاركة"
+    />
+    <input
+      type="text"
+      class="form-control form-control-dark"
+      style="
+        width: 97%;
+        background-color: #303136;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        margin-bottom: 20px;
+        margin-top: 20px;
+      "
+      [(ngModel)]="participation.location"
+      placeholder="مكان المشاركة"
+    />
+    <input
+      type="text"
+      onfocusin="(this.type='date')"
+      onfocusout="(this.type='text')"
+      class="form-control form-control-dark"
+      style="
+        width: 97%;
+        background-color: #303136;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        margin-bottom: 20px;
+        margin-top: 20px;
+      "
+      [(ngModel)]="participation.year"
+      placeholder="تاريخ المشاركة"
+    />
+    <input
+      type="text"
+      class="form-control form-control-dark"
+      style="
+        width: 97%;
+        background-color: #303136;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        margin-bottom: 20px;
+        margin-top: 20px;
+      "
+      [(ngModel)]="participation.teamName"
+      placeholder="اسم الفريق الذي شاركت معه"
+    />
+    <input
+      type="text"
+      class="form-control form-control-dark"
+      style="
+        width: 97%;
+        background-color: #303136;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        margin-bottom: 20px;
+        margin-top: 20px;
+      "
+      [(ngModel)]="participation.rank"
+      placeholder="المركز الذي احتليته"
+    />
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-times"
+      (click)="showPDialogModalFlag = false"
+      label="رجوع"
+      [style]="{
+        width: '15vw',
+        'background-color': '#970000',
+        color: 'white',
+        border: 'none',
+        'font-family': 'sans-serif'
+      }"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      (click)="addParticibation()"
+      label="موافق"
+      class="p-button-text"
+      [style]="{
+        width: '15vw',
+        border: 'none',
+        color: 'white',
+        'background-color': '#005C97',
+        'font-family': 'sans-serif'
+      }"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+<p-dialog
+  header="هل أنت متأكد؟"
+  [(visible)]="this.showDDialogModalFlag"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-times"
+      (click)="showDDialogModalFlag = false"
+      label="رجوع"
+      [style]="{
+        width: '15vw',
+        'background-color': '#970000',
+        color: 'white',
+        border: 'none',
+        'font-family': 'sans-serif'
+      }"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      (click)="confirmDelete()"
+      label="موافق"
+      class="p-button-text"
+      [style]="{
+        width: '15vw',
+        border: 'none',
+        color: 'white',
+        'background-color': '#005C97',
+        'font-family': 'sans-serif'
+      }"
+    ></p-button>
+  </ng-template>
+</p-dialog>
