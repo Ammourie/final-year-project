@@ -10,6 +10,31 @@
     " main main main main  main menuu"; */
   /* background-color: #2196f3; */
 }
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .card {
   background-color: transparent;
 }
@@ -449,6 +474,13 @@ p {
   justify-content: flex-end;
   gap: 20px;
 }
+::ng-deep .p-carousel-indicators {
+  display: none !important;
+}
+
+::ng-deep .p-carousel {
+  margin: 20px;
+}
 .confirm-dialog-content {
   display: grid;
   grid-template-columns: 47% 47%;
@@ -468,17 +500,16 @@ p {
 }
 @media (max-width: 800px) {
   .participates-part {
-   width: 100px;
+    width: 100%;
   }
-.hovered{
-width: 30px;
-height: 30px;
-}
-.hovered:hover{
-  width: 30px;
-  height: 30px;
-}
-
+  .hovered {
+    width: 30px;
+    height: 30px;
+  }
+  .hovered:hover {
+    width: 30px;
+    height: 30px;
+  }
 
   :host ::ng-deep .p-dialog {
     width: 90%;

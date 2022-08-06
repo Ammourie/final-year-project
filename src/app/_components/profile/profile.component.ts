@@ -1,3 +1,4 @@
+import { Problem } from './../../_models/problem';
 import { Participation } from './../../_models/participation';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -14,6 +15,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  latestSubmissionsLoading: boolean = false;
+  responsiveOptions;
   editingNamePart: boolean = false;
   editingBioPart: boolean = false;
   showDialogModalFlag: boolean = false;
@@ -33,6 +36,7 @@ export class ProfileComponent implements OnInit {
   loggedinId = this.x2.nameid;
   loading = true;
   model1: any = { bio: null, fullName: null, university: null };
+  latestSubmissions: Problem[] = [];
   participation: Participation = {
     rank: '',
     year: '',
@@ -47,19 +51,53 @@ export class ProfileComponent implements OnInit {
     private http: HttpClient,
     private location: Location,
     private jwtHelper: JwtHelperService
-  ) {}
+  ) {  this.responsiveOptions = [
+    {
+      breakpoint: '1200px',
+      numVisible: 1,
+      numScroll: 1,
+    },
 
+  ];}
+
+  getLatestSubmissions() {
+    this.latestSubmissionsLoading = true;
+    const id =
+      this.router.url.split('/')[this.router.url.split('/').length - 1];
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+
+    this.http
+      .get<Problem[]>(
+        'https://cpcmanager.herokuapp.com/api/Users/' +
+          id +
+          '/latest-submissions',
+        header
+      )
+      .subscribe({
+        next: (r) => {
+          this.latestSubmissions = r;
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => {
+          this.latestSubmissionsLoading = false;
+        },
+      });
+  }
   goback() {
     this.location.back();
   }
   ngOnInit(): void {
     const id =
-    this.router.url.split('/')[this.router.url.split('/').length - 1];
+      this.router.url.split('/')[this.router.url.split('/').length - 1];
     this.getUser(id);
   }
-  getUser(id:any) {
-
-
+  getUser(id: any) {
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
 
     var header = {
@@ -80,6 +118,7 @@ export class ProfileComponent implements OnInit {
         },
         complete: () => {
           this.loading = false;
+          this.getLatestSubmissions();
         },
       });
   }

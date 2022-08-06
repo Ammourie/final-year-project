@@ -324,8 +324,7 @@
 
                 <img
                   src="../../../assets/images/code-cheaf.png "
-                                      class="card-images"
-
+                  class="card-images"
                   alt=""
                   *ngIf="this.student?.codeChefHandle == null"
                 />
@@ -356,8 +355,7 @@
 
                 <img
                   src="../../../assets/images/code-forces.png "
-                                      class="card-images"
-
+                  class="card-images"
                   alt=""
                   *ngIf="this.student?.codeforcesAccount == null"
                 />
@@ -395,7 +393,7 @@
       <div class="about-part" *ngIf="!this.editingBioPart">
         {{
           this.student?.bio == null
-            ? "لا يوجد بعد سيرة ذاتية قم بإضافتها"
+            ? "لا يوجد بعد سيرة ذاتية"
             : this.student?.bio
         }}
       </div>
@@ -419,7 +417,7 @@
         oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"
         >{{
           this.student?.bio == null
-            ? "لا يوجد بعد سيرة ذاتية قم بإضافتها"
+            ? "لا يوجد بعد سيرة ذاتية "
             : this.student?.bio
         }}</textarea
       >
@@ -433,16 +431,8 @@
         ></i>
       </h4>
 
-      <div
-        style="
-          color: white;
-          align-self: center;
-          font-size: 30px;
-          font-family: sans-serif;
-        "
-        *ngIf="this.student?.participations?.length == 0"
-      >
-        لا يوجد مشاركات بعد قم بإضافة البعض
+      <div class="about-part" *ngIf="this.student?.participations?.length == 0">
+لا يوجد أي مشاركات بعد
       </div>
       <div
         class="participates-part"
@@ -496,6 +486,99 @@
           </div>
         </div>
       </div>
+      <h4 class="part-header">آخر المسائل المحلولة</h4>
+      <div style="position: relative; left: 50%">
+        <div class="lds-dual-ring" *ngIf="this.latestSubmissionsLoading"></div>
+      </div>
+      <div
+        *ngIf="
+          !this.latestSubmissionsLoading && this.latestSubmissions.length == 0
+        "
+        style="
+          color: white;
+          font-size: 20px;
+          position: relative;
+          left: 40%;
+          margin-bottom: 20px;
+        "
+      >
+        لم يتم حل أي مسائل مؤخراً
+      </div>
+      <p-carousel
+        *ngIf="
+          !this.latestSubmissionsLoading && this.latestSubmissions.length != 0
+        "
+        [value]="this.latestSubmissions"
+        [numVisible]="2"
+        [numScroll]="2"
+        [circular]="false"
+        [responsiveOptions]="responsiveOptions"
+      >
+        <ng-template let-problem pTemplate="item">
+          <div
+            style="
+              display: flex;
+              direction: rtl;
+              align-items: center;
+              justify-content: space-between;
+              width: 100;
+              margin-left: 10px;
+              margin-right: 10px;
+              margin-bottom: 30px;
+              background-color: #202124;
+              border-radius: 20px;
+              color: #9f9f9f;
+            "
+          >
+            <div style="display: flex">
+              <img
+                src="../../../assets/images/cpc.png"
+                width="80px"
+                style="border-radius: 20px"
+                alt=""
+              />
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px;
+                  padding: 20px;
+                "
+              >
+                <div style="font-size: 15px; color: white">
+                  {{ problem.name }}
+                  <a
+                    href="{{ problem.url }}"
+                    target="_blank"
+                    style="color: #348ac7; text-decoration: underline"
+                    >{{ problem.contestId + problem.index }}</a
+                  >
+                </div>
+                <div style="font-size: 13px; color: #9f9f9f">
+                  مستوى صعوبة المسألة
+                  {{
+                    problem.rating <= 1000
+                      ? "سهل"
+                      : problem.rating <= 1800
+                      ? "متوسط"
+                      : "متقدم"
+                  }}
+                </div>
+                <div
+                  style="
+                    font-size: 13px;
+                    color: #9f9f9f;
+                    display: flex;
+                    gap: 5px;
+                  "
+                >
+                  <div *ngFor="let itemc of problem.tags">{{ itemc }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
     </div>
   </body>
 </html>
