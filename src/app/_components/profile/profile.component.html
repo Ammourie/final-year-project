@@ -432,7 +432,7 @@
       </h4>
 
       <div class="about-part" *ngIf="this.student?.participations?.length == 0">
-لا يوجد أي مشاركات بعد
+        لا يوجد أي مشاركات بعد
       </div>
       <div
         class="participates-part"
@@ -487,19 +487,13 @@
         </div>
       </div>
       <h4 class="part-header">آخر المسائل المحلولة</h4>
-      <div style="position: relative; left: 50%">
+      <div style="position: relative; left: 48%">
         <div class="lds-dual-ring" *ngIf="this.latestSubmissionsLoading"></div>
       </div>
       <div
+        class="about-part"
         *ngIf="
           !this.latestSubmissionsLoading && this.latestSubmissions.length == 0
-        "
-        style="
-          color: white;
-          font-size: 20px;
-          position: relative;
-          left: 40%;
-          margin-bottom: 20px;
         "
       >
         لم يتم حل أي مسائل مؤخراً

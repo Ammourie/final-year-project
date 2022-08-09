@@ -83,6 +83,8 @@ export class ProfileComponent implements OnInit {
         },
         error: (error) => {
           console.log(error);
+          this.latestSubmissionsLoading = false;
+
         },
         complete: () => {
           this.latestSubmissionsLoading = false;
