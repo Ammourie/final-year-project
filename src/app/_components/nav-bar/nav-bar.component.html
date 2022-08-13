@@ -59,14 +59,14 @@
 
         <li class="nav-item">
           <a
-            *ngIf="!isCoach()"
+            *ngIf="this.userService.me?.teams?.length != 0"
             class="nav-link"
             [routerLink]="null"
             routerLinkActive="router-link-active"
             >تشكيل الفرق</a
           >
           <a
-            *ngIf="isCoach()"
+            *ngIf="this.userService.me?.teams?.length == 0"
             class="nav-link"
             [routerLink]="['/team-register']"
             routerLinkActive="router-link-active"

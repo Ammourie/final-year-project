@@ -110,6 +110,8 @@ export class PracticeGroubsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.trainingGroups = res;
+          console.log(res);
+
         },
         error: (error) => console.log(error),
         complete: () => {

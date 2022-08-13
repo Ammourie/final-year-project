@@ -30,29 +30,28 @@
         <div class="d-flex flex-row">
           <div style="margin-left: 20%">
             <img
-            src="assets/images/person.svg"
-            *ngIf="
-              this.userService.me?.profilePhoto == null "
-            width="45px"
-            height="45px"
-            style="border-radius: 30px"
-            onmouseover="this.style.cursor='pointer'"
-            (click)="this.userService.gotoProfile(this.accountService.getMyId())"
-          />
-          <img
-            [src]="this.userService.me?.profilePhoto"
-            *ngIf="
-              this.userService.me?.profilePhoto != null
-            "
-            width="45px"
-            height="45px"
-            style="border-radius: 30px"
-            onmouseover="this.style.cursor='pointer'"
-            (click)="this.userService.gotoProfile(this.accountService.getMyId())"
-          />
+              src="assets/images/person.svg"
+              *ngIf="this.userService.me?.profilePhoto == null"
+              width="45px"
+              height="45px"
+              style="border-radius: 30px"
+              onmouseover="this.style.cursor='pointer'"
+              (click)="
+                this.userService.gotoProfile(this.accountService.getMyId())
+              "
+            />
+            <img
+              [src]="this.userService.me?.profilePhoto"
+              *ngIf="this.userService.me?.profilePhoto != null"
+              width="45px"
+              height="45px"
+              style="border-radius: 30px"
+              onmouseover="this.style.cursor='pointer'"
+              (click)="
+                this.userService.gotoProfile(this.accountService.getMyId())
+              "
+            />
           </div>
-
-
         </div>
         <div style="display: flex; align-items: center">
           <div style="color: antiquewhite; font-size: 28px">الفرق</div>
@@ -109,6 +108,11 @@
           srcset=""
         />
       </div>
+      <a
+      [routerLink]="['/']"
+      routerLinkActive="router-link-active"
+      style="text-decoration: none"
+    >
       <div style="display: flex; flex-direction: column; align-items: center">
         <img
           src="../../../assets/images/logo.png"
@@ -123,7 +127,8 @@
         <div style="color: dimgrey; font-size: 13px">
           Syrian Programming Contest
         </div>
-      </div>
+      </div></a
+    >
       <div class="bt-gr">
         <a
           [routerLink]="['/main-practice-page']"
@@ -186,7 +191,15 @@
       </div>
       <div class="grid-container" *ngIf="!this.gettingTeams">
         <div class="group" *ngFor="let team of teams; let i = index">
-          <h5 style="align-self: center">{{ team.name }}</h5>
+          <div style="display: flex; gap: 10px; justify-content: space-between">
+            <h5>{{ team.name }}</h5>
+            <i
+              class="bi bi-trash"
+              style="color: rgb(185, 11, 11); font-size: 20px; cursor: pointer"
+              *ngIf="this.userService.me?.isCoach"
+              (click)="showConfirmDeleteDialoge(team,i)"
+            ></i>
+          </div>
           <div
             class="group-mem"
             onmouseover="this.style.cursor='pointer'"
@@ -262,8 +275,45 @@
           <button disabled class="btn btn-primary"  style="width: 60%; border-radius: 10px;align-self: center; opacity: 0; " *ngIf="i%2!=0 && i%5!=0">
             إسناد مهمة
           </button> -->
+          <!-- <div class="btn btn-danger">حذف الفريق</div> -->
         </div>
       </div>
     </div>
   </body>
 </html>
+<p-dialog
+  header="هل أنت متأكد من أنك تريد حذف الفريق ({{ this.teamToDelete?.name }})؟"
+  [(visible)]="this.deleteDialoge"
+  [modal]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-times"
+      (click)="this.deleteDialoge = false"
+      label="رجوع"
+      [style]="{
+        width: '15vw',
+        'background-color': '#970000',
+        color: 'white',
+        border: 'none',
+        'font-family': 'sans-serif'
+      }"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      (click)="this.deleteTeam()"
+      label="موافق"
+      class="p-button-text"
+      [style]="{
+        width: '15vw',
+        border: 'none',
+        color: 'white',
+        'background-color': '#005C97',
+        'font-family': 'sans-serif'
+      }"
+    ></p-button>
+  </ng-template>
+</p-dialog>

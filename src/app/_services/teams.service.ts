@@ -1,4 +1,5 @@
 import { User } from '../_models/user';
+import { AccountService } from './account.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -15,7 +16,10 @@ export class TeamsService {
   studentsTotal = 100;
   studentsItemsPerPage = 10;
   baseUrl = 'https://cpcmanager.herokuapp.com/api/';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private accountService: AccountService
+  ) {}
   getUnteamedStudents(page: number): User[] {
     this.studentsCurrentPage = page;
     this.gettingUnteamedStudent = true;
@@ -31,7 +35,9 @@ export class TeamsService {
     };
     this.http
       .get<any>(
-        this.baseUrl + 'Users?NotInATeam=true&CoachesOnly=false&PageSize=10&PageNumber=' + page,
+        this.baseUrl +
+          'Users?NotInATeam=true&CoachesOnly=false&PageSize=10&PageNumber=' +
+          page,
         httpOptions
       )
       .subscribe({
@@ -80,5 +86,21 @@ export class TeamsService {
         },
       });
     return this.recommendedStudents;
+  }
+
+  getMyUser() {
+    const auth = JSON.parse(localStorage.getItem('user')!!).token;
+
+    var header = {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${auth}`),
+    };
+
+  return  this.http
+      .get<User>(
+        'https://cpcmanager.herokuapp.com/api/Users/' +
+          this.accountService.getMyId(),
+        header
+      )
+
   }
 }

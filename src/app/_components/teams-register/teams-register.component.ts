@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../_models/user';
 import { Router } from '@angular/router';
 import { UsersService } from '../../_services/users.service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { Location } from '@angular/common';
 
@@ -34,7 +34,7 @@ export class TeamsRegisterComponent implements OnInit {
     private httpclient: HttpClient,
     public teamsService: TeamsService,
     public searchService: SearchService,
-    public accountService:AccountService
+    public accountService: AccountService
   ) {
     this.responsiveOptions = [
       {
@@ -49,8 +49,20 @@ export class TeamsRegisterComponent implements OnInit {
       },
     ];
   }
+
   ngOnInit() {
-    this.studentService.getMyUser()
+    this.studentService.getMyUser();
+
+    this.teamsService.getMyUser().subscribe({
+      next: (r) => {
+        if(!r.isCoach)
+        this.addStudent(r);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {},
+    });
     if (this.studentService.students.length == 0) {
       this.teamsService.getUnteamedRecommendedStudents();
 
@@ -60,6 +72,7 @@ export class TeamsRegisterComponent implements OnInit {
 
     this.primengConfig.ripple = true;
   }
+
   goback() {
     this.location.back();
   }
@@ -81,6 +94,7 @@ export class TeamsRegisterComponent implements OnInit {
   displayModal: boolean = false;
 
   showModalDialog() {
+    console.log(this.studentService);
     this.displayModal = true;
   }
 
