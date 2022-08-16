@@ -1,3 +1,33 @@
+.dropbtn2 {
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown2 {
+  position: relative;
+}
+.t {
+  text-decoration: none;
+  color: aliceblue;
+}
+.t:hover {
+  text-decoration: underline;
+}
+
+.dropdown-content2 {
+  position: absolute;
+  text-align: center;
+  left: 20px;
+  background-color: #1e2021;
+  color: #d2d3d7;
+  padding: 10px;
+  min-width: 260px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
 .content {
   /* color: wheat; */
   display: flex;

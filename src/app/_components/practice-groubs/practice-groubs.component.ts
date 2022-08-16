@@ -1,3 +1,4 @@
+import { NotService } from './../../_services/not.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from './../../_models/user';
 import { TrainingGroup } from './../../_models/training_group';
@@ -18,7 +19,7 @@ export class PracticeGroubsComponent implements OnInit {
   showGroupDetailsModal: boolean = false;
   showGroupCreateModal: boolean = false;
   loadingGroups: boolean = false;
-
+  notflag = false;
   groupForView: TrainingGroup = {
     id: 0,
     name: '',
@@ -54,7 +55,8 @@ export class PracticeGroubsComponent implements OnInit {
     private http: HttpClient,
     public studentService: UsersService,
     private location: Location,
-    public accountService: AccountService
+    public accountService: AccountService,
+    public notService: NotService
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +66,13 @@ export class PracticeGroubsComponent implements OnInit {
       this.studentService.getMyUser();
     }
     this.getGroups();
+  }
+  toggleFlag() {
+    if (this.notflag) {
+      this.notService.notflag = false;
+      localStorage.setItem('task-flag', '0');
+    }
+    this.notflag = !this.notflag;
   }
   getCurrenetUser() {
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
@@ -111,7 +120,6 @@ export class PracticeGroubsComponent implements OnInit {
         next: (res) => {
           this.trainingGroups = res;
           console.log(res);
-
         },
         error: (error) => console.log(error),
         complete: () => {

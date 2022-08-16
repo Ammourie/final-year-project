@@ -99,6 +99,41 @@
     >
       <ul class="navbar-nav list-inline text-center align-items-center" st>
         <li class="nav-item">
+          <div class="dropdown" *ngIf="this.accountService.getLoggidIn()">
+            <div class="dropbtn" (click)="toggleFlag()">
+              <div style="position: relative">
+                <div
+                  style="
+                    position: absolute;
+                    background-color: rgb(227, 2, 2);
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                  "
+                  *ngIf="this.notService.notflag"
+                ></div>
+                <img
+                  src="../../../assets/images/notifications.svg"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+            </div>
+            <div class="dropdown-content" *ngIf="notflag">
+              <div *ngIf="this.notService.notflag && notflag">
+                <a
+                  class="col t"
+                  [routerLink]="['/main-practice-page']"
+                  (click)="toggleFlag()"
+                >
+                  لديك مهام جديدة مسندة قم بحلها
+                </a>
+              </div>
+              <div *ngIf="!this.notService.notflag">ليس لديك مهام جديدة</div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
           <!-- <input
             type="text"
             class="search-click"

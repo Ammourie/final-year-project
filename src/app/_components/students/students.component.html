@@ -22,7 +22,7 @@
   <body>
     <div class="gr-header">
       <div class="d-flex flex-row justify-content-between">
-        <div class="d-flex flex-row">
+        <div style="display: flex; gap: 20px; align-items: center ; height: min-content;">
           <div style="margin-left: 20%">
             <img
               src="assets/images/person.svg"
@@ -46,6 +46,28 @@
                 this.studentService.gotoProfile(this.accountService.getMyId())
               "
             />
+          </div>
+          <div class="dropdown2">
+            <div class="dropbtn2" (click)="toggleFlag()">
+                <div
+                  style="
+                    position: absolute;
+                    background-color: rgb(227, 2, 2);
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                  "
+                  *ngIf="this.notService.notflag"
+                ></div>
+                <img
+                  src="../../../assets/images/notifications.svg"
+                  width="45px"
+                  height="45px"
+                  alt=""
+                  srcset=""
+                />
+              </div>
+
           </div>
         </div>
         <div style="display: flex; align-items: center">
@@ -92,6 +114,18 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="dropdown-content2" *ngIf="notflag">
+      <div *ngIf="this.notService.notflag && notflag">
+        <a
+          class="col t"
+          [routerLink]="['/main-practice-page']"
+          (click)="toggleFlag()"
+        >
+          لديك مهام جديدة مسندة قم بحلها
+        </a>
+      </div>
+      <div *ngIf="!this.notService.notflag">ليس لديك مهام جديدة</div>
     </div>
     <div class="gr-menu">
       <div style="height: 40px; width: 40px">

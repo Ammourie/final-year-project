@@ -1,3 +1,4 @@
+import { NotService } from './../../_services/not.service';
 import { UsersService } from './../../_services/users.service';
 import { User } from './../../_models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -36,17 +37,27 @@ export class CalendarComponent implements OnInit {
   postSessionDate = '';
   showEventFlag = false;
   showEventPostFlag = false;
+  notflag = false;
+
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
     private location: Location,
     public userService: UsersService,
-    public accountService:AccountService
+    public accountService: AccountService,
+    public notService: NotService
   ) {}
 
   ngOnInit(): void {
     this.getEvents();
     this.userService.getMyUser();
+  }
+  toggleFlag() {
+    if (this.notflag) {
+      this.notService.notflag = false;
+      localStorage.setItem('task-flag', '0');
+    }
+    this.notflag = !this.notflag;
   }
   activeCell(i: number): boolean {
     var x = false;

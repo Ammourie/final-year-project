@@ -1,3 +1,4 @@
+import { NotService } from './../../_services/not.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { UsersService } from './../../_services/users.service';
 import { User } from './../../_models/user';
@@ -21,6 +22,7 @@ import {
   styleUrls: ['./main-practice-page.component.css'],
 })
 export class MainPracticePageComponent implements OnInit {
+  notflag = false;
   tasksLoading: boolean = false;
   postsLoading: boolean = false;
   problemsLoading: boolean = false;
@@ -38,18 +40,26 @@ export class MainPracticePageComponent implements OnInit {
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
     public userService: UsersService,
-    private location: Location,public accountService:AccountService
+    private location: Location,
+    public accountService: AccountService,
+    public notService: NotService
   ) {}
 
   ngOnInit(): void {
-    this.userService.getMyUser()
+    this.userService.getMyUser();
     this.getAllTasks();
     this.getMyTasks();
     this.getPosts();
     this.getRecommendedProblems();
     this.getRecommendedUsers();
   }
-
+  toggleFlag() {
+    if (this.notflag) {
+      this.notService.notflag = false;
+      localStorage.setItem('task-flag', '0');
+    }
+    this.notflag = !this.notflag;
+  }
   getPosts() {
     this.postsLoading = true;
     const auth = JSON.parse(localStorage.getItem('user')!!).token;
@@ -196,4 +206,3 @@ export class MainPracticePageComponent implements OnInit {
     this.location.back();
   }
 }
-

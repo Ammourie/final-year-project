@@ -1,3 +1,4 @@
+import { NotService } from './../../_services/not.service';
 import { UsersService } from './../../_services/users.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
@@ -11,16 +12,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent implements OnInit {
+  notflag = false;
+
   constructor(
     public accountService: AccountService,
     private router: Router,
     private jwtHelper: JwtHelperService,
-    public userService:UsersService
+    public userService: UsersService,
+    public notService: NotService
   ) {}
 
+  toggleFlag() {
+    if (this.notflag) {
+      this.notService.notflag = false;
+      localStorage.setItem('task-flag', '0');
+    }
+    this.notflag = !this.notflag;
+  }
   ngOnInit(): void {
-    if (this.accountService.getLoggidIn())
-      this.userService.getMyUser();
+    if (this.accountService.getLoggidIn()) this.userService.getMyUser();
   }
 
   logout() {
@@ -37,6 +47,6 @@ export class NavBarComponent implements OnInit {
       const isCoach = x2['role'] == 'Member,Coach';
       return isCoach;
     } catch (error) {}
-    return false
+    return false;
   }
 }

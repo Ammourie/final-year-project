@@ -1,3 +1,4 @@
+import { NotService } from './../../_services/not.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { SearchService } from './../../_services/search.service';
 import { User } from './../../_models/user';
@@ -19,23 +20,31 @@ export class StudentsComponent implements OnInit {
   value: number = 69;
   searchString = '';
   searchFlag = false;
-
+  notflag = false;
   constructor(
     public studentService: UsersService,
     private router: Router,
     private location: Location,
     public statsService: StatsService,
     public searchService: SearchService,
-    public accountService:AccountService
+    public accountService: AccountService,
+    public notService: NotService
   ) {}
   ngOnInit() {
-    this.studentService.getMyUser()
+    this.studentService.getMyUser();
     if (this.studentService.students.length == 0) {
       this.studentService.getstudents(1);
     }
     if (this.statsService.stats == null) {
       this.statsService.getStats();
     }
+  }
+  toggleFlag() {
+    if (this.notflag) {
+      this.notService.notflag = false;
+      localStorage.setItem('task-flag', '0');
+    }
+    this.notflag = !this.notflag;
   }
   goback() {
     console.log('vvv');
@@ -48,24 +57,24 @@ export class StudentsComponent implements OnInit {
   searchForStudent() {
     if (this.searchString == '') {
       this.searchFlag = false;
-      this.studentService.getstudents(1)
+      this.studentService.getstudents(1);
     } else {
       this.searchFlag = true;
 
-    this.searchService.studentsSearch(this.searchString).subscribe({
-      next: (res: any) => {
-        this.studentService.students = res;
-        console.log(this.studentService.students);
-      },
-      error: (error: any) => console.log(error),
-      complete: () => {
-        this.searchService.gettingSearchedStudents = false;
-      },
-    });}
+      this.searchService.studentsSearch(this.searchString).subscribe({
+        next: (res: any) => {
+          this.studentService.students = res;
+          console.log(this.studentService.students);
+        },
+        error: (error: any) => console.log(error),
+        complete: () => {
+          this.searchService.gettingSearchedStudents = false;
+        },
+      });
+    }
   }
   onPageChange(page: any) {
-    if (this.studentService.studentsCurrentPage!=page.page + 1) {
-
+    if (this.studentService.studentsCurrentPage != page.page + 1) {
       this.studentService.getstudents(page.page + 1);
     }
   }

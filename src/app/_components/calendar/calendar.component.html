@@ -22,31 +22,53 @@
   <body>
     <div class="gr-header">
       <div class="d-flex flex-row justify-content-between">
-        <div class="d-flex flex-row">
+        <div style="display: flex; gap: 20px; align-items: center ; height: min-content;">
           <div style="margin-left: 20%">
             <img
-            src="assets/images/person.svg"
-            *ngIf="
-              this.userService.me?.profilePhoto == null "
-            width="45px"
-            height="45px"
-            style="border-radius: 30px"
-            onmouseover="this.style.cursor='pointer'"
-            (click)="this.userService.gotoProfile(this.accountService.getMyId())"
-          />
-          <img
-            [src]="this.userService.me?.profilePhoto"
-            *ngIf="
-              this.userService.me?.profilePhoto != null
-            "
-            width="45px"
-            height="45px"
-            style="border-radius: 30px"
-            onmouseover="this.style.cursor='pointer'"
-            (click)="this.userService.gotoProfile(this.accountService.getMyId())"
-          />
+              src="assets/images/person.svg"
+              *ngIf="this.userService.me?.profilePhoto == null"
+              width="45px"
+              height="45px"
+              style="border-radius: 30px"
+              onmouseover="this.style.cursor='pointer'"
+              (click)="
+                this.userService.gotoProfile(this.accountService.getMyId())
+              "
+            />
+            <img
+              [src]="this.userService.me?.profilePhoto"
+              *ngIf="this.userService.me?.profilePhoto != null"
+              width="45px"
+              height="45px"
+              style="border-radius: 30px"
+              onmouseover="this.style.cursor='pointer'"
+              (click)="
+                this.userService.gotoProfile(this.accountService.getMyId())
+              "
+            />
           </div>
+          <div class="dropdown2">
+            <div class="dropbtn2" (click)="toggleFlag()">
+                <div
+                  style="
+                    position: absolute;
+                    background-color: rgb(227, 2, 2);
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                  "
+                  *ngIf="this.notService.notflag"
+                ></div>
+                <img
+                  src="../../../assets/images/notifications.svg"
+                  width="45px"
+                  height="45px"
+                  alt=""
+                  srcset=""
+                />
+              </div>
 
+          </div>
         </div>
         <div style="display: flex; align-items: center">
           <i
@@ -91,31 +113,49 @@
         </div>
       </div>
     </div>
+    <div class="dropdown-content2" *ngIf="notflag">
+      <div *ngIf="this.notService.notflag && notflag">
+        <a
+          class="col t"
+          [routerLink]="['/main-practice-page']"
+          (click)="toggleFlag()"
+        >
+          لديك مهام جديدة مسندة قم بحلها
+        </a>
+      </div>
+      <div *ngIf="!this.notService.notflag">ليس لديك مهام جديدة</div>
+    </div>
     <div class="gr-menu">
       <div style="height: 40px; width: 40px">
-        <img src="assets/images/back-icon.svg" alt="" srcset="" (click)="goback()"  onmouseover="this.style.cursor='pointer'" />
-      </div>
-      <a
-      [routerLink]="['/']"
-      routerLinkActive="router-link-active"
-      style="text-decoration: none"
-    >
-      <div style="display: flex; flex-direction: column; align-items: center">
         <img
-          src="../../../assets/images/logo.png"
-          width="125px"
-          height="auto"
+          src="assets/images/back-icon.svg"
           alt=""
           srcset=""
+          (click)="goback()"
+          onmouseover="this.style.cursor='pointer'"
         />
-        <div style="color: antiquewhite; font-size: 17px">
-          المسابقة البرمجية السورية
-        </div>
-        <div style="color: dimgrey; font-size: 13px">
-          Syrian Programming Contest
-        </div>
-      </div></a
-    >
+      </div>
+      <a
+        [routerLink]="['/']"
+        routerLinkActive="router-link-active"
+        style="text-decoration: none"
+      >
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <img
+            src="../../../assets/images/logo.png"
+            width="125px"
+            height="auto"
+            alt=""
+            srcset=""
+          />
+          <div style="color: antiquewhite; font-size: 17px">
+            المسابقة البرمجية السورية
+          </div>
+          <div style="color: dimgrey; font-size: 13px">
+            Syrian Programming Contest
+          </div>
+        </div></a
+      >
       <div class="bt-gr">
         <a
           [routerLink]="['/main-practice-page']"
@@ -272,7 +312,9 @@
       [resizable]="false"
       [style]="{ width: '50vw' }"
     >
-      <div style="display: flex; flex-direction: column; gap: 20px; direction: rtl">
+      <div
+        style="display: flex; flex-direction: column; gap: 20px; direction: rtl"
+      >
         <textarea
           name=""
           id=""
@@ -287,11 +329,11 @@
             color: white;
             border-radius: 20px;
             margin-top: 20px;
-
           "
           [(ngModel)]="postEvent.description"
           oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"
-          placeholder="أدخل وصف الحدث هنا!!"        >
+          placeholder="أدخل وصف الحدث هنا!!"
+        >
         </textarea>
 
         <input

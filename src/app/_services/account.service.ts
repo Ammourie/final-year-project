@@ -117,6 +117,8 @@ export class AccountService {
   }
   logout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('task-flag');
+    localStorage.removeItem('task-num');
     this.currentUserSource.next(null);
   }
   getMyToken(): string {
